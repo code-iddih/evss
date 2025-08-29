@@ -11,7 +11,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body>
         <header className="bg-blue-600 text-white text-center py-6">
-          <h1 className="text-4xl font-serif">Lavington SDA Church</h1>
+          <h1 className="text-4xl font-serif">Elgonview SDA Church</h1>
           <p className="mt-2">Your gateway to a loving church family</p>
         </header>
         <nav className="bg-blue-400 text-white py-3">
