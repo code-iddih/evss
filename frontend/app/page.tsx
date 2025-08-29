@@ -105,29 +105,33 @@ export default function Home() {
       {/* About the Church */}
       <section className="py-8 bg-white rounded-lg shadow p-6">
         <h2 className="text-3xl font-serif text-blue-800 mb-4">About Elgonview Sabbath School</h2>
-        <div className="space-y-6">
-          <div>
-            <h3 className="text-xl font-semibold flex items-center">
-              <FaChurch className="mr-2" /> A Community
-            </h3>
-            <p className="text-gray-700 mt-2">
-              We are a community who firmly believes in God’s Word. Elgonview Sabbath School is your gateway to a loving, compassionate church family and to our many community events and services.
-            </p>
-            <a href="/about" className="text-blue-600 hover:underline mt-4 inline-block">Read More</a>
+        <div className="flex flex-row space-x-6">
+          <div className="w-1/3 bg-[#7d0707] text-white p-6 rounded-lg shadow" style={{ backgroundImage: 'url(/images/community.jpg)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
+            <h3 className="text-xl font-semibold mb-4">COMMUNITY</h3>
+            <p className="mb-4">At Elgonview, we empower businesses by combining expertise. We empower businesses by combining expertise. We empower businesses by combining expertise.</p>
           </div>
-          <div>
-            <h3 className="text-xl font-semibold">Our Mission</h3>
-            <p className="text-gray-700 mt-2">
-              Make disciples of Jesus Christ who live as His loving witnesses and proclaim to all people the everlasting gospel of the Three Angels’ Messages in preparation for His soon return (Matt 28:18-20, Acts 1:8, Rev 14:6-12).
-            </p>
-            <a href="/mission" className="text-blue-600 hover:underline mt-4 inline-block">Read More</a>
+          <div className="w-1/3 bg-[#7d0707] text-white p-6 rounded-lg shadow" style={{ backgroundImage: 'url(/images/mission.jpg)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
+            <h3 className="text-xl font-semibold mb-4">MISSION</h3>
+            <p className="mb-4">At Elgonview, we empower businesses by combining expertise. We empower businesses by combining expertise. We empower businesses by combining expertise.</p>
           </div>
-          <div>
-            <h3 className="text-xl font-semibold">Our Vision</h3>
-            <p className="text-gray-700 mt-2">
-              In harmony with Bible revelation, Seventh-day Adventists see as the climax of God’s plan the restoration of all His creation to full harmony with His perfect will and righteousness.
+          <div className="w-1/3 bg-[#7d0707] text-white p-6 rounded-lg shadow" style={{ backgroundImage: 'url(/images/vision.jpg)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
+            <h3 className="text-xl font-semibold mb-4">VISION</h3>
+            <p className="mb-4">At Elgonview, we empower businesses by combining expertise. We empower businesses by combining expertise. We empower businesses by combining expertise.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Mission Section */}
+      <section className="py-8 bg-white rounded-lg shadow p-6">
+        <div className="relative w-full bg-[#d67918] text-white rounded-t-lg p-4" style={{ borderTopLeftRadius: '20px', borderTopRightRadius: '20px' }}>
+          <h2 className="text-4xl font-bold text-center">MISSION</h2>
+        </div>
+        <div className="relative w-full bg-[#7d0707] text-white p-6 rounded-b-lg" style={{ backgroundImage: 'url(/images/mission-bg.jpg)', backgroundSize: 'cover', backgroundPosition: 'center', borderBottomLeftRadius: '20px', borderBottomRightRadius: '20px' }}>
+          <div className="absolute inset-0 bg-black bg-opacity-40 p-4 rounded-b-lg" style={{ borderBottomLeftRadius: '20px', borderBottomRightRadius: '20px' }}>
+            <h3 className="text-xl font-semibold mb-4">PREACHING THE THIRD ANGELS MESSAGE</h3>
+            <p className="mb-4">
+              At Shodwe, we empower businesses by combining expertise and knowledge. At Shodwe, we empower businesses by combining expertise and knowledge. At Shodwe, we empower businesses by combining expertise and knowledge. At Shodwe, we empower businesses by combining expertise and knowledge. At Shodwe, we empower businesses by combining expertise and knowledge.
             </p>
-            <a href="/vision" className="text-blue-600 hover:underline mt-4 inline-block">Read More</a>
           </div>
         </div>
       </section>
