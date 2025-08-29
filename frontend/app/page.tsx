@@ -1,103 +1,112 @@
-import Image from "next/image";
+'use client';
+
+import Countdown from 'react-countdown';
+import { FaChurch } from 'react-icons/fa';
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Welcome to ...{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            EVSS - Eldoret.
-          </li>
-        </ol>
+  const eventDate = new Date('2025-08-30T08:00:00');
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  return (
+    <main className="max-w-5xl mx-auto p-4">
+      {/* Upcoming Events */}
+      <section className="py-8 text-center">
+        <h2 className="text-3xl font-serif text-blue-800 mb-4">Upcoming Events</h2>
+        <h3 className="text-2xl font-semibold">Education Sabbath</h3>
+        <p className="text-gray-600">August 30, 2025, 8:00 AM</p>
+        <Countdown
+          date={eventDate}
+          renderer={({ days, hours, minutes, seconds }) => (
+            <div className="grid grid-cols-4 gap-4 max-w-md mx-auto mt-4">
+              <div className="bg-blue-100 p-4 rounded">
+                <span className="text-2xl font-bold">{days}</span> Days
+              </div>
+              <div className="bg-blue-100 p-4 rounded">
+                <span className="text-2xl font-bold">{hours}</span> Hours
+              </div>
+              <div className="bg-blue-100 p-4 rounded">
+                <span className="text-2xl font-bold">{minutes}</span> Minutes
+              </div>
+              <div className="bg-blue-100 p-4 rounded">
+                <span className="text-2xl font-bold">{seconds}</span> Seconds
+              </div>
+            </div>
+          )}
+        />
+      </section>
+
+      {/* About the Church */}
+      <section className="py-8 bg-white rounded-lg shadow p-6">
+        <h2 className="text-3xl font-serif text-blue-800 mb-4">About The Church</h2>
+        <div className="space-y-6">
+          <div>
+            <h3 className="text-xl font-semibold flex items-center"><FaChurch className="mr-2" /> A Community</h3>
+            <p className="text-gray-700 mt-2">
+              We are a community who firmly believes in God’s Word. Lavington Church is your gateway to a loving, compassionate church family and to our many community events and services.
+            </p>
+            <a href="/about" className="text-blue-600 hover:underline mt-4 inline-block">Read More</a>
+          </div>
+          <div>
+            <h3 className="text-xl font-semibold">Our Mission</h3>
+            <p className="text-gray-700 mt-2">
+              Make disciples of Jesus Christ who live as His loving witnesses and proclaim to all people the everlasting gospel of the Three Angels’ Messages in preparation for His soon return (Matt 28:18-20, Acts 1:8, Rev 14:6-12).
+            </p>
+            <a href="/mission" className="text-blue-600 hover:underline mt-4 inline-block">Read More</a>
+          </div>
+          <div>
+            <h3 className="text-xl font-semibold">Our Vision</h3>
+            <p className="text-gray-700 mt-2">
+              In harmony with Bible revelation, Seventh-day Adventists see as the climax of God’s plan the restoration of all His creation to full harmony with His perfect will and righteousness.
+            </p>
+            <a href="/vision" className="text-blue-600 hover:underline mt-4 inline-block">Read More</a>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </section>
+
+      {/* Latest Sermons */}
+      <section className="py-8">
+        <h2 className="text-3xl font-serif text-blue-800 mb-4">Latest Sermons</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="bg-white p-4 rounded-lg shadow">
+            <h3 className="text-xl font-semibold">Men Ought to Pray</h3>
+            <p className="text-gray-600">By Pr. Gilbert Ojwang, July 12, 2025</p>
+            <a href="/sermons/men-ought-to-pray" className="text-blue-600 hover:underline">Watch Video</a>
+          </div>
+          <div className="bg-white p-4 rounded-lg shadow">
+            <h3 className="text-xl font-semibold">The Prodigal Sons</h3>
+            <p className="text-gray-600">By Eld. Emmanuel Nyambare, February 21, 2025</p>
+            <a href="/sermons/the-prodigal-sons" className="text-blue-600 hover:underline">Watch Video</a>
+          </div>
+          <div className="bg-white p-4 rounded-lg shadow">
+            <h3 className="text-xl font-semibold">Go Deeper with God</h3>
+            <p className="text-gray-600">By Pr. Peter Nyagah, July 27, 2024</p>
+            <a href="/sermons/go-deeper-with-god" className="text-blue-600 hover:underline">Watch Video</a>
+          </div>
+        </div>
+      </section>
+
+      {/* Welcome */}
+      <section className="py-8 bg-blue-50 rounded-lg p-6">
+        <h2 className="text-3xl font-serif text-blue-800 mb-4">Welcome To Church</h2>
+        <p className="text-gray-700">
+          Welcome to Lavington SDA Church online—your gateway to a loving, compassionate church family and to our many community events and services. I hope you’ll find plenty to feed your mind, soul, and body while you’re here … and that you’ll be convinced to join us in person at our weekly Sabbath worship.
+        </p>
+        <p className="text-gray-700 mt-4">
+          We believe the Scriptures are sacred and therefore should be studied in a reverent manner. Our services are conducted in a traditional style. Congregational singing of beloved hymns and prayer are a part of the service. Most members choose to wear attire that is business or business casual, but we welcome you to wear what’s comfortable for you.
+        </p>
+        <p className="text-gray-700 mt-4">
+          We welcome you to fellowship with us as you seek to find your rightful place of service to the Almighty God and to mankind.
+        </p>
+      </section>
+
+      {/* Latest Blog */}
+      <section className="py-8">
+        <h2 className="text-3xl font-serif text-blue-800 mb-4">Latest Blog</h2>
+        <div className="bg-white p-4 rounded-lg shadow">
+          <h3 className="text-xl font-semibold">Questions about Adventists? Ask here!</h3>
+          <p className="text-gray-700 mt-2">Find answers to your questions about Seventh-day Adventists.</p>
+          <a href="/blog/questions-about-adventists" className="text-blue-600 hover:underline mt-4 inline-block">Read More</a>
+        </div>
+      </section>
+    </main>
   );
 }
