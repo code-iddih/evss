@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import Countdown from 'react-countdown';
-import { FaChurch } from 'react-icons/fa';
+import Image from 'next/image';
 
-// Image paths
+// Slider images
 const sliderImages = [
   '/images/slider1.jpg',
   '/images/slider2.jpg',
@@ -20,7 +20,9 @@ export default function Home() {
   // Auto-slide every 5 seconds
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev === sliderImages.length - 1 ? 0 : prev + 1));
+      setCurrentSlide((prev) =>
+        prev === sliderImages.length - 1 ? 0 : prev + 1
+      );
     }, 5000);
     return () => clearInterval(interval);
   }, []);
@@ -49,7 +51,8 @@ export default function Home() {
                     Welcome to Elgonview Sabbath School
                   </h1>
                   <p className="text-lg md:text-xl mb-6">
-                    Join our loving community for worship, fellowship, and service.
+                    Join our loving community for worship, fellowship, and
+                    service.
                   </p>
                   <a
                     href="/about"
@@ -78,7 +81,9 @@ export default function Home() {
 
       {/* Upcoming Events */}
       <section className="py-8 text-center">
-        <h2 className="text-3xl font-serif text-blue-800 mb-4">Upcoming Events</h2>
+        <h2 className="text-3xl font-serif text-blue-800 mb-4">
+          Upcoming Events
+        </h2>
         <h3 className="text-2xl font-semibold">Education Sabbath</h3>
         <p className="text-gray-600">August 30, 2025, 8:00 AM</p>
         <Countdown
@@ -102,73 +107,108 @@ export default function Home() {
         />
       </section>
 
-      {/* About the Church */}
-      <section className="py-8 bg-white rounded-lg shadow p-6">
-        <h2 className="text-3xl font-serif text-blue-800 mb-4">About Elgonview Sabbath School</h2>
-        <div className="flex flex-row space-x-6">
-          <div className="w-1/3 bg-[#7d0707] text-white p-6 rounded-lg shadow" style={{ backgroundImage: 'url(/images/community.jpg)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
-            <h3 className="text-xl font-semibold mb-4">COMMUNITY</h3>
-            <p className="mb-4">At Elgonview, we empower businesses by combining expertise. We empower businesses by combining expertise. We empower businesses by combining expertise.</p>
-          </div>
-          <div className="w-1/3 bg-[#7d0707] text-white p-6 rounded-lg shadow" style={{ backgroundImage: 'url(/images/mission.jpg)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
-            <h3 className="text-xl font-semibold mb-4">MISSION</h3>
-            <p className="mb-4">At Elgonview, we empower businesses by combining expertise. We empower businesses by combining expertise. We empower businesses by combining expertise.</p>
-          </div>
-          <div className="w-1/3 bg-[#7d0707] text-white p-6 rounded-lg shadow" style={{ backgroundImage: 'url(/images/vision.jpg)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
-            <h3 className="text-xl font-semibold mb-4">VISION</h3>
-            <p className="mb-4">At Elgonview, we empower businesses by combining expertise. We empower businesses by combining expertise. We empower businesses by combining expertise.</p>
-          </div>
-        </div>
-      </section>
+      {/* Community, Mission, Vision - Images Only */}
+      <section className="py-12 px-6 bg-gray-50">
+        <h2 className="text-3xl font-bold text-center mb-8">
+          Community, Mission & Vision
+        </h2>
 
-      {/* Mission Section */}
-      <section className="py-8 bg-white rounded-lg shadow p-6">
-        <div className="relative w-full bg-[#d67918] text-white rounded-t-lg p-4" style={{ borderTopLeftRadius: '20px', borderTopRightRadius: '20px' }}>
-          <h2 className="text-4xl font-bold text-center">MISSION</h2>
-        </div>
-        <div className="relative w-full bg-[#7d0707] text-white p-6 rounded-b-lg" style={{ backgroundImage: 'url(/images/mission-bg.jpg)', backgroundSize: 'cover', backgroundPosition: 'center', borderBottomLeftRadius: '20px', borderBottomRightRadius: '20px' }}>
-          <div className="absolute inset-0 bg-black bg-opacity-40 p-4 rounded-b-lg" style={{ borderBottomLeftRadius: '20px', borderBottomRightRadius: '20px' }}>
-            <h3 className="text-xl font-semibold mb-4">PREACHING THE THIRD ANGELS MESSAGE</h3>
-            <p className="mb-4">
-              At Shodwe, we empower businesses by combining expertise and knowledge. At Shodwe, we empower businesses by combining expertise and knowledge. At Shodwe, we empower businesses by combining expertise and knowledge. At Shodwe, we empower businesses by combining expertise and knowledge. At Shodwe, we empower businesses by combining expertise and knowledge.
-            </p>
-          </div>
+        <div className="flex flex-col md:flex-row justify-center items-center gap-6">
+          {/* Community */}
+          <Image
+            src="/images/community.png"
+            alt="Community"
+            width={400}
+            height={250}
+            className="rounded-lg shadow-md"
+          />
+
+          {/* Mission */}
+          <Image
+            src="/images/mission.png"
+            alt="Mission"
+            width={400}
+            height={250}
+            className="rounded-lg shadow-md"
+          />
+
+          {/* Vision */}
+          <Image
+            src="/images/vision.png"
+            alt="Vision"
+            width={400}
+            height={250}
+            className="rounded-lg shadow-md"
+          />
         </div>
       </section>
 
       {/* Latest Sermons */}
       <section className="py-8">
-        <h2 className="text-3xl font-serif text-blue-800 mb-4">Latest Sermons</h2>
+        <h2 className="text-3xl font-serif text-blue-800 mb-4">
+          Latest Sermons
+        </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="bg-white p-4 rounded-lg shadow hover:shadow-lg transition">
             <h3 className="text-xl font-semibold">Men Ought to Pray</h3>
-            <p className="text-gray-600">By Pr. Gilbert Ojwang, July 12, 2025</p>
-            <a href="/sermons/men-ought-to-pray" className="text-blue-600 hover:underline">Watch Video</a>
+            <p className="text-gray-600">
+              By Pr. Gilbert Ojwang, July 12, 2025
+            </p>
+            <a
+              href="/sermons/men-ought-to-pray"
+              className="text-blue-600 hover:underline"
+            >
+              Watch Video
+            </a>
           </div>
           <div className="bg-white p-4 rounded-lg shadow hover:shadow-lg transition">
             <h3 className="text-xl font-semibold">The Prodigal Sons</h3>
-            <p className="text-gray-600">By Eld. Emmanuel Nyambare, February 21, 2025</p>
-            <a href="/sermons/the-prodigal-sons" className="text-blue-600 hover:underline">Watch Video</a>
+            <p className="text-gray-600">
+              By Eld. Emmanuel Nyambare, February 21, 2025
+            </p>
+            <a
+              href="/sermons/the-prodigal-sons"
+              className="text-blue-600 hover:underline"
+            >
+              Watch Video
+            </a>
           </div>
           <div className="bg-white p-4 rounded-lg shadow hover:shadow-lg transition">
             <h3 className="text-xl font-semibold">Go Deeper with God</h3>
-            <p className="text-gray-600">By Pr. Peter Nyagah, July 27, 2024</p>
-            <a href="/sermons/go-deeper-with-god" className="text-blue-600 hover:underline">Watch Video</a>
+            <p className="text-gray-600">
+              By Pr. Peter Nyagah, July 27, 2024
+            </p>
+            <a
+              href="/sermons/go-deeper-with-god"
+              className="text-blue-600 hover:underline"
+            >
+              Watch Video
+            </a>
           </div>
         </div>
       </section>
 
       {/* Welcome */}
       <section className="py-8 bg-blue-50 rounded-lg p-6">
-        <h2 className="text-3xl font-serif text-blue-800 mb-4">Welcome To Elgonview Sabbath School</h2>
+        <h2 className="text-3xl font-serif text-blue-800 mb-4">
+          Welcome To Elgonview Sabbath School
+        </h2>
         <p className="text-gray-700">
-          Welcomes to Elgonview Sabbath School online—your gateway to a loving, compassionate church family and to our many community events and services. I hope you’ll find plenty to feed your mind, soul, and body while you’re here … and that you’ll be convinced to join us in person at our weekly Sabbath worship.
+          Welcome to Elgonview Sabbath School online—your gateway to a loving,
+          compassionate church family and to our many community events and
+          services. We hope you’ll find plenty to feed your mind, soul, and body
+          while you’re here … and that you’ll be convinced to join us in person
+          at our weekly Sabbath worship.
         </p>
         <p className="text-gray-700 mt-4">
-          We believe the Scriptures are sacred and therefore should be studied in a reverent manner. Our services are conducted in a traditional style. Congregational singing of beloved hymns and prayer are a part of the service. Most members choose to wear attire that is business or business casual, but we welcome you to wear what’s comfortable for you.
+          We believe the Scriptures are sacred and should be studied in a
+          reverent manner. Our services are traditional with hymns, prayers, and
+          sermons. Most members wear business or business casual attire, but we
+          welcome you to wear what’s comfortable for you.
         </p>
         <p className="text-gray-700 mt-4">
-          We welcome you to fellowship with us as you seek to find your rightful place of service to the Almighty God and to mankind.
+          We welcome you to fellowship with us as you seek to find your rightful
+          place of service to the Almighty God and to mankind.
         </p>
       </section>
 
@@ -176,11 +216,179 @@ export default function Home() {
       <section className="py-8">
         <h2 className="text-3xl font-serif text-blue-800 mb-4">Latest Blog</h2>
         <div className="bg-white p-4 rounded-lg shadow hover:shadow-lg transition">
-          <h3 className="text-xl font-semibold">Questions about Adventists? Ask here!</h3>
-          <p className="text-gray-700 mt-2">Find answers to your questions about Seventh-day Adventists.</p>
-          <a href="/blog/questions-about-adventists" className="text-blue-600 hover:underline mt-4 inline-block">Read More</a>
+          <h3 className="text-xl font-semibold">
+            Questions about Adventists? Ask here!
+          </h3>
+          <p className="text-gray-700 mt-2">
+            Find answers to your questions about Seventh-day Adventists.
+          </p>
+          <a
+            href="/blog/questions-about-adventists"
+            className="text-blue-600 hover:underline mt-4 inline-block"
+          >
+            Read More
+          </a>
         </div>
       </section>
     </main>
   );
 }
+
+
+
+
+
+
+
+
+
+// <!doctype html>
+// <html lang="en">
+// <head>
+// <meta charset="utf-8" />
+// <meta name="viewport" content="width=device-width,initial-scale=1" />
+// <title>Community</title>
+// <style>
+//   :root{
+//     --maroon:#7d0707;
+//     --orange:#d67918;
+//   }
+
+//   body{
+//     margin:0;
+//     background:#f3f5f7;
+//     font-family: "Helvetica Neue", Arial, sans-serif;
+//     display:flex;
+//     justify-content:center;
+//     padding:30px;
+//   }
+
+//   .card{
+//     width:740px;
+//     background:#fff;
+//     border-radius:14px;
+//     overflow:hidden;
+//     box-shadow:0 6px 18px rgba(18,23,26,0.06);
+//     position:relative;
+//   }
+
+//   .top-orange{
+//     height:26px;
+//     background:var(--orange);
+//     border-top-left-radius:50px;
+//     border-top-right-radius:50px;
+//   }
+
+//   .header{
+//     background:var(--maroon);
+//     color:#fff;
+//     padding:42px 38px;
+//     position:relative;
+//     z-index:2;
+//   }
+//   .header h1{
+//     margin:0;
+//     font-size:64px;
+//     font-weight:900;
+//   }
+
+//   .gap{height:12px;background:#fff;}
+
+//   .media{
+//     position:relative;
+//     background:#000;
+//   }
+//   .media img{
+//     width:100%;
+//     height:360px;
+//     object-fit:cover;
+//     display:block;
+//   }
+//   .media .img-overlay{
+//     position:absolute;
+//     inset:0;
+//     background: linear-gradient(
+//       to bottom,
+//       rgba(214,121,24,0.9) 0%,   /* strong orange at top */
+//       rgba(214,121,24,0.6) 40%,  /* medium in middle */
+//       rgba(214,121,24,0.1) 70%,  /* lighter further down */
+//       rgba(214,121,24,0.0) 100%  /* fully transparent bottom */
+//     );
+//     pointer-events:none;
+//   }
+
+//   .info{
+//     position:absolute;
+//     top:-12px;
+//     left:44px;
+//     bottom:0;
+//     width:260px;
+//     background:var(--maroon);
+//     color:#fff;
+//     padding:18px;
+//     z-index:6;
+//     box-shadow:0 8px 18px rgba(7,8,9,0.12);
+//     display:flex;
+//     flex-direction:column;
+//     align-items:center;
+//     border-radius:0;
+//   }
+
+//   .info .pill{
+//     padding:8px 14px;
+//     border-radius:50px;
+//     font-weight:700;
+//     font-size:13px;
+//     color:#fff;
+//     border:2px solid var(--orange);
+//     margin-bottom:14px;
+//     text-align:center;
+//   }
+
+//   .info p{
+//     margin:0;
+//     font-size:13px;
+//     line-height:1.6;
+//     flex:1;
+//     text-align:left;
+//   }
+
+//   .bottom-orange{
+//     height:28px;
+//     background:var(--orange);
+//     border-bottom-left-radius:50px;
+//     border-bottom-right-radius:50px;
+//   }
+// </style>
+// </head>
+// <body>
+//   <div class="card">
+//     <div class="top-orange"></div>
+
+//     <div class="header">
+//       <h1>COMMUNITY</h1>
+//     </div>
+
+//     <div class="gap"></div>
+
+//     <div class="media">
+//       <img src="https://cdn.pixabay.com/photo/2025/08/02/14/53/pied-cuckoo-9750790_640.jpg" alt="community">
+//       <div class="img-overlay"></div>
+
+//       <div class="info">
+//         <div class="pill">Loving family, rooted in God.</div>
+//         <p>
+//           We are a community who firmly believes in God’s Word.
+//           Lavington Church is your gateway to a loving, compassionate
+//           church family and to our many community events and services.
+//           I hope you’ll find plenty to feed your mind, soul, and body
+//           while you’re here – and that you’ll be convinced to join us
+//           in person at our weekly Sabbath worship.
+//         </p>
+//       </div>
+//     </div>
+
+//     <div class="bottom-orange"></div>
+//   </div>
+// </body>
+// </html>
