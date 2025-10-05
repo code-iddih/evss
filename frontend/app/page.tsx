@@ -105,8 +105,7 @@ export default function Home() {
         />
       </section>
 
-      // Community, Mission, Vision
-      // Community, Mission, Vision
+      {/* // Community, Mission, Vision */}
       <section className="py-8 text-center bg-gray-100">
         <h2 className="text-3xl font-serif text-blue-800 mb-8">
           Community, Mission & Vision
