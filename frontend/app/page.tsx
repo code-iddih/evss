@@ -35,9 +35,8 @@ export default function Home() {
           {sliderImages.map((image, index) => (
             <div
               key={index}
-              className={`absolute inset-0 transition-opacity duration-1000 ${
-                index === currentSlide ? 'opacity-100' : 'opacity-0'
-              }`}
+              className={`absolute inset-0 transition-opacity duration-1000 ${index === currentSlide ? 'opacity-100' : 'opacity-0'
+                }`}
               style={{
                 backgroundImage: `url(${image})`,
                 backgroundSize: 'cover',
@@ -71,9 +70,8 @@ export default function Home() {
             <button
               key={index}
               onClick={() => setCurrentSlide(index)}
-              className={`w-3 h-3 rounded-full ${
-                index === currentSlide ? 'bg-white' : 'bg-gray-400'
-              }`}
+              className={`w-3 h-3 rounded-full ${index === currentSlide ? 'bg-white' : 'bg-gray-400'
+                }`}
             />
           ))}
         </div>
@@ -108,38 +106,67 @@ export default function Home() {
       </section>
 
       {/* Community, Mission, Vision - Images Only */}
-      <section className="py-12 px-6 bg-gray-50">
-        <h2 className="text-3xl font-bold text-center mb-8">
+      // Community, Mission, Vision
+      <section className="py-8 text-center bg-gray-100">
+        <h2 className="text-3xl font-serif text-blue-800 mb-8">
           Community, Mission & Vision
         </h2>
+        {/* The new Community Card using Tailwind and Next.js Image */}
+        <div className="flex justify-center px-4">
+          <div className="max-w-3xl w-full bg-white rounded-xl overflow-hidden shadow-xl relative">
+            {/* Top Orange Accent */}
+            <div className="h-4 bg-[#d67918] rounded-t-xl"></div>
 
-        <div className="flex flex-col md:flex-row justify-center items-center gap-6">
-          {/* Community */}
-          <Image
-            src="/images/community.png"
-            alt="Community"
-            width={400}
-            height={250}
-            className="rounded-lg shadow-md"
-          />
+            {/* Header (Maroon) */}
+            <div className="bg-[#7d0707] text-white p-8 relative z-10">
+              <h1 className="text-4xl md:text-6xl font-extrabold m-0">
+                COMMUNITY
+              </h1>
+            </div>
 
-          {/* Mission */}
-          <Image
-            src="/images/mission.png"
-            alt="Mission"
-            width={400}
-            height={250}
-            className="rounded-lg shadow-md"
-          />
+            {/* Gap */}
+            <div className="h-3 bg-white"></div>
 
-          {/* Vision */}
-          <Image
-            src="/images/vision.png"
-            alt="Vision"
-            width={400}
-            height={250}
-            className="rounded-lg shadow-md"
-          />
+            {/* Media and Info Container */}
+            <div className="relative bg-black">
+              {/* Image (Note: If this image is not hosted on your domain, you'll need to configure
+             'next.config.js' to allow the hostname 'googleusercontent.com' in the 'images' object.) */}
+              <Image
+                src="https://cdn.pixabay.com/photo/2016/01/21/18/41/king-penguin-1154432_640.jpg"
+                alt="Church Community Gathering"
+                width={768} // Max width of the card for full image coverage
+                height={360}
+                className="w-full h-96 object-cover block"
+                priority
+              />
+
+              {/* Orange Gradient Overlay */}
+              <div
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                  background:
+                    'linear-gradient(to bottom, rgba(214,121,24,0.9) 0%, rgba(214,121,24,0.6) 40%, rgba(214,121,24,0.1) 70%, rgba(214,121,24,0.0) 100%)',
+                }}
+              ></div>
+
+              {/* Info Box (Maroon) */}
+              <div className="absolute top-[-12px] left-10 w-64 bg-[#7d0707] text-white p-6 shadow-2xl flex flex-col items-center rounded-none z-20 h-[calc(100%+12px)]">
+                <div className="px-3 py-1 mb-4 rounded-full font-bold text-sm text-white border-2 border-[#d67918] text-center">
+                  Loving family, rooted in God.
+                </div>
+                <p className="m-0 text-sm leading-relaxed text-left flex-1">
+                  We are a community who firmly believes in God’s Word. Elgonview
+                  Sabbath School is your gateway to a loving, compassionate church
+                  family and to our many community events and services. We hope
+                  you’ll find plenty to feed your mind, soul, and body while you’re
+                  here.
+                </p>
+              </div>
+            </div>
+
+            {/* Bottom Orange Accent */}
+            <div className="h-5 bg-[#d67918] rounded-b-xl"></div>
+          </div>
         </div>
       </section>
 

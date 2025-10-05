@@ -28,3 +28,52 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Community, Mission and Vision */
+/* app/globals.css */
+.values-section {
+  padding: 3rem 1.5rem;
+  background-color: #f9fafb;
+}
+
+.values-title {
+  font-size: 1.875rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.values-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .values-container {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+.value-card {
+  flex: 1;
+  max-width: 300px;
+  padding: 1.5rem;
+  background: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.value-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1e40af;
+  margin-bottom: 0.5rem;
+}
+
+.value-text {
+  color: #374151;
+}
