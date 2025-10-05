@@ -105,21 +105,24 @@ export default function Home() {
         />
       </section>
 
-      {/* Community, Mission, Vision - Images Only */}
+      // Community, Mission, Vision
       // Community, Mission, Vision
       <section className="py-8 text-center bg-gray-100">
         <h2 className="text-3xl font-serif text-blue-800 mb-8">
           Community, Mission & Vision
         </h2>
-        {/* The new Community Card using Tailwind and Next.js Image */}
-        <div className="flex justify-center px-4">
-          <div className="max-w-3xl w-full bg-white rounded-xl overflow-hidden shadow-xl relative">
+
+        {/* Outer Flex Container for the Three Cards */}
+        <div className="flex flex-col md:flex-row justify-center gap-6 px-4">
+
+          {/* 1. COMMUNITY CARD - Width increased, Height reduced */}
+          <div className="w-full md:w-1/3 max-w-lg lg:max-w-xl bg-white rounded-xl overflow-hidden shadow-xl relative"> {/* max-w-lg/xl for wider cards */}
             {/* Top Orange Accent */}
             <div className="h-4 bg-[#d67918] rounded-t-xl"></div>
 
             {/* Header (Maroon) */}
-            <div className="bg-[#7d0707] text-white p-8 relative z-10">
-              <h1 className="text-4xl md:text-6xl font-extrabold m-0">
+            <div className="bg-[#7d0707] text-white p-6 relative z-10">
+              <h1 className="text-3xl md:text-4xl font-extrabold m-0">
                 COMMUNITY
               </h1>
             </div>
@@ -129,14 +132,65 @@ export default function Home() {
 
             {/* Media and Info Container */}
             <div className="relative bg-black">
-              {/* Image (Note: If this image is not hosted on your domain, you'll need to configure
-             'next.config.js' to allow the hostname 'googleusercontent.com' in the 'images' object.) */}
+              {/* Image - Width increased, Height reduced */}
               <Image
                 src="https://cdn.pixabay.com/photo/2016/01/21/18/41/king-penguin-1154432_640.jpg"
-                alt="Church Community Gathering"
-                width={768} // Max width of the card for full image coverage
-                height={360}
-                className="w-full h-96 object-cover block"
+                alt="Community Image"
+                width={600} // Increased width
+                height={180} // Reduced height
+                className="w-full object-cover block"
+                priority
+              />
+
+              {/* Orange Gradient Overlay (Matching original style) */}
+              <div
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                  background:
+                    'linear-gradient(to bottom, rgba(214,121,24,0.9) 0%, rgba(214,121,24,0.6) 40%, rgba(214,121,24,0.1) 70%, rgba(214,121,24,0.0) 100%)',
+                }}
+              ></div>
+
+              {/* Info Box (Maroon) - Width adjusted slightly for new card size */}
+              <div className="absolute top-[-12px] bottom-0 left-4 w-60 bg-[#7d0707] text-white p-4 shadow-2xl flex flex-col rounded-none z-20"> {/* Adjusted width for the info box */}
+                <div className="px-3 py-1 mb-3 rounded-full font-bold text-xs text-white border-2 border-[#d67918] text-center">
+                  Loving family, rooted in God.
+                </div>
+                <p className="m-0 text-xs leading-relaxed text-left flex-1">
+                  We are a community who firmly believes in God’s Word. Join our loving, compassionate church family.
+                </p>
+              </div>
+            </div>
+
+            {/* Bottom Orange Accent */}
+            <div className="h-5 bg-[#d67918] rounded-b-xl"></div>
+          </div>
+
+
+          {/* 2. MISSION CARD - Width increased, Height reduced */}
+          <div className="w-full md:w-1/3 max-w-lg lg:max-w-xl bg-white rounded-xl overflow-hidden shadow-xl relative"> {/* max-w-lg/xl for wider cards */}
+            {/* Top Orange Accent */}
+            <div className="h-4 bg-[#d67918] rounded-t-xl"></div>
+
+            {/* Header (Maroon) */}
+            <div className="bg-[#7d0707] text-white p-6 relative z-10">
+              <h1 className="text-3xl md:text-4xl font-extrabold m-0">
+                MISSION
+              </h1>
+            </div>
+
+            {/* Gap */}
+            <div className="h-3 bg-white"></div>
+
+            {/* Media and Info Container */}
+            <div className="relative bg-black">
+              {/* Image - Width increased, Height reduced */}
+              <Image
+                src="https://cdn.pixabay.com/photo/2016/01/21/18/41/king-penguin-1154432_640.jpg"
+                alt="Mission Image"
+                width={600}
+                height={180}
+                className="w-full object-cover block"
                 priority
               />
 
@@ -149,17 +203,13 @@ export default function Home() {
                 }}
               ></div>
 
-              {/* Info Box (Maroon) */}
-              <div className="absolute top-[-12px] left-10 w-64 bg-[#7d0707] text-white p-6 shadow-2xl flex flex-col items-center rounded-none z-20 h-[calc(100%+12px)]">
-                <div className="px-3 py-1 mb-4 rounded-full font-bold text-sm text-white border-2 border-[#d67918] text-center">
-                  Loving family, rooted in God.
+              {/* Info Box (Maroon) - Width adjusted slightly for new card size */}
+              <div className="absolute top-[-12px] bottom-0 left-4 w-60 bg-[#7d0707] text-white p-4 shadow-2xl flex flex-col rounded-none z-20">
+                <div className="px-3 py-1 mb-3 rounded-full font-bold text-xs text-white border-2 border-[#d67918] text-center">
+                  Serve and share.
                 </div>
-                <p className="m-0 text-sm leading-relaxed text-left flex-1">
-                  We are a community who firmly believes in God’s Word. Elgonview
-                  Sabbath School is your gateway to a loving, compassionate church
-                  family and to our many community events and services. We hope
-                  you’ll find plenty to feed your mind, soul, and body while you’re
-                  here.
+                <p className="m-0 text-xs leading-relaxed text-left flex-1">
+                  Our mission is to serve God and humanity with love, integrity, and faithful service.
                 </p>
               </div>
             </div>
@@ -167,6 +217,59 @@ export default function Home() {
             {/* Bottom Orange Accent */}
             <div className="h-5 bg-[#d67918] rounded-b-xl"></div>
           </div>
+
+
+          {/* 3. VISION CARD - Width increased, Height reduced */}
+          <div className="w-full md:w-1/3 max-w-lg lg:max-w-xl bg-white rounded-xl overflow-hidden shadow-xl relative"> {/* max-w-lg/xl for wider cards */}
+            {/* Top Orange Accent */}
+            <div className="h-4 bg-[#d67918] rounded-t-xl"></div>
+
+            {/* Header (Maroon) */}
+            <div className="bg-[#7d0707] text-white p-6 relative z-10">
+              <h1 className="text-3xl md:text-4xl font-extrabold m-0">
+                VISION
+              </h1>
+            </div>
+
+            {/* Gap */}
+            <div className="h-3 bg-white"></div>
+
+            {/* Media and Info Container */}
+            <div className="relative bg-black">
+              {/* Image - Width increased, Height reduced */}
+              <Image
+                src="https://cdn.pixabay.com/photo/2016/01/21/18/41/king-penguin-1154432_640.jpg"
+                alt="Vision Image"
+                width={600}
+                height={180}
+                className="w-full object-cover block"
+                priority
+              />
+
+              {/* Orange Gradient Overlay */}
+              <div
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                  background:
+                    'linear-gradient(to bottom, rgba(214,121,24,0.9) 0%, rgba(214,121,24,0.6) 40%, rgba(214,121,24,0.1) 70%, rgba(214,121,24,0.0) 100%)',
+                }}
+              ></div>
+
+              {/* Info Box (Maroon) - Width adjusted slightly for new card size */}
+              <div className="absolute top-[-12px] bottom-0 left-4 w-60 bg-[#7d0707] text-white p-4 shadow-2xl flex flex-col rounded-none z-20">
+                <div className="px-3 py-1 mb-3 rounded-full font-bold text-xs text-white border-2 border-[#d67918] text-center">
+                  Rooted in faith.
+                </div>
+                <p className="m-0 text-xs leading-relaxed text-left flex-1">
+                  Our vision is to grow a strong, vibrant spiritual family that is deeply rooted in the promises of faith.
+                </p>
+              </div>
+            </div>
+
+            {/* Bottom Orange Accent */}
+            <div className="h-5 bg-[#d67918] rounded-b-xl"></div>
+          </div>
+
         </div>
       </section>
 
