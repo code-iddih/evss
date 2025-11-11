@@ -275,12 +275,7 @@ export default function Home() {
         </div>
       </section>
 
-      Understood. You want to add a narrow orange line *immediately below* the maroon header section and *above* the image container for each of the three cards.
-
-      Here is the updated code for the "Latest Sermons" section, with a `div` for the orange line inserted in the requested position for all three cards:
-
-      ````jsx
-      // Latest Sermons - Visual Card Structure for Three Sermons
+       {/* LATEST SERMON        */}
       <section className="py-8 bg-gray-100">
         <h2 className="text-3xl font-serif text-blue-800 mb-8 text-center">
           Latest Sermons
