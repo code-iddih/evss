@@ -11,6 +11,9 @@ const sliderImages = [
   '/images/slider3.jpg',
   '/images/slider4.jpg',
   '/images/slider5.jpg',
+  '/images/flowers.jpg',
+  '/images/flowers1.jpg',
+  '/images/flowers2.jpg',
 ];
 
 export default function Home() {
@@ -272,50 +275,205 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Latest Sermons */}
-      <section className="py-8">
-        <h2 className="text-3xl font-serif text-blue-800 mb-4">
+      Understood. You want to add a narrow orange line *immediately below* the maroon header section and *above* the image container for each of the three cards.
+
+      Here is the updated code for the "Latest Sermons" section, with a `div` for the orange line inserted in the requested position for all three cards:
+
+      ````jsx
+      // Latest Sermons - Visual Card Structure for Three Sermons
+      <section className="py-8 bg-gray-100">
+        <h2 className="text-3xl font-serif text-blue-800 mb-8 text-center">
           Latest Sermons
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-white p-4 rounded-lg shadow hover:shadow-lg transition">
-            <h3 className="text-xl font-semibold">Men Ought to Pray</h3>
-            <p className="text-gray-600">
-              By Pr. Gilbert Ojwang, July 12, 2025
-            </p>
-            <a
-              href="/sermons/men-ought-to-pray"
-              className="text-blue-600 hover:underline"
-            >
-              Watch Video
-            </a>
-          </div>
-          <div className="bg-white p-4 rounded-lg shadow hover:shadow-lg transition">
-            <h3 className="text-xl font-semibold">The Prodigal Sons</h3>
-            <p className="text-gray-600">
-              By Eld. Emmanuel Nyambare, February 21, 2025
-            </p>
-            <a
-              href="/sermons/the-prodigal-sons"
-              className="text-blue-600 hover:underline"
-            >
-              Watch Video
-            </a>
-          </div>
-          <div className="bg-white p-4 rounded-lg shadow hover:shadow-lg transition">
-            <h3 className="text-xl font-semibold">Go Deeper with God</h3>
-            <p className="text-gray-600">
-              By Pr. Peter Nyagah, July 27, 2024
-            </p>
-            <a
-              href="/sermons/go-deeper-with-god"
-              className="text-blue-600 hover:underline"
-            >
-              Watch Video
-            </a>
+
+        {/* Grid Container for three visual cards */}
+        <div className="flex justify-center px-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl w-full">
+
+            {/* --- CARD 1: Youth Sabbath (Heartbreak) --- */}
+            <div className="w-full bg-white rounded-lg shadow-2xl overflow-hidden">
+              {/* Top Header Section (Maroon) */}
+              <div className="p-3 text-center text-white bg-[#7d0707]">
+                <h3 className="text-xl font-bold">Youth Sabbath</h3>
+              </div>
+
+              {/* NEW NARROW ORANGE LINE */}
+              <div className="h-1 bg-[#d67918]"></div> {/* This is the new line */}
+
+              {/* Media and Content Area */}
+              <div className="relative w-full" style={{ height: '300px' }}>
+
+                {/* Main Image */}
+                <Image
+                  src="/images/flowers.jpg"
+                  alt="How to overcome Heartbreak"
+                  layout="fill"
+                  objectFit="cover"
+                  priority
+                />
+
+                {/* Dark Overlay with Gradient for Text Readability */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+
+                {/* Text Content Block */}
+                <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
+                  <h1 className="text-2xl font-serif font-bold mb-3 leading-tight">
+                    How to overcome Heartbreak in the modern Era?
+                  </h1>
+
+                  <p className="text-sm font-semibold">
+                    <span className="font-normal text-gray-300">Speaker:</span> Pr. Prof. Rei Kesis
+                  </p>
+                  <p className="text-sm font-semibold">
+                    <span className="font-normal text-gray-300">Duration:</span> 45 Mins
+                  </p>
+                </div>
+
+                {/* Play Button */}
+                <a
+                  href="/sermons/heartbreak"
+                  className="absolute bottom-4 right-4 z-10 p-3 rounded-full shadow-lg transition hover:scale-105 bg-[#d67918]"
+                  aria-label="Watch Video"
+                >
+                  <svg
+                    className="w-4 h-4 text-white"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M6 4l15 8-15 8z" />
+                  </svg>
+                </a>
+              </div>
+
+              {/* Bottom Orange Accent */}
+              <div className="h-2 bg-[#d67918]"></div>
+            </div>
+
+            {/* --- CARD 2: Men Ought to Pray --- */}
+            <div className="w-full bg-white rounded-lg shadow-2xl overflow-hidden">
+              {/* Top Header Section (Maroon) */}
+              <div className="p-3 text-center text-white bg-[#7d0707]">
+                <h3 className="text-xl font-bold">Prayer Series</h3>
+              </div>
+
+              {/* NEW NARROW ORANGE LINE */}
+              <div className="h-1 bg-[#d67918]"></div> {/* This is the new line */}
+
+              {/* Media and Content Area */}
+              <div className="relative w-full" style={{ height: '300px' }}>
+
+                {/* Main Image */}
+                <Image
+                  src="/images/flowers1.jpg"
+                  alt="Men Ought to Pray"
+                  layout="fill"
+                  objectFit="cover"
+                  priority
+                />
+
+                {/* Dark Overlay with Gradient for Text Readability */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+
+                {/* Text Content Block */}
+                <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
+                  <h1 className="text-2xl font-serif font-bold mb-3 leading-tight">
+                    Men Ought to Pray
+                  </h1>
+
+                  <p className="text-sm font-semibold">
+                    <span className="font-normal text-gray-300">Speaker:</span> Pr. Gilbert Ojwang
+                  </p>
+                  <p className="text-sm font-semibold">
+                    <span className="font-normal text-gray-300">Date:</span> July 12, 2025
+                  </p>
+                </div>
+
+                {/* Play Button */}
+                <a
+                  href="/sermons/men-ought-to-pray"
+                  className="absolute bottom-4 right-4 z-10 p-3 rounded-full shadow-lg transition hover:scale-105 bg-[#d67918]"
+                  aria-label="Watch Video"
+                >
+                  <svg
+                    className="w-4 h-4 text-white"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M6 4l15 8-15 8z" />
+                  </svg>
+                </a>
+              </div>
+
+              {/* Bottom Orange Accent */}
+              <div className="h-2 bg-[#d67918]"></div>
+            </div>
+
+            {/* --- CARD 3: The Prodigal Sons --- */}
+            <div className="w-full bg-white rounded-lg shadow-2xl overflow-hidden">
+              {/* Top Header Section (Maroon) */}
+              <div className="p-3 text-center text-white bg-[#7d0707]">
+                <h3 className="text-xl font-bold">Parable Study</h3>
+              </div>
+
+              {/* NEW NARROW ORANGE LINE */}
+              <div className="h-1 bg-[#d67918]"></div> {/* This is the new line */}
+
+              {/* Media and Content Area */}
+              <div className="relative w-full" style={{ height: '300px' }}>
+
+                {/* Main Image */}
+                <Image
+                  src="/images/flowers2.jpg"
+                  alt="The Prodigal Sons"
+                  layout="fill"
+                  objectFit="cover"
+                  priority
+                />
+
+                {/* Dark Overlay with Gradient for Text Readability */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+
+                {/* Text Content Block */}
+                <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
+                  <h1 className="text-2xl font-serif font-bold mb-3 leading-tight">
+                    The Prodigal Sons
+                  </h1>
+
+                  <p className="text-sm font-semibold">
+                    <span className="font-normal text-gray-300">Speaker:</span> Eld. Emmanuel Nyambare
+                  </p>
+                  <p className="text-sm font-semibold">
+                    <span className="font-normal text-gray-300">Date:</span> February 21, 2025
+                  </p>
+                </div>
+
+                {/* Play Button */}
+                <a
+                  href="/sermons/the-prodigal-sons"
+                  className="absolute bottom-4 right-4 z-10 p-3 rounded-full shadow-lg transition hover:scale-105 bg-[#d67918]"
+                  aria-label="Watch Video"
+                >
+                  <svg
+                    className="w-4 h-4 text-white"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M6 4l15 8-15 8z" />
+                  </svg>
+                </a>
+              </div>
+
+              {/* Bottom Orange Accent */}
+              <div className="h-2 bg-[#d67918]"></div>
+            </div>
+
           </div>
         </div>
       </section>
+      ```http://googleusercontent.com/image_generation_content/1
+
+      ````
+
 
       {/* Welcome */}
       <section className="py-8 bg-blue-50 rounded-lg p-6">
