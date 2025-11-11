@@ -108,7 +108,7 @@ export default function Home() {
         />
       </section>
 
-      {/* // Community, Mission, Vision */}
+      // Community, Mission, Vision - Resized to be smaller (max-w-sm)
       <section className="py-8 text-center bg-gray-100">
         <h2 className="text-3xl font-serif text-blue-800 mb-8">
           Community, Mission & Vision
@@ -117,14 +117,14 @@ export default function Home() {
         {/* Outer Flex Container for the Three Cards */}
         <div className="flex flex-col md:flex-row justify-center gap-6 px-4">
 
-          {/* 1. COMMUNITY CARD - Width increased, Height reduced */}
-          <div className="w-full md:w-1/3 max-w-lg lg:max-w-xl bg-white rounded-xl overflow-hidden shadow-xl relative"> {/* max-w-lg/xl for wider cards */}
+          {/* 1. COMMUNITY CARD - RESIZED */}
+          <div className="w-full md:w-1/3 max-w-sm bg-white rounded-xl overflow-hidden shadow-xl relative"> {/* Reduced max-width */}
             {/* Top Orange Accent */}
             <div className="h-4 bg-[#d67918] rounded-t-xl"></div>
 
             {/* Header (Maroon) */}
-            <div className="bg-[#7d0707] text-white p-6 relative z-10">
-              <h1 className="text-3xl md:text-4xl font-extrabold m-0">
+            <div className="bg-[#7d0707] text-white p-4 relative z-10"> {/* Reduced padding */}
+              <h1 className="text-3xl font-extrabold m-0">
                 COMMUNITY
               </h1>
             </div>
@@ -134,12 +134,12 @@ export default function Home() {
 
             {/* Media and Info Container */}
             <div className="relative bg-black">
-              {/* Image - Width increased, Height reduced */}
+              {/* Image - Resized for smaller card */}
               <Image
                 src="https://cdn.pixabay.com/photo/2016/01/21/18/41/king-penguin-1154432_640.jpg"
                 alt="Community Image"
-                width={600} // Increased width
-                height={180} // Reduced height
+                width={400} // Reduced width
+                height={150} // Reduced height
                 className="w-full object-cover block"
                 priority
               />
@@ -153,9 +153,9 @@ export default function Home() {
                 }}
               ></div>
 
-              {/* Info Box (Maroon) - Width adjusted slightly for new card size */}
-              <div className="absolute top-[-12px] bottom-0 left-4 w-60 bg-[#7d0707] text-white p-4 shadow-2xl flex flex-col rounded-none z-20"> {/* Adjusted width for the info box */}
-                <div className="px-3 py-1 mb-3 rounded-full font-bold text-xs text-white border-2 border-[#d67918] text-center">
+              {/* Info Box (Maroon) - Resized for smaller card */}
+              <div className="absolute top-[-12px] bottom-0 left-4 w-48 bg-[#7d0707] text-white p-3 shadow-2xl flex flex-col rounded-none z-20"> {/* Reduced width and padding */}
+                <div className="px-3 py-1 mb-2 rounded-full font-bold text-xs text-white border-2 border-[#d67918] text-center">
                   Loving family, rooted in God.
                 </div>
                 <p className="m-0 text-xs leading-relaxed text-left flex-1">
@@ -169,14 +169,14 @@ export default function Home() {
           </div>
 
 
-          {/* 2. MISSION CARD - Width increased, Height reduced */}
-          <div className="w-full md:w-1/3 max-w-lg lg:max-w-xl bg-white rounded-xl overflow-hidden shadow-xl relative"> {/* max-w-lg/xl for wider cards */}
+          {/* 2. MISSION CARD - RESIZED */}
+          <div className="w-full md:w-1/3 max-w-sm bg-white rounded-xl overflow-hidden shadow-xl relative"> {/* Reduced max-width */}
             {/* Top Orange Accent */}
             <div className="h-4 bg-[#d67918] rounded-t-xl"></div>
 
             {/* Header (Maroon) */}
-            <div className="bg-[#7d0707] text-white p-6 relative z-10">
-              <h1 className="text-3xl md:text-4xl font-extrabold m-0">
+            <div className="bg-[#7d0707] text-white p-4 relative z-10"> {/* Reduced padding */}
+              <h1 className="text-3xl font-extrabold m-0">
                 MISSION
               </h1>
             </div>
@@ -186,12 +186,12 @@ export default function Home() {
 
             {/* Media and Info Container */}
             <div className="relative bg-black">
-              {/* Image - Width increased, Height reduced */}
+              {/* Image - Resized for smaller card */}
               <Image
                 src="https://cdn.pixabay.com/photo/2016/01/21/18/41/king-penguin-1154432_640.jpg"
                 alt="Mission Image"
-                width={600}
-                height={180}
+                width={400}
+                height={150}
                 className="w-full object-cover block"
                 priority
               />
@@ -205,9 +205,9 @@ export default function Home() {
                 }}
               ></div>
 
-              {/* Info Box (Maroon) - Width adjusted slightly for new card size */}
-              <div className="absolute top-[-12px] bottom-0 left-4 w-60 bg-[#7d0707] text-white p-4 shadow-2xl flex flex-col rounded-none z-20">
-                <div className="px-3 py-1 mb-3 rounded-full font-bold text-xs text-white border-2 border-[#d67918] text-center">
+              {/* Info Box (Maroon) - Resized for smaller card */}
+              <div className="absolute top-[-12px] bottom-0 left-4 w-48 bg-[#7d0707] text-white p-3 shadow-2xl flex flex-col rounded-none z-20">
+                <div className="px-3 py-1 mb-2 rounded-full font-bold text-xs text-white border-2 border-[#d67918] text-center">
                   Serve and share.
                 </div>
                 <p className="m-0 text-xs leading-relaxed text-left flex-1">
@@ -221,14 +221,14 @@ export default function Home() {
           </div>
 
 
-          {/* 3. VISION CARD - Width increased, Height reduced */}
-          <div className="w-full md:w-1/3 max-w-lg lg:max-w-xl bg-white rounded-xl overflow-hidden shadow-xl relative"> {/* max-w-lg/xl for wider cards */}
+          {/* 3. VISION CARD - RESIZED */}
+          <div className="w-full md:w-1/3 max-w-sm bg-white rounded-xl overflow-hidden shadow-xl relative"> {/* Reduced max-width */}
             {/* Top Orange Accent */}
             <div className="h-4 bg-[#d67918] rounded-t-xl"></div>
 
             {/* Header (Maroon) */}
-            <div className="bg-[#7d0707] text-white p-6 relative z-10">
-              <h1 className="text-3xl md:text-4xl font-extrabold m-0">
+            <div className="bg-[#7d0707] text-white p-4 relative z-10"> {/* Reduced padding */}
+              <h1 className="text-3xl font-extrabold m-0">
                 VISION
               </h1>
             </div>
@@ -238,12 +238,12 @@ export default function Home() {
 
             {/* Media and Info Container */}
             <div className="relative bg-black">
-              {/* Image - Width increased, Height reduced */}
+              {/* Image - Resized for smaller card */}
               <Image
                 src="https://cdn.pixabay.com/photo/2016/01/21/18/41/king-penguin-1154432_640.jpg"
                 alt="Vision Image"
-                width={600}
-                height={180}
+                width={400}
+                height={150}
                 className="w-full object-cover block"
                 priority
               />
@@ -257,9 +257,9 @@ export default function Home() {
                 }}
               ></div>
 
-              {/* Info Box (Maroon) - Width adjusted slightly for new card size */}
-              <div className="absolute top-[-12px] bottom-0 left-4 w-60 bg-[#7d0707] text-white p-4 shadow-2xl flex flex-col rounded-none z-20">
-                <div className="px-3 py-1 mb-3 rounded-full font-bold text-xs text-white border-2 border-[#d67918] text-center">
+              {/* Info Box (Maroon) - Resized for smaller card */}
+              <div className="absolute top-[-12px] bottom-0 left-4 w-48 bg-[#7d0707] text-white p-3 shadow-2xl flex flex-col rounded-none z-20">
+                <div className="px-3 py-1 mb-2 rounded-full font-bold text-xs text-white border-2 border-[#d67918] text-center">
                   Rooted in faith.
                 </div>
                 <p className="m-0 text-xs leading-relaxed text-left flex-1">
@@ -275,7 +275,7 @@ export default function Home() {
         </div>
       </section>
 
-       {/* LATEST SERMON        */}
+      {/* LATEST SERMON        */}
       <section className="py-8 bg-gray-100">
         <h2 className="text-3xl font-serif text-blue-800 mb-8 text-center">
           Latest Sermons
@@ -465,9 +465,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      ```http://googleusercontent.com/image_generation_content/1
 
-      ````
 
 
       {/* Welcome */}
