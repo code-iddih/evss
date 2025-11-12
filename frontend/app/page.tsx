@@ -466,7 +466,7 @@ export default function Home() {
       </section>
 
 
-      {/* Welcome To Church Section - Updated Content and Animated Frame */}
+      {/* Welcome To Church Section - Restored Static Structure and Simplified Image Container */}
       <section className="relative py-16 px-4 md:px-8 overflow-hidden bg-white">
 
         {/* Background Pattern (Faint Graphics) */}
@@ -512,23 +512,26 @@ export default function Home() {
 
           </div>
 
-          {/* Right Column: Pastor's Photo with Animated Frame */}
-          <div className="lg:w-5/12 w-full mt-8 lg:mt-0 lg:ml-[-50px] flex justify-center relative shadow-2xl">
+          {/* Right Column: Pastor's Photo with Static Border (Simplified) */}
+          <div className="lg:w-5/12 w-full mt-8 lg:mt-0 lg:ml-[-50px] flex justify-center relative">
 
-            {/* Container for the image and its animated border */}
-            <div
-              className="animated-border-simple w-full max-w-xs md:max-w-sm h-[450px] lg:h-[600px] rounded-lg overflow-hidden"
+            {/* SIMPLIFIED CONTAINER FOR MAX COMPATIBILITY */}
+            <div className="relative w-full max-w-xs md:max-w-sm h-[450px] lg:h-[600px] shadow-2xl rounded-lg overflow-hidden"
+              style={{
+                borderWidth: '8px',
+                borderStyle: 'solid',
+                // Static gradient border restored
+                borderImage: 'linear-gradient(to bottom right, #d67918 0%, #7d0707 100%) 1',
+                borderImageSlice: 1,
+              }}
             >
-              {/* Inner container to hold the image content */}
-              <div className="relative w-full h-full bg-white rounded-[calc(0.5rem - 8px)]">
-                <Image
-                  src={PASTOR_PHOTO_PATH}
-                  alt="Pr. Daniel Ombim"
-                  layout="fill"
-                  objectFit="cover"
-                  priority
-                />
-              </div>
+              <Image
+                src={PASTOR_PHOTO_PATH}
+                alt="Pr. Daniel Ombim"
+                layout="fill"
+                objectFit="cover"
+                priority
+              />
             </div>
 
           </div>
