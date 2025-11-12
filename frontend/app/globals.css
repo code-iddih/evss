@@ -80,7 +80,7 @@ body {
 
 /* Pastor animatiton */
 
-/* --- RELIABLE ANIMATED BORDER (Pseudo-Element Method) --- */
+/* --- STABLE ANIMATED BORDER (Background/Border Method) --- */
 
 /* 1. Keyframes: Defines the clockwise, snake-like movement */
 @keyframes border-flow-clockwise {
@@ -91,56 +91,48 @@ body {
     100% { background-position: 0% 50%; }
 }
 
-/* 2. Main Container Class: Holds the image and the pseudo-element */
-.animated-frame-stable {
+/* 2. Main Animated Container Class */
+.animated-frame-final {
     --border-size: 8px;
     --color-1: #d67918; /* Orange */
     --color-2: #7d0707; /* Maroon */
     
-    position: relative; /* Essential for positioning the ::after element */
+    position: relative;
     z-index: 10;
-    overflow: hidden; /* Contains the image and border */
-    border-radius: 0.5rem; /* For rounded corners */
-}
+    overflow: hidden;
+    border-radius: 0.5rem; 
 
-/* 3. Pseudo-Element Class: Creates the animated border effect */
-.animated-frame-stable::after {
-    content: '';
-    position: absolute;
-    inset: 0; /* Cover the entire container */
-    z-index: 1; /* Place above the image container */
-
-    /* Animation Properties */
-    background-image: linear-gradient(
+    /* Apply the animated background directly to the container */
+    background: linear-gradient(
         90deg, 
         var(--color-1) 0%,
         var(--color-2) 25%,
         var(--color-1) 50%,
         var(--color-2) 75%,
         var(--color-1) 100%
-    );
-    background-size: 400% 400%;
-    animation: border-flow-clockwise 15s linear infinite;
+    ) border-box; /* Set the gradient to cover the border area */
 
-    /* CRITICAL FIX: Clip-path creates the hole *before* the image renders */
-    /* This creates a frame by clipping a slightly smaller rectangle inside */
-    clip-path: 
-        polygon(
-            0 0, 100% 0, 100% 100%, 0 100%, /* Outer rectangle */
-            var(--border-size) var(--border-size), /* Inner cutout corner 1 */
-            var(--border-size) calc(100% - var(--border-size)), /* Inner cutout corner 2 */
-            calc(100% - var(--border-size)) calc(100% - var(--border-size)), /* Inner cutout corner 3 */
-            calc(100% - var(--border-size)) var(--border-size) /* Inner cutout corner 4 */
-        );
+    background-size: 400% 400%;
+    animation: border-flow-clockwise 15s linear infinite; 
     
-    /* Ensure the inner image content is still visible underneath */
-    clip-path: 
-        polygon(
-            evenodd, 
-            0% 0%, 100% 0%, 100% 100%, 0% 100%, /* Outer perimeter */
-            var(--border-size) var(--border-size), 
-            calc(100% - var(--border-size)) var(--border-size), 
-            calc(100% - var(--border-size)) calc(100% - var(--border-size)), 
-            var(--border-size) calc(100% - var(--border-size)) /* Inner cutout */
-        );
+    /* Set the border style to be transparent so the background shows through */
+    border: var(--border-size) solid transparent; 
+}
+
+/* 3. Inner Content Fix: Forces content (the image) to sit inside the padding area */
+.animated-frame-final > div {
+    /* Critical property: Clips the background (which is the gradient) 
+       to the inside of the border (padding-box). Since the content 
+       (the inner div) is placed *over* the gradient, the gradient 
+       shows up as a border around the content. */
+    background-clip: padding-box; 
+    
+    /* The image itself needs a solid background to cover the area */
+    background-color: white; 
+    
+    /* Ensure sizing and corners match the outer container */
+    width: 100%;
+    height: 100%;
+    border-radius: calc(0.5rem - 0px); /* Keep it simple */
+    overflow: hidden;
 }

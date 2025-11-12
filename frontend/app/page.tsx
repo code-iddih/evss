@@ -495,7 +495,7 @@ export default function Home() {
 
             {/* Shortened Paragraphs for Content Balance */}
             <p className="text-gray-700 mb-4 text-sm leading-relaxed">
-              Welcome to Lavington SDA Church online. We are a loving, compassionate church family and your gateway to numerous community events and faithful services. We hope you'll find spiritual nourishment while you're here and are convinced to join us in person for our weekly Sabbath worship.
+              Welcome to Lavington SDA Church online. We are a loving, compassionate church family and your gateway to numerous community events and faithful services. I hope you'll find spiritual nourishment while you're here and are convinced to join us in person for our weekly Sabbath worship.
             </p>
             <p className="text-gray-700 mb-6 text-sm leading-relaxed">
               We believe the Holy Scriptures are sacred and should be studied reverently. Our services follow a traditional style with hymns, prayers, and sermons. We welcome you to fellowship with us as you seek your rightful place of service to God and humanity.
@@ -515,17 +515,20 @@ export default function Home() {
           {/* Right Column: Pastor's Photo with Animated Frame */}
           <div className="lg:w-5/12 w-full mt-8 lg:mt-0 lg:ml-[-50px] flex justify-center relative shadow-2xl">
 
-            {/* The image is contained directly in the stable animation wrapper */}
+            {/* Container 1: The final, stable animated border element (animated-frame-final) */}
             <div
-              className="animated-frame-stable w-full max-w-xs md:max-w-sm h-[450px] lg:h-[600px]"
+              className="animated-frame-final w-full max-w-xs md:max-w-sm h-[450px] lg:h-[600px]"
             >
-              <Image
-                src={PASTOR_PHOTO_PATH}
-                alt="Pr. Daniel Ombim"
-                layout="fill"
-                objectFit="cover"
-                priority
-              />
+              {/* Container 2: The inner content and image holder (REQUIRED for the background-clip fix) */}
+              <div className="relative w-full h-full rounded-lg">
+                <Image
+                  src={PASTOR_PHOTO_PATH}
+                  alt="Pr. Daniel Ombim"
+                  layout="fill"
+                  objectFit="cover"
+                  priority
+                />
+              </div>
             </div>
 
           </div>
