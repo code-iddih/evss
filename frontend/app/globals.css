@@ -80,65 +80,67 @@ body {
 
 /* Pastor animatiton */
 
-/* --- Snake-like Flow Animation for Border --- */
+/* --- RELIABLE ANIMATED BORDER (Pseudo-Element Method) --- */
 
-/* 1. Define the flowing animation */
+/* 1. Keyframes: Defines the clockwise, snake-like movement */
 @keyframes border-flow-clockwise {
-    0% {
-        /* Start with the gradient primarily horizontal (left to right) */
-        background-position: 0% 50%;
-    }
-    25% {
-        /* Push the gradient down and right (traveling along the top edge) */
-        background-position: 100% 0%;
-    }
-    50% {
-        /* Push the gradient left and down (traveling along the right edge) */
-        background-position: 200% 50%;
-    }
-    75% {
-        /* Push the gradient up and left (traveling along the bottom edge) */
-        background-position: 100% 100%;
-    }
-    100% {
-        /* Return to start (completes the circuit) */
-        background-position: 0% 50%;
-    }
+    0% { background-position: 0% 50%; }
+    25% { background-position: 100% 0%; }
+    50% { background-position: 200% 50%; }
+    75% { background-position: 100% 100%; }
+    100% { background-position: 0% 50%; }
 }
 
-/* 2. Define the class for the animated border */
-.animated-border-simple {
+/* 2. Main Container Class: Holds the image and the pseudo-element */
+.animated-frame-stable {
     --border-size: 8px;
     --color-1: #d67918; /* Orange */
     --color-2: #7d0707; /* Maroon */
-
-    /* Basic container styles */
-    position: relative;
-    z-index: 10;
     
-    /* Create the large, repeating gradient background */
+    position: relative; /* Essential for positioning the ::after element */
+    z-index: 10;
+    overflow: hidden; /* Contains the image and border */
+    border-radius: 0.5rem; /* For rounded corners */
+}
+
+/* 3. Pseudo-Element Class: Creates the animated border effect */
+.animated-frame-stable::after {
+    content: '';
+    position: absolute;
+    inset: 0; /* Cover the entire container */
+    z-index: 1; /* Place above the image container */
+
+    /* Animation Properties */
     background-image: linear-gradient(
-        90deg, /* Angle determines the direction of the flow */
+        90deg, 
         var(--color-1) 0%,
         var(--color-2) 25%,
         var(--color-1) 50%,
         var(--color-2) 75%,
         var(--color-1) 100%
     );
-    
-    /* Make the background large and use the new animation */
-    background-size: 400% 400%; /* Larger size emphasizes the movement */
-    background-position: 0% center;
+    background-size: 400% 400%;
+    animation: border-flow-clockwise 15s linear infinite;
 
-    /* Apply the new animation */
-    animation: border-flow-clockwise 8s linear infinite; /* Increased duration for smoother flow */
-
-    /* Masking to create the "hole" in the middle, leaving only the border */
-    mask: 
-        linear-gradient(#fff 0 0) content-box, 
-        linear-gradient(#fff 0 0);
-    mask-composite: exclude;
-    padding: var(--border-size);
+    /* CRITICAL FIX: Clip-path creates the hole *before* the image renders */
+    /* This creates a frame by clipping a slightly smaller rectangle inside */
+    clip-path: 
+        polygon(
+            0 0, 100% 0, 100% 100%, 0 100%, /* Outer rectangle */
+            var(--border-size) var(--border-size), /* Inner cutout corner 1 */
+            var(--border-size) calc(100% - var(--border-size)), /* Inner cutout corner 2 */
+            calc(100% - var(--border-size)) calc(100% - var(--border-size)), /* Inner cutout corner 3 */
+            calc(100% - var(--border-size)) var(--border-size) /* Inner cutout corner 4 */
+        );
     
-    border-radius: 0.5rem;
+    /* Ensure the inner image content is still visible underneath */
+    clip-path: 
+        polygon(
+            evenodd, 
+            0% 0%, 100% 0%, 100% 100%, 0% 100%, /* Outer perimeter */
+            var(--border-size) var(--border-size), 
+            calc(100% - var(--border-size)) var(--border-size), 
+            calc(100% - var(--border-size)) calc(100% - var(--border-size)), 
+            var(--border-size) calc(100% - var(--border-size)) /* Inner cutout */
+        );
 }
