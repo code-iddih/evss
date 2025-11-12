@@ -14,7 +14,10 @@ const sliderImages = [
   '/images/flowers.jpg',
   '/images/flowers1.jpg',
   '/images/flowers2.jpg',
+  '/images/pastor.jpg'
 ];
+
+const PASTOR_PHOTO_PATH = '/images/pastor.jpg';
 
 export default function Home() {
   const eventDate = new Date('2025-08-30T08:00:00');
@@ -467,29 +470,93 @@ export default function Home() {
       </section>
 
 
+      {/* Welcome To Church Section - Final Structure */}
+      <section className="relative py-16 px-4 md:px-8 overflow-hidden bg-white">
 
-      {/* Welcome */}
-      <section className="py-8 bg-blue-50 rounded-lg p-6">
-        <h2 className="text-3xl font-serif text-blue-800 mb-4">
-          Welcome To Elgonview Sabbath School
-        </h2>
-        <p className="text-gray-700">
-          Welcome to Elgonview Sabbath School online—your gateway to a loving,
-          compassionate church family and to our many community events and
-          services. We hope you’ll find plenty to feed your mind, soul, and body
-          while you’re here … and that you’ll be convinced to join us in person
-          at our weekly Sabbath worship.
-        </p>
-        <p className="text-gray-700 mt-4">
-          We believe the Scriptures are sacred and should be studied in a
-          reverent manner. Our services are traditional with hymns, prayers, and
-          sermons. Most members wear business or business casual attire, but we
-          welcome you to wear what’s comfortable for you.
-        </p>
-        <p className="text-gray-700 mt-4">
-          We welcome you to fellowship with us as you seek to find your rightful
-          place of service to the Almighty God and to mankind.
-        </p>
+        {/* Background Pattern (Faint Graphics) */}
+        <div
+          className="absolute inset-0 z-0 pointer-events-none"
+          style={{
+            background: `repeating-linear-gradient(
+        45deg,
+        #f0f0f0, /* Very light gray */
+        #f0f0f0 10px,
+        #ffffff 10px,
+        #ffffff 20px
+      )`,
+            opacity: 0.5,
+          }}
+        ></div>
+
+        {/* Content Container */}
+        <div className="relative z-10 max-w-6xl mx-auto flex flex-col lg:flex-row items-center lg:items-start">
+
+          {/* Left Column: Text Content and Pastor's Name Block */}
+          <div className="lg:w-7/12 p-4 lg:pr-12 bg-white/80 rounded-lg">
+            <h2 className="text-4xl font-serif text-gray-800 mb-6">
+              Welcome To Church
+            </h2>
+
+            {/* Paragraphs */}
+            <p className="text-gray-700 mb-4 text-sm leading-relaxed">
+              Welcome to Lavington SDA Church online—your gateway to a loving, compassionate
+              church family and to our many community events and services. I hope you'll find plenty to
+              feed your mind, soul, and body while you're here ... and that you'll be convinced to join us
+              in person at our weekly Sabbath worship.
+            </p>
+            <p className="text-gray-700 mb-4 text-sm leading-relaxed">
+              We believe the Scriptures are sacred and should therefore be studied in a reverent
+              manner. Our services are conducted in a traditional style. Congregational singing of
+              beloved hymns and prayer are a part of the service. Most members choose to wear attire
+              that is business or business casual, but we welcome you to wear what's comfortable for
+              you.
+            </p>
+            <p className="text-gray-700 mb-6 text-sm leading-relaxed">
+              We welcome you to fellowship with us as you seek to find your rightful place of service to
+              the Almighty God and to mankind.
+            </p>
+
+            {/* Pastor's Name Block - REINTRODUCED ON THE LEFT WITH NEW STRUCTURE */}
+            <div className="mt-8 max-w-sm mx-auto lg:mx-0"> {/* Added margin top, centered on small, left-aligned on large */}
+              {/* Top Orange Accent */}
+              <div className="h-1 bg-[#d67918]"></div>
+
+              {/* Name in Maroon Box */}
+              <div className="bg-[#7d0707] text-white p-3 text-center text-xl font-bold">
+                Pr. Daniel Ombim
+              </div>
+
+              {/* Bottom Orange Accent */}
+              <div className="h-1 bg-[#d67918]"></div>
+            </div>
+
+          </div>
+
+          {/* Right Column: Pastor's Photo with Styled Border (No Name Banner here) */}
+          <div className="lg:w-5/12 w-full mt-8 lg:mt-0 lg:ml-[-50px] flex justify-center relative">
+
+            {/* Container for the image and its border */}
+            <div className="relative w-full max-w-xs md:max-w-sm h-[450px] lg:h-[600px] shadow-2xl rounded-lg overflow-hidden"
+              style={{
+                borderWidth: '8px',
+                borderStyle: 'solid',
+                borderImage: 'linear-gradient(to bottom right, #d67918 0%, #7d0707 100%) 1',
+                borderImageSlice: 1,
+              }}
+            >
+              <Image
+                src={PASTOR_PHOTO_PATH}
+                alt="Pr. Daniel Ombim"
+                layout="fill"
+                objectFit="cover"
+                priority
+              />
+            </div>
+
+            {/* Removed the Pr. Daniel Ombim name banner from here */}
+
+          </div>
+        </div>
       </section>
 
       {/* Latest Blog */}
