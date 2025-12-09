@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Countdown from 'react-countdown';
 import Image from 'next/image';
-import LatestBlogSection from './LatestBlogSection'; // adjust path if needed
+import LatestBlogSection from './events/LatestBlogSection'; 
 
 // Slider images
 const sliderImages = [
