@@ -2,37 +2,58 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation'; // Import for better handling
 
 export default function PrayerRequestForm() {
   const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState(''); // Changed from email
   const [request, setRequest] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  
+  const router = useRouter();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError(null);
 
     if (request.trim() === '') {
-      alert('Please enter your prayer request.');
+      setError('Please enter your prayer request before submitting.');
       return;
     }
 
     setIsSubmitting(true);
 
-    // --- Placeholder for actual API submission ---
-    // In a real application, you would send this data to a server here.
-    console.log('Submitting Request:', { name, email, request });
-    
-    // Simulate API delay
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      // 1. Send data to our new Next.js API route
+      const response = await fetch('/api/submit-prayer', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: name || 'Anonymous',
+          phoneNumber: phoneNumber || 'N/A',
+          request,
+        }),
+      });
+
+      if (!response.ok) {
+        // Handle API route errors
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Failed to send prayer request.');
+      }
+
+      // 2. Success state
       setIsSubmitted(true);
-      // Optional: Clear the form fields after successful submission
-      // setName('');
-      // setEmail('');
-      // setRequest('');
-    }, 2000);
+      
+    } catch (err: any) {
+      console.error('Submission Error:', err);
+      setError(err.message || 'An unexpected error occurred. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (isSubmitted) {
@@ -44,7 +65,7 @@ export default function PrayerRequestForm() {
           </svg>
           <h2 className="text-3xl font-bold text-green-700 mb-4">Prayer Received!</h2>
           <p className="text-gray-700 text-lg">
-            Thank you for sharing your heart with us. Our prayer team will lift your request up to God. Be blessed!
+            Thank you for sharing your heart with us. Our prayer team will lift your request up to God.
           </p>
         </div>
       </div>
@@ -53,7 +74,7 @@ export default function PrayerRequestForm() {
 
   return (
     <div className="container mx-auto px-4 py-12 min-h-[70vh] flex flex-col items-center">
-      {/* Maroon Heading */}
+      {/* ... (Existing Headings) ... */}
       <h1 className="text-4xl font-serif text-[#7d0707] font-bold text-center mb-6">Submit a Prayer Request</h1>
       
       <p className="text-lg text-gray-700 text-center max-w-3xl mb-10">
@@ -62,6 +83,12 @@ export default function PrayerRequestForm() {
 
       {/* Form Container */}
       <div className="bg-white p-8 md:p-10 rounded-xl shadow-2xl max-w-2xl w-full border-t-4 border-[#d67918]">
+        {error && (
+          <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4" role="alert">
+            <p className="font-bold">Error</p>
+            <p>{error}</p>
+          </div>
+        )}
         <form onSubmit={handleSubmit} className="space-y-6">
           
           {/* Name Field (Optional) */}
@@ -80,18 +107,18 @@ export default function PrayerRequestForm() {
             />
           </div>
 
-          {/* Email Field (Optional) */}
+          {/* Phone Number Field (Replaced Email, Optional) */}
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-              Your Email (Optional, for follow-up)
+            <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+              Your Phone Number (Optional, for follow-up)
             </label>
             <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              type="tel" // Use type="tel" for phone numbers
+              id="phone"
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value)}
               className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-[#7d0707] focus:border-[#7d0707] transition"
-              placeholder="email@example.com"
+              placeholder="+254 7XX XXX XXX"
               disabled={isSubmitting}
             />
           </div>
@@ -120,7 +147,6 @@ export default function PrayerRequestForm() {
             className="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-[#d67918] hover:bg-[#c26c16] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#7d0707] transition disabled:opacity-50"
           >
             {isSubmitting ? (
-              // Loading spinner inside button
               <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-3"></div>
             ) : null}
             {isSubmitting ? 'Sending Request...' : 'Submit Prayer Request'}
