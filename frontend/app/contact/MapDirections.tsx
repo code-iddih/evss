@@ -24,12 +24,29 @@ const MapDirections = () => {
           src={`https://maps.google.com/maps?width=100%&height=600&hl=en&q=${encodeURIComponent(CHURCH_NAME)}&ie=UTF8&t=&z=14&iwloc=B&output=embed`}
           className="absolute inset-0"
         />
+        
         {/* Directions Button Overlay */}
         <a
           href={MAPS_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="absolute bottom-5 right-5 inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-lg text-white transition duration-300 ease-in-out transform hover:scale-105"
+          className="
+            absolute 
+            bottom-5 
+            left-1/2 
+            transform 
+            -translate-x-1/2 
+            inline-flex 
+            items-center 
+            px-6 py-3 
+            border border-transparent 
+            text-base font-medium 
+            rounded-full shadow-lg 
+            text-white 
+            transition 
+            duration-300 ease-in-out 
+            transform hover:scale-105
+          "
           style={{
             backgroundColor: isHovered ? '#d67918' : '#7d0707', // Orange/Maroon hover effect
           }}
