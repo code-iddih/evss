@@ -3,13 +3,24 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Ensure any other existing config options are kept here
   /* config options here */
   
   images: {
-    // Add both the previous and the new domain here.
-    domains: [
-      'googleusercontent.com', // Needed for the old image
-      'cdn.pixabay.com',         // ⬅️ NEW: Needed for the new Pixabay image
+    // Using the modern remotePatterns structure for external image domains
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'googleusercontent.com', // Needed for existing images
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn.pixabay.com',         // Needed for existing images
+      },
+      {
+        protocol: 'https',
+        hostname: 'i.ytimg.com',           // ✅ CRITICAL: The YouTube thumbnail domain
+      },
     ],
   },
 };
