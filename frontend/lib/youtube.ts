@@ -2,74 +2,20 @@
 
 const YOUTUBE_HOST = 'https://www.googleapis.com/youtube/v3';
 
-// Function to extract the 11-character Video ID from a YouTube URL
-const extractVideoId = (url: string): string | null => {
-  // Regex to match watch?v=ID, youtu.be/ID, or /embed/ID
-  const match = url.match(/(?:\?v=|youtu\.be\/|\/embed\/)(.{11})/);
-  return match ? match[1] : null;
-};
+// Get the Channel ID after enabling the API key
+const ELGONVIEW_CHANNEL_ID = "UCq1j7kaIVVSbht1znKdl9EQ"; // Placeholder: You must find the real ID!
 
 interface SermonData {
   title: string;
-  speaker: string;
+  speaker: string; // Will always be the Channel Name
   duration: string;
   thumbnailUrl: string;
   videoId: string;
+  publishedAt: string;
 }
 
-export async function fetchSermonDetails(youtubeUrl: string): Promise<SermonData | null> {
-  const videoId = extractVideoId(youtubeUrl);
-  if (!videoId) {
-    console.error("Invalid YouTube URL provided.");
-    return null;
-  }
-  
-  // 1. Get Title, Speaker (Channel), and Duration from YouTube API
-  const apiKey = process.env.YOUTUBE_API_KEY;
-  if (!apiKey) {
-      throw new Error("YOUTUBE_API_KEY is not set in environment variables.");
-  }
-  
-  const apiUrl = `${YOUTUBE_HOST}/videos?part=snippet,contentDetails&id=${videoId}&key=${apiKey}`;
-
-  try {
-    const response = await fetch(apiUrl, { next: { revalidate: 3600 } }); // Revalidate every hour
-    const data = await response.json();
-    
-    if (!data.items || data.items.length === 0) {
-      console.error("Video not found or API error:", data);
-      return null;
-    }
-    
-    const item = data.items[0];
-
-    // 2. Construct Thumbnail URL (Highest Quality)
-    const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
-    
-    // 3. Format Duration (YouTube returns PXXTXXS)
-    const durationISO = item.contentDetails.duration;
-    // You would need a library like 'iso8601-duration' or a small helper function 
-    // to convert this (e.g., PT30M15S) into a human-readable format (e.g., 30:15).
-    // For simplicity here, we'll keep the raw value or use a placeholder:
-    const duration = formatDuration(durationISO); // Function to be implemented later
-
-    return {
-      title: item.snippet.title,
-      speaker: item.snippet.channelTitle,
-      duration: duration,
-      thumbnailUrl: thumbnailUrl,
-      videoId: videoId,
-    };
-    
-  } catch (error) {
-    console.error("Error fetching YouTube data:", error);
-    return null;
-  }
-}
-
-// Simple placeholder function for duration conversion
+// Helper to convert ISO duration (PTXXHXXMXXS)
 function formatDuration(isoDuration: string): string {
-    // A simplified duration parser for common YouTube formats (e.g., PT1H30M15S)
     const parts = isoDuration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
     if (!parts) return isoDuration;
 
@@ -79,7 +25,77 @@ function formatDuration(isoDuration: string): string {
     
     let result = '';
     if (hours > 0) result += `${hours}:`;
-    result += `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+    result += `${String(minutes + (hours * 60)).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
     
-    return result; // e.g., "1:30:15" or "05:45"
+    return result; 
+}
+
+
+export async function fetchChannelSermons(maxResults: number = 6): Promise<SermonData[]> {
+    const apiKey = process.env.YOUTUBE_API_KEY;
+    if (!apiKey) {
+        // Essential check for your current issue!
+        console.error("YOUTUBE_API_KEY is not set in environment variables. Sermons cannot be fetched.");
+        return [];
+    }
+
+    // --- STEP 1 & 2: Get Uploads Playlist ID ---
+    // Every channel's uploads playlist ID is typically the Channel ID with UC replaced by UU.
+    // This is faster than making a 'channels' API call first.
+    if (!ELGONVIEW_CHANNEL_ID.startsWith('UC')) {
+        console.error("Invalid Channel ID format.");
+        return [];
+    }
+    const uploadsPlaylistId = ELGONVIEW_CHANNEL_ID.replace('UC', 'UU');
+    
+    // --- STEP 3: Get Videos from the Uploads Playlist ---
+    const playlistApiUrl = `${YOUTUBE_HOST}/playlistItems?` + new URLSearchParams({
+        part: 'snippet',
+        playlistId: uploadsPlaylistId,
+        maxResults: maxResults.toString(),
+        key: apiKey,
+    }).toString();
+
+    try {
+        const playlistResponse = await fetch(playlistApiUrl, { next: { revalidate: 3600 } });
+        const playlistData = await playlistResponse.json();
+
+        if (!playlistData.items || playlistData.items.length === 0) {
+            console.error("No videos found in the uploads playlist.");
+            return [];
+        }
+
+        // Extract all Video IDs from the playlist items
+        const videoIds = playlistData.items
+            .map((item: any) => item.snippet.resourceId.videoId)
+            .join(',');
+            
+        // --- STEP 4: Get Full Details (Duration, MaxRes Thumbnail) for all videos in one go ---
+        const videosApiUrl = `${YOUTUBE_HOST}/videos?` + new URLSearchParams({
+            part: 'snippet,contentDetails',
+            id: videoIds,
+            key: apiKey,
+        }).toString();
+        
+        const videosResponse = await fetch(videosApiUrl, { next: { revalidate: 3600 } });
+        const videosData = await videosResponse.json();
+
+        if (!videosData.items) {
+            console.error("Could not fetch video details.");
+            return [];
+        }
+
+        return videosData.items.map((item: any): SermonData => ({
+            title: item.snippet.title,
+            speaker: item.snippet.channelTitle,
+            duration: formatDuration(item.contentDetails.duration),
+            thumbnailUrl: item.snippet.thumbnails?.maxres?.url || item.snippet.thumbnails?.high?.url || '',
+            videoId: item.id,
+            publishedAt: item.snippet.publishedAt,
+        }));
+
+    } catch (error) {
+        console.error("Error fetching YouTube Channel data:", error);
+        return [];
+    }
 }
