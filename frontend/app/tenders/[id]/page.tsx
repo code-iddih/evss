@@ -1,10 +1,11 @@
 // app/tenders/page.tsx
 import Link from 'next/link';
 
+// --- THEME COLOR DEFINITIONS ---
 const COLOR_MAROON = '#800000';
 const COLOR_ORANGE = '#FF8C00';
 
-// Light green theme for Open tenders
+// Light green theme for STATUS BADGES only
 const OPEN_BG = '#dcfce7'; 
 const OPEN_TEXT = '#15803d';
 
@@ -60,13 +61,13 @@ const sampleTenders: Tender[] = [
 export default function TendersPage() {
   return (
     <div className="min-h-screen bg-gray-50 pb-20">
-      {/* 1. Header Section */}
+      {/* 1. Centered Header Section */}
       <div 
         className="py-20 text-white text-center mb-10 shadow-inner"
         style={{ backgroundColor: COLOR_MAROON }}
       >
         <div className="container mx-auto px-4">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-center">Latest Tenders</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">Latest Tenders</h1>
           <p className="text-lg opacity-90 max-w-2xl mx-auto italic">
             "Doing all things decently and in order." — 1 Corinthians 14:40
           </p>
@@ -121,6 +122,7 @@ export default function TendersPage() {
   );
 }
 
+// --- SUB-COMPONENT: Tender Card ---
 function TenderCard({ tender }: { tender: Tender }) {
   const isOpen = tender.status === 'Open';
 
@@ -133,6 +135,7 @@ function TenderCard({ tender }: { tender: Tender }) {
                 <span className="text-xs font-black px-2 py-1 rounded bg-gray-100 text-gray-500 tracking-tighter uppercase">
                     Ref: {tender.refNumber}
                 </span>
+                {/* Status Badge uses the Green Style */}
                 <span 
                     className="text-[10px] font-bold px-4 py-1 rounded-2xl uppercase tracking-widest"
                     style={isOpen ? { backgroundColor: OPEN_BG, color: OPEN_TEXT } : { backgroundColor: '#fee2e2', color: '#b91c1c' }}
@@ -140,7 +143,9 @@ function TenderCard({ tender }: { tender: Tender }) {
                     {tender.status}
                 </span>
             </div>
-            <h3 className="text-2xl font-extrabold text-gray-900">{tender.title}</h3>
+            <h3 className="text-2xl font-extrabold text-gray-900 group-hover:text-gray-700 transition-colors">
+                {tender.title}
+            </h3>
           </div>
           
           <div className="hidden md:block text-right">
@@ -149,7 +154,9 @@ function TenderCard({ tender }: { tender: Tender }) {
           </div>
         </div>
 
-        <p className="text-gray-600 mb-8 leading-relaxed line-clamp-2">{tender.description}</p>
+        <p className="text-gray-600 mb-8 leading-relaxed line-clamp-2 md:line-clamp-none max-w-4xl">
+            {tender.description}
+        </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-between gap-6 pt-6 border-t border-gray-50">
           <div className="flex items-center gap-8">
@@ -159,12 +166,15 @@ function TenderCard({ tender }: { tender: Tender }) {
               </div>
           </div>
 
+          {/* Independent Button: Retains Maroon color and uses rounded-2xl */}
           <Link 
             href={isOpen ? `/tenders/${tender.id}` : '#'}
-            className={`w-full sm:w-auto text-center px-10 py-3 rounded-2xl font-black text-sm uppercase tracking-widest transition-all shadow-sm ${
-                !isOpen ? 'bg-gray-100 text-gray-400 cursor-not-allowed shadow-none' : 'hover:brightness-95 active:scale-95'
+            className={`w-full sm:w-auto text-center px-10 py-3 rounded-2xl font-black text-sm uppercase tracking-widest transition-all ${
+                !isOpen 
+                ? 'bg-gray-100 text-gray-400 cursor-not-allowed' 
+                : 'text-white hover:brightness-110 active:scale-95 shadow-md'
             }`}
-            style={isOpen ? { backgroundColor: OPEN_BG, color: OPEN_TEXT } : {}}
+            style={isOpen ? { backgroundColor: COLOR_MAROON } : {}}
           >
             {isOpen ? 'View Full Tender' : 'Submissions Closed'}
           </Link>
