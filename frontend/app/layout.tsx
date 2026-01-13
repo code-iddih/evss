@@ -22,7 +22,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <li><a href="/giving" className="hover:underline">Giving</a></li>
             <li><a href="/blog" className="hover:underline">Blog</a></li>
             <li><a href="/vacancies" className="hover:underline">Vacancies</a></li>
-            <li><a href="/tenders" className="hover:underline">Tenders</a></li>
             <li><a href="/prayers" className="hover:underline">Prayers</a></li>
             <li><a href="/contact" className="hover:underline">Contact</a></li>
           </ul>
