@@ -204,90 +204,69 @@ export default function Home() {
       </section>
 
       {/* LATEST SERMONS */}
-      <section className="py-20 bg-white overflow-hidden">
-        {/* Uniform Header Structure */}
+      <section className="py-20 bg-white overflow-hidden w-full">
         <ScrollReveal>
-          <div className="mb-12 flex flex-col items-center">
-            {/* Black Inter Title */}
+          <div className="mb-12 flex flex-col items-center text-center">
             <h2 className="text-4xl md:text-5xl font-black text-black tracking-tighter mb-4">
               Latest Sermons
             </h2>
-
-            {/* Custom Gradient Bar */}
             <div className="w-24 h-1.5 rounded-full bg-gradient-to-r from-[#7d0707] to-[#d67918]" />
           </div>
         </ScrollReveal>
 
-        <div className="flex justify-center px-4">
-          <div className="flex flex-col md:flex-row gap-8 max-w-6xl w-full">
-            {/* SERMON CARDS */}
-            {[
-              {
-                tag: 'Youth Sabbath',
-                title: 'How to overcome Heartbreak in the modern Era?',
-                speaker: 'Pr. Prof. Rei Kesis',
-                meta: '45 Mins',
-                img: '/images/flowers.jpg'
-              },
-              {
-                tag: 'Prayer Series',
-                title: 'Men Ought to Pray',
-                speaker: 'Pr. Gilbert Ojwang',
-                meta: 'July 12, 2025',
-                img: '/images/flowers1.jpg'
-              },
-              {
-                tag: 'Parable Study',
-                title: 'The Prodigal Sons',
-                speaker: 'Eld. Emmanuel Nyambare',
-                meta: 'February 21, 2025',
-                img: '/images/flowers2.jpg'
-              }
-            ].map((sermon, i) => (
-              /* Using the fixed ScrollReveal with width classes */
-              <ScrollReveal
-                key={i}
-                delay={i * 0.2}
-                className="w-full md:w-1/3"
-              >
-                <div className="w-full h-full bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all overflow-hidden border border-gray-100 flex flex-col">
-                  {/* Tag Header (Maroon) */}
-                  <div className="p-4 text-center text-white bg-[#7d0707] shrink-0">
-                    <h3 className="text-sm font-bold uppercase tracking-widest">{sermon.tag}</h3>
-                  </div>
-
-                  {/* Accent Line (Orange) */}
-                  <div className="h-1 bg-[#d67918] shrink-0" />
-
-                  {/* Image and Content Container */}
-                  <div className="relative w-full h-[320px] grow">
-                    <Image src={sermon.img} alt={sermon.title} fill className="object-cover" />
-
-                    {/* Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
-
-                    {/* Text Content */}
-                    <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                      <h1 className="text-xl font-bold mb-3 leading-tight tracking-tight">
-                        {sermon.title}
-                      </h1>
-                      <div className="space-y-1 opacity-80">
-                        <p className="text-xs font-medium">Speaker: {sermon.speaker}</p>
-                        <p className="text-xs font-medium">Info: {sermon.meta}</p>
-                      </div>
-                    </div>
-
-                    {/* Play Button (Orange) */}
-                    <button className="absolute bottom-6 right-6 p-4 rounded-full shadow-lg bg-[#d67918] hover:bg-orange-600 transition-colors text-white">
-                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M6 4l15 8-15 8z" />
-                      </svg>
-                    </button>
-                  </div>
+        {/* CENTRAL FIX: 
+            1. 'px-4' gives a tiny gap at the very edge of the screen.
+            2. 'flex-col items-center' forces vertical stacking and horizontal centering on mobile.
+        */}
+        <div className="flex flex-col md:flex-row flex-wrap justify-center gap-y-16 gap-x-8 px-4 max-w-7xl mx-auto w-full">
+          {[
+            { tag: 'Youth Sabbath', title: 'How to overcome Heartbreak...', speaker: 'Pr. Prof. Rei Kesis', meta: '45 Mins', img: '/images/flowers.jpg' },
+            { tag: 'Prayer Series', title: 'Men Ought to Pray', speaker: 'Pr. Gilbert Ojwang', meta: 'July 12, 2025', img: '/images/flowers1.jpg' },
+            { tag: 'Parable Study', title: 'The Prodigal Sons', speaker: 'Eld. Emmanuel Nyambare', meta: 'February 21, 2025', img: '/images/flowers2.jpg' }
+          ].map((sermon, i) => (
+            <ScrollReveal
+              key={i}
+              delay={i * 0.2}
+              /* WRAPPER FIX: 
+                 'w-full flex justify-center' ensures the animation box itself 
+                 is centered relative to the screen.
+              */
+              className="w-full md:w-[calc(33.333%-2rem)] flex justify-center"
+            >
+              {/* CARD FIX: 
+                  'max-w-[310px]' makes it thinner than the previous version.
+                  'mx-auto' is the final safety net for centering.
+              */}
+              <div className="w-full max-w-[310px] bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full mx-auto">
+                <div className="p-4 text-center text-white bg-[#7d0707] shrink-0">
+                  <h3 className="text-xs font-bold uppercase tracking-widest">{sermon.tag}</h3>
                 </div>
-              </ScrollReveal>
-            ))}
-          </div>
+
+                <div className="h-1 bg-[#d67918] shrink-0" />
+
+                <div className="relative w-full h-[360px] md:h-[320px] grow">
+                  <Image src={sermon.img} alt={sermon.title} fill className="object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent" />
+
+                  <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                    <h1 className="text-lg font-bold mb-3 leading-tight tracking-tight">
+                      {sermon.title}
+                    </h1>
+                    <div className="space-y-1 opacity-90">
+                      <p className="text-[10px] font-bold uppercase text-[#d67918]">Speaker: {sermon.speaker}</p>
+                      <p className="text-[10px] opacity-70">Info: {sermon.meta}</p>
+                    </div>
+                  </div>
+
+                  <button className="absolute bottom-6 right-6 p-4 rounded-full shadow-lg bg-[#d67918] hover:bg-orange-600 transition-all hover:scale-110 text-white z-10">
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M6 4l15 8-15 8z" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </ScrollReveal>
+          ))}
         </div>
       </section>
 
