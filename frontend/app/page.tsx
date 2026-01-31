@@ -290,23 +290,22 @@ export default function Home() {
               <h2 className="text-4xl md:text-5xl font-black text-black tracking-tighter mb-4">
                 Welcome To Church
               </h2>
-              {/* Main Section Gradient Bar */}
               <div className="w-24 h-1.5 rounded-full bg-gradient-to-r from-[#7d0707] to-[#d67918]" />
             </div>
           </ScrollReveal>
 
-          <div className="flex flex-col lg:flex-row items-center lg:items-start gap-12">
+          {/* FIX: Changed lg:items-start to lg:items-center */}
+          <div className="flex flex-col lg:flex-row items-center lg:items-center gap-12">
 
             {/* Left Column: Message Block */}
             <ScrollReveal delay={0.2} className="w-full lg:w-7/12 order-2 lg:order-1">
-              {/* Message Subtitle - No bar here */}
               <div className="flex flex-col items-center lg:items-start mb-4">
                 <h4 className="text-[#d67918] font-bold tracking-widest uppercase text-xs">
                   — Message —
                 </h4>
               </div>
 
-              {/* Message Box: Maroon background */}
+              {/* Message Box */}
               <div className="relative bg-[#7d0707] text-white p-8 shadow-2xl border-l-8 border-[#7d0707] border-r-8 border-[#d67918]">
                 <p className="mb-4 text-sm md:text-base leading-relaxed font-medium opacity-95">
                   Welcome to Lavington SDA Church online. We are a loving, compassionate church family and your gateway to numerous community events and faithful services. I hope you'll find spiritual nourishment while you're here and are convinced to join us in person for our weekly Sabbath worship.
@@ -317,10 +316,8 @@ export default function Home() {
               </div>
             </ScrollReveal>
 
-            {/* Right Column: Pastor Image with Name Block on Top */}
+            {/* Right Column: Pastor Image */}
             <ScrollReveal delay={0.4} className="w-full lg:w-5/12 order-1 lg:order-2 flex flex-col items-center">
-
-              {/* Pastor's Name Block - "Hard" Formatting */}
               <div className="mb-6 w-full max-w-sm">
                 <div className="h-1 bg-[#d67918]" />
                 <div className="bg-[#7d0707] text-white p-3 text-center text-xl font-bold uppercase tracking-tight shadow-lg">
@@ -329,7 +326,6 @@ export default function Home() {
                 <div className="h-1 bg-[#d67918]" />
               </div>
 
-              {/* The Original Image Frame Style */}
               <div className="animated-frame-final w-full max-w-sm h-[450px] lg:h-[550px] shadow-2xl relative">
                 <div className="relative w-full h-full rounded-lg overflow-hidden border-4 border-white">
                   <Image
@@ -342,12 +338,10 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Church Pastor Title - Gradient Bar Below it */}
               <div className="mt-4 flex flex-col items-center">
                 <span className="text-sm font-bold uppercase tracking-[0.3em] text-[#7d0707]">
                   Church Pastor
                 </span>
-                {/* Gradient Bar applied here */}
                 <div className="w-16 h-1 rounded-full bg-gradient-to-r from-[#7d0707] to-[#d67918] mt-2" />
               </div>
             </ScrollReveal>
