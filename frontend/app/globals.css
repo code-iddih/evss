@@ -7,13 +7,16 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  /* Ensure this matches the variable name we define in layout.tsx */
+  --font-inter: 'Inter', ui-sans-serif, system-ui, sans-serif;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Map Tailwind's default sans to your Inter variable */
+  --font-sans: var(--font-inter);
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -23,14 +26,22 @@
   }
 }
 
+/* GLOBAL RESET */
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* REPLACED Arial with Inter variable */
+  font-family: var(--font-inter);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ensure headings inherit the Inter font weight properly */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-inter);
 }
 
 /* Community, Mission and Vision */
-/* app/globals.css */
 .values-section {
   padding: 3rem 1.5rem;
   background-color: #f9fafb;
@@ -38,9 +49,10 @@ body {
 
 .values-title {
   font-size: 1.875rem;
-  font-weight: bold;
+  font-weight: 800; /* Inter looks best at 800 for titles */
   text-align: center;
   margin-bottom: 2rem;
+  letter-spacing: -0.025em;
 }
 
 .values-container {
@@ -62,27 +74,24 @@ body {
   max-width: 300px;
   padding: 1.5rem;
   background: #fff;
-  border-radius: 0.5rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 0.75rem; /* Smoother corners for Inter aesthetic */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
   text-align: center;
 }
 
 .value-title {
   font-size: 1.25rem;
-  font-weight: 600;
+  font-weight: 700;
   color: #1e40af;
   margin-bottom: 0.5rem;
 }
 
 .value-text {
   color: #374151;
+  line-height: 1.6;
 }
 
-/* Pastor animatiton */
-
-/* --- STABLE ANIMATED BORDER (Background/Border Method) --- */
-
-/* 1. Keyframes: Defines the clockwise, snake-like movement */
+/* Pastor animation */
 @keyframes border-flow-clockwise {
     0% { background-position: 0% 50%; }
     25% { background-position: 100% 0%; }
@@ -91,18 +100,16 @@ body {
     100% { background-position: 0% 50%; }
 }
 
-/* 2. Main Animated Container Class */
 .animated-frame-final {
     --border-size: 8px;
-    --color-1: #d67918; /* Orange */
-    --color-2: #7d0707; /* Maroon */
+    --color-1: #d67918;
+    --color-2: #7d0707;
     
     position: relative;
     z-index: 10;
     overflow: hidden;
-    border-radius: 0.5rem; 
+    border-radius: 1rem; /* Slightly more rounded */
 
-    /* Apply the animated background directly to the container */
     background: linear-gradient(
         90deg, 
         var(--color-1) 0%,
@@ -110,30 +117,18 @@ body {
         var(--color-1) 50%,
         var(--color-2) 75%,
         var(--color-1) 100%
-    ) border-box; /* Set the gradient to cover the border area */
+    ) border-box;
 
     background-size: 400% 400%;
     animation: border-flow-clockwise 15s linear infinite; 
-    
-    /* Set the border style to be transparent so the background shows through */
     border: var(--border-size) solid transparent; 
 }
 
-/* 3. Inner Content Fix: Forces content (the image) to sit inside the padding area */
 .animated-frame-final > div {
-    /* Critical property: Clips the background (which is the gradient) 
-       to the inside of the border (padding-box). Since the content 
-       (the inner div) is placed *over* the gradient, the gradient 
-       shows up as a border around the content. */
     background-clip: padding-box; 
-    
-    /* The image itself needs a solid background to cover the area */
     background-color: white; 
-    
-    /* Ensure sizing and corners match the outer container */
     width: 100%;
     height: 100%;
-    border-radius: calc(0.5rem - 0px); /* Keep it simple */
+    border-radius: calc(1rem - var(--border-size)); 
     overflow: hidden;
 }
-

@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Countdown from 'react-countdown';
 import Image from 'next/image';
 import LatestBlogSection from './events/LatestBlogSection'; 
+import ScrollReveal from '@/components/ScrollReveal';
 
 // Slider images
 const sliderImages = [
@@ -51,7 +52,7 @@ export default function Home() {
               <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60 flex items-center justify-center">
                 <div className="text-center text-white px-4">
                   <h1 className="text-4xl md:text-6xl font-serif font-bold mb-4">
-                    Welcome to Elgonview Sabbath School
+                    Welcome to Elgonview SDA Church
                   </h1>
                   <p className="text-lg md:text-xl mb-6">
                     Join our loving community for worship, fellowship, and
@@ -83,6 +84,7 @@ export default function Home() {
       </section>
 
       {/* Upcoming Events */}
+      <ScrollReveal>
       <section className="py-8 text-center">
         <h2 className="text-3xl font-serif text-blue-800 mb-4">
           Upcoming Events
@@ -109,6 +111,7 @@ export default function Home() {
           )}
         />
       </section>
+      </ScrollReveal>
 
       {/* Community, Mission, Vision - Resized to be smaller (max-w-sm) */}
       <section className="py-8 text-center bg-gray-100">
