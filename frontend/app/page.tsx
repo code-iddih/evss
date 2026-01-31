@@ -152,7 +152,7 @@ export default function Home() {
         {/* Uniform Header Structure */}
         <div className="mb-12 flex flex-col items-center">
           {/* Black Inter Title */}
-          <h2 className="text-4xl md:text-5xl font-black text-black tracking-tighter mb-4 uppercase">
+          <h2 className="text-4xl md:text-5xl font-black text-black tracking-tighter mb-4">
             Our Identity
           </h2>
 
