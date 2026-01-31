@@ -1,5 +1,6 @@
 // app/vacancies/page.tsx
 import Link from 'next/link';
+import ScrollReveal from '@/components/ScrollReveal';
 
 // --- THEME COLOR DEFINITIONS ---
 const COLOR_MAROON = '#800000';
@@ -76,46 +77,52 @@ export default function VacanciesPage() {
 
       <div className="container mx-auto px-4 max-w-6xl">
         
-        {/* 2. Summary Info - Unified rounded-2xl */}
-        <div className="flex flex-col md:flex-row justify-between items-center mb-8 bg-white p-6 rounded-2xl shadow-sm border-t-4" style={{ borderTopColor: COLOR_ORANGE }}>
-            <div className="text-center md:text-left mb-4 md:mb-0">
-                <h2 className="text-xl font-bold text-gray-800">Current Career Opportunities</h2>
-                <p className="text-gray-500 text-sm italic">Showing {sampleVacancies.length} total listings</p>
-            </div>
-            <div className="flex gap-3">
-                <span className="text-xs font-bold px-4 py-2 rounded-2xl uppercase tracking-wider" style={{ backgroundColor: OPEN_BG, color: OPEN_TEXT }}>
-                    {sampleVacancies.filter(v => v.status === 'Open').length} Open
-                </span>
-                <span className="bg-gray-100 text-gray-800 text-xs font-bold px-4 py-2 rounded-2xl uppercase tracking-wider">
-                    {sampleVacancies.filter(v => v.status === 'Closed').length} Closed
-                </span>
-            </div>
-        </div>
+        {/* 2. Summary Info - Pop-up effect applied here */}
+        <ScrollReveal>
+          <div className="flex flex-col md:flex-row justify-between items-center mb-8 bg-white p-6 rounded-2xl shadow-sm border-t-4" style={{ borderTopColor: COLOR_ORANGE }}>
+              <div className="text-center md:text-left mb-4 md:mb-0">
+                  <h2 className="text-xl font-bold text-gray-800">Current Career Opportunities</h2>
+                  <p className="text-gray-500 text-sm italic">Showing {sampleVacancies.length} total listings</p>
+              </div>
+              <div className="flex gap-3">
+                  <span className="text-xs font-bold px-4 py-2 rounded-2xl uppercase tracking-wider" style={{ backgroundColor: OPEN_BG, color: OPEN_TEXT }}>
+                      {sampleVacancies.filter(v => v.status === 'Open').length} Open
+                  </span>
+                  <span className="bg-gray-100 text-gray-800 text-xs font-bold px-4 py-2 rounded-2xl uppercase tracking-wider">
+                      {sampleVacancies.filter(v => v.status === 'Closed').length} Closed
+                  </span>
+              </div>
+          </div>
+        </ScrollReveal>
 
-        {/* 3. The Vacancies List Grid */}
+        {/* 3. The Vacancies List Grid - Staggered delay applied to each card */}
         <div className="grid gap-8">
-          {sampleVacancies.map((vacancy) => (
-            <VacancyCard key={vacancy.id} vacancy={vacancy} />
+          {sampleVacancies.map((vacancy, index) => (
+            <ScrollReveal key={vacancy.id} delay={index * 0.15}>
+              <VacancyCard vacancy={vacancy} />
+            </ScrollReveal>
           ))}
         </div>
 
-        {/* 4. Submission Footer */}
-        <div className="mt-16 p-8 bg-white rounded-2xl border-2 border-dashed border-gray-200 text-center">
-            <h3 className="text-2xl font-bold text-gray-800 mb-3">How to Apply</h3>
-            <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed">
-                Interested candidates should submit their CV, cover letter, and a recommendation letter from their local church pastor. 
-                Applications should be addressed to the <strong>Church Board</strong> and submitted by the deadline.
-            </p>
-            <div className="mt-6">
-                <Link 
-                    href="mailto:hr@elgonview-sda.org" 
-                    className="font-bold underline decoration-2 underline-offset-4"
-                    style={{ color: COLOR_MAROON }}
-                >
-                    Inquire about specific requirements
-                </Link>
-            </div>
-        </div>
+        {/* 4. Submission Footer - Pop-up effect with a slight delay */}
+        <ScrollReveal delay={0.4}>
+          <div className="mt-16 p-8 bg-white rounded-2xl border-2 border-dashed border-gray-200 text-center">
+              <h3 className="text-2xl font-bold text-gray-800 mb-3">How to Apply</h3>
+              <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                  Interested candidates should submit their CV, cover letter, and a recommendation letter from their local church pastor. 
+                  Applications should be addressed to the <strong>Church Board</strong> and submitted by the deadline.
+              </p>
+              <div className="mt-6">
+                  <Link 
+                      href="mailto:hr@elgonview-sda.org" 
+                      className="font-bold underline decoration-2 underline-offset-4"
+                      style={{ color: COLOR_MAROON }}
+                  >
+                      Inquire about specific requirements
+                  </Link>
+              </div>
+          </div>
+        </ScrollReveal>
       </div>
     </div>
   );
@@ -134,7 +141,6 @@ function VacancyCard({ vacancy }: { vacancy: Vacancy }) {
                 <span className="text-xs font-black px-2 py-1 rounded bg-gray-100 text-gray-500 tracking-tighter uppercase">
                     Ref: {vacancy.refNumber}
                 </span>
-                {/* Status Badge: Light Green Style */}
                 <span 
                     className="text-[10px] font-bold px-4 py-1 rounded-2xl uppercase tracking-widest"
                     style={isOpen ? { backgroundColor: OPEN_BG, color: OPEN_TEXT } : { backgroundColor: '#fee2e2', color: '#b91c1c' }}
@@ -165,7 +171,6 @@ function VacancyCard({ vacancy }: { vacancy: Vacancy }) {
               </div>
           </div>
 
-          {/* MAROON BUTTON: Points to /vacancies/[id] */}
           <Link 
             href={isOpen ? `/vacancies/${vacancy.id}` : '#'}
             className={`w-full sm:w-auto text-center px-10 py-3 rounded-2xl font-black text-sm uppercase tracking-widest transition-all ${
