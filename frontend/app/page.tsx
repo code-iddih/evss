@@ -81,27 +81,35 @@ export default function Home() {
         </div>
       </section>
 
+
       {/* Upcoming Events */}
       <ScrollReveal>
         <section className="py-16 text-center bg-white">
           {/* Header Section */}
-          <div className="mb-8">
-            <h2 className="text-sm font-black tracking-[0.2em] text-[#d67918] uppercase mb-2">
-              Mark Your Calendar
+          <div className="mb-10 flex flex-col items-center">
+            {/* Title set to Black */}
+            <h2 className="text-4xl md:text-5xl font-black text-black tracking-tighter mb-4">
+              Next Sabbath
             </h2>
-            <h3 className="text-4xl font-extrabold text-gray-900 tracking-tighter mb-2">
-              Education Sabbath
-            </h3>
-            <p className="text-gray-500 font-medium italic">
-              August 30, 2025 — 8:00 AM
-            </p>
+
+            {/* Custom Gradient Bar */}
+            <div className="w-24 h-1.5 rounded-full bg-gradient-to-r from-[#7d0707] to-[#d67918]" />
+
+            <div className="mt-6">
+              <h3 className="text-2xl font-extrabold text-[#7d0707] tracking-tight">
+                Education Sabbath
+              </h3>
+              <p className="text-gray-500 font-medium mt-1">
+                August 30, 2025 • 8:00 AM
+              </p>
+            </div>
           </div>
 
           {/* Countdown Timer */}
           <Countdown
             date={eventDate}
             renderer={({ days, hours, minutes, seconds }) => (
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto px-4">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-2xl mx-auto px-4">
                 {[
                   { label: 'Days', value: days },
                   { label: 'Hours', value: hours },
@@ -109,15 +117,15 @@ export default function Home() {
                   { label: 'Seconds', value: seconds },
                 ].map((item, i) => (
                   <div key={i} className="relative group">
-                    {/* Decorative Background Accent */}
-                    <div className="absolute inset-0 bg-[#d67918] rounded-2xl translate-y-1 translate-x-1 group-hover:translate-y-0 group-hover:translate-x-0 transition-transform" />
+                    {/* Shadow Accent */}
+                    <div className="absolute inset-0 bg-[#d67918] rounded-2xl translate-y-1 translate-x-1 opacity-20 group-hover:opacity-100 transition-opacity" />
 
                     {/* Main Card */}
-                    <div className="relative bg-[#7d0707] p-6 rounded-2xl border-2 border-[#7d0707] flex flex-col items-center justify-center shadow-lg">
-                      <span className="text-4xl font-black text-white tracking-tighter">
+                    <div className="relative bg-white p-6 rounded-2xl border-2 border-[#7d0707] flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-shadow">
+                      <span className="text-4xl font-black text-[#7d0707] tracking-tighter leading-none">
                         {item.value}
                       </span>
-                      <span className="text-[10px] font-bold uppercase tracking-widest text-[#d67918] mt-1">
+                      <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#d67918] mt-2">
                         {item.label}
                       </span>
                     </div>
@@ -127,9 +135,12 @@ export default function Home() {
             )}
           />
 
-          {/* Call to Action */}
-          <div className="mt-10">
-            <button className="px-8 py-3 bg-[#7d0707] text-white font-bold rounded-full hover:bg-[#d67918] transition-colors duration-300 shadow-md">
+          {/* Call to Action - Updated Button Text */}
+          <div className="mt-12">
+            <button
+              onClick={() => {/* Add calendar logic here */ }}
+              className="px-10 py-3.5 bg-[#7d0707] text-white font-bold rounded-xl hover:bg-[#d67918] transition-all transform hover:-translate-y-1 shadow-lg inline-block cursor-pointer"
+            >
               Add to Calendar
             </button>
           </div>
