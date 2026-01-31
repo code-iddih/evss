@@ -147,132 +147,89 @@ export default function Home() {
         </section>
       </ScrollReveal>
 
-      {/* Community, Mission, Vision - Resized to be smaller (max-w-sm) */}
-      <section className="py-8 text-center bg-gray-100">
-        <h2 className="text-3xl font-serif text-blue-800 mb-8">
-          Community, Mission & Vision
-        </h2>
+      {/* Our Identity Section (Community, Mission, Vision) */}
+      <section className="py-16 text-center bg-white">
+        {/* Uniform Header Structure */}
+        <div className="mb-12 flex flex-col items-center">
+          {/* Black Inter Title */}
+          <h2 className="text-4xl md:text-5xl font-black text-black tracking-tighter mb-4 uppercase">
+            Our Identity
+          </h2>
+
+          {/* Custom Gradient Bar */}
+          <div className="w-24 h-1.5 rounded-full bg-gradient-to-r from-[#7d0707] to-[#d67918]" />
+        </div>
 
         {/* Outer Flex Container for the Three Cards */}
-        <div className="flex flex-col md:flex-row justify-center gap-6 px-4">
-          {/* 1. COMMUNITY CARD - RESIZED */}
-          <div className="w-full md:w-1/3 max-w-sm bg-white rounded-xl overflow-hidden shadow-xl relative">
-            {/* Top Orange Accent */}
-            <div className="h-4 bg-[#d67918] rounded-t-xl" />
+        <div className="flex flex-col md:flex-row justify-center gap-8 px-4 max-w-7xl mx-auto">
 
-            {/* Header (Maroon) */}
-            <div className="bg-[#7d0707] text-white p-4 relative z-10">
-              <h1 className="text-3xl font-extrabold m-0">COMMUNITY</h1>
-            </div>
+          {/* Card Component Structure (Repeated for Community, Mission, Vision) */}
+          {[
+            {
+              title: 'COMMUNITY',
+              tag: 'Loving family, rooted in God.',
+              text: 'We are a community who firmly believes in God’s Word. Join our loving, compassionate church family.',
+              img: 'https://cdn.pixabay.com/photo/2016/01/21/18/41/king-penguin-1154432_640.jpg'
+            },
+            {
+              title: 'MISSION',
+              tag: 'Serve and share.',
+              text: 'Our mission is to serve God and humanity with love, integrity, and faithful service.',
+              img: 'https://cdn.pixabay.com/photo/2016/01/21/18/41/king-penguin-1154432_640.jpg'
+            },
+            {
+              title: 'VISION',
+              tag: 'Rooted in faith.',
+              text: 'Our vision is to grow a strong, vibrant spiritual family that is deeply rooted in the promises of faith.',
+              img: 'https://cdn.pixabay.com/photo/2016/01/21/18/41/king-penguin-1154432_640.jpg'
+            }
+          ].map((item, idx) => (
+            <div key={idx} className="w-full md:w-1/3 max-w-sm bg-white rounded-xl overflow-hidden shadow-xl relative group hover:shadow-2xl transition-all duration-300">
+              {/* Top Orange Accent */}
+              <div className="h-4 bg-[#d67918] rounded-t-xl" />
 
-            {/* Gap */}
-            <div className="h-3 bg-white" />
-
-            {/* Media and Info Container */}
-            <div className="relative bg-black">
-              {/* Image - Resized for smaller card */}
-              <Image
-                src="https://cdn.pixabay.com/photo/2016/01/21/18/41/king-penguin-1154432_640.jpg"
-                alt="Community Image"
-                width={400}
-                height={150}
-                className="w-full object-cover block"
-                priority
-              />
-
-              {/* Orange Gradient Overlay (Matching original style) */}
-              <div
-                className="absolute inset-0 pointer-events-none"
-                style={{
-                  background:
-                    'linear-gradient(to bottom, rgba(214,121,24,0.9) 0%, rgba(214,121,24,0.6) 40%, rgba(214,121,24,0.1) 70%, rgba(214,121,24,0.0) 100%)',
-                }}
-              />
-
-              {/* Info Box (Maroon) - Resized for smaller card */}
-              <div className="absolute top-[-12px] bottom-0 left-4 w-48 bg-[#7d0707] text-white p-3 shadow-2xl flex flex-col rounded-none z-20">
-                <div className="px-3 py-1 mb-2 rounded-full font-bold text-xs text-white border-2 border-[#d67918] text-center">
-                  Loving family, rooted in God.
-                </div>
-                <p className="m-0 text-xs leading-relaxed text-left flex-1">
-                  We are a community who firmly believes in God’s Word. Join our loving, compassionate church family.
-                </p>
+              {/* Header (Maroon) - Title is now straight (no italic) */}
+              <div className="bg-[#7d0707] text-white p-5 relative z-10 text-left">
+                <h1 className="text-3xl font-black m-0 tracking-tighter uppercase">{item.title}</h1>
               </div>
-            </div>
 
-            {/* Bottom Orange Accent */}
-            <div className="h-5 bg-[#d67918] rounded-b-xl" />
-          </div>
+              {/* Gap */}
+              <div className="h-3 bg-white" />
 
-          {/* 2. MISSION CARD - RESIZED */}
-          <div className="w-full md:w-1/3 max-w-sm bg-white rounded-xl overflow-hidden shadow-xl relative">
-            <div className="h-4 bg-[#d67918] rounded-t-xl" />
-            <div className="bg-[#7d0707] text-white p-4 relative z-10">
-              <h1 className="text-3xl font-extrabold m-0">MISSION</h1>
-            </div>
-            <div className="h-3 bg-white" />
-            <div className="relative bg-black">
-              <Image
-                src="https://cdn.pixabay.com/photo/2016/01/21/18/41/king-penguin-1154432_640.jpg"
-                alt="Mission Image"
-                width={400}
-                height={150}
-                className="w-full object-cover block"
-                priority
-              />
-              <div
-                className="absolute inset-0 pointer-events-none"
-                style={{
-                  background:
-                    'linear-gradient(to bottom, rgba(214,121,24,0.9) 0%, rgba(214,121,24,0.6) 40%, rgba(214,121,24,0.1) 70%, rgba(214,121,24,0.0) 100%)',
-                }}
-              />
-              <div className="absolute top-[-12px] bottom-0 left-4 w-48 bg-[#7d0707] text-white p-3 shadow-2xl flex flex-col rounded-none z-20">
-                <div className="px-3 py-1 mb-2 rounded-full font-bold text-xs text-white border-2 border-[#d67918] text-center">
-                  Serve and share.
+              {/* Media and Info Container - Height increased to 200px */}
+              <div className="relative bg-black h-[200px]">
+                <Image
+                  src={item.img}
+                  alt={item.title}
+                  fill
+                  className="object-cover block opacity-90 transition-transform duration-500 group-hover:scale-105"
+                  priority
+                />
+
+                {/* Overlay */}
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background: 'linear-gradient(to bottom, rgba(214,121,24,0.9) 0%, rgba(214,121,24,0.6) 40%, rgba(214,121,24,0.1) 70%, rgba(214,121,24,0.0) 100%)',
+                  }}
+                />
+
+                {/* Info Box (Maroon) */}
+                <div className="absolute top-[-12px] bottom-4 left-4 w-52 bg-[#7d0707] text-white p-4 shadow-2xl flex flex-col rounded-none z-20 border-r-4 border-[#d67918]">
+                  <div className="px-2 py-1 mb-3 rounded-full font-bold text-[10px] text-white border-2 border-[#d67918] text-center uppercase tracking-wider">
+                    {item.tag}
+                  </div>
+                  <p className="m-0 text-xs leading-relaxed text-left flex-1 font-medium opacity-90">
+                    {item.text}
+                  </p>
                 </div>
-                <p className="m-0 text-xs leading-relaxed text-left flex-1">
-                  Our mission is to serve God and humanity with love, integrity, and faithful service.
-                </p>
               </div>
-            </div>
-            <div className="h-5 bg-[#d67918] rounded-b-xl" />
-          </div>
 
-          {/* 3. VISION CARD - RESIZED */}
-          <div className="w-full md:w-1/3 max-w-sm bg-white rounded-xl overflow-hidden shadow-xl relative">
-            <div className="h-4 bg-[#d67918] rounded-t-xl" />
-            <div className="bg-[#7d0707] text-white p-4 relative z-10">
-              <h1 className="text-3xl font-extrabold m-0">VISION</h1>
+              {/* Bottom Orange Accent */}
+              <div className="h-5 bg-[#d67918] rounded-b-xl" />
             </div>
-            <div className="h-3 bg-white" />
-            <div className="relative bg-black">
-              <Image
-                src="https://cdn.pixabay.com/photo/2016/01/21/18/41/king-penguin-1154432_640.jpg"
-                alt="Vision Image"
-                width={400}
-                height={150}
-                className="w-full object-cover block"
-                priority
-              />
-              <div
-                className="absolute inset-0 pointer-events-none"
-                style={{
-                  background:
-                    'linear-gradient(to bottom, rgba(214,121,24,0.9) 0%, rgba(214,121,24,0.6) 40%, rgba(214,121,24,0.1) 70%, rgba(214,121,24,0.0) 100%)',
-                }}
-              />
-              <div className="absolute top-[-12px] bottom-0 left-4 w-48 bg-[#7d0707] text-white p-3 shadow-2xl flex flex-col rounded-none z-20">
-                <div className="px-3 py-1 mb-2 rounded-full font-bold text-xs text-white border-2 border-[#d67918] text-center">
-                  Rooted in faith.
-                </div>
-                <p className="m-0 text-xs leading-relaxed text-left flex-1">
-                  Our vision is to grow a strong, vibrant spiritual family that is deeply rooted in the promises of faith.
-                </p>
-              </div>
-            </div>
-            <div className="h-5 bg-[#d67918] rounded-b-xl" />
-          </div>
+          ))}
+
         </div>
       </section>
 
