@@ -402,6 +402,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      
       {/* LATEST BLOG - use the component instead of embedding the JSX here */}
       <LatestBlogSection />
     </main>
