@@ -317,58 +317,91 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Welcome To Church Section - Complete & Final Structure with Stable Animation */}
+      {/* Welcome To Church Section */}
       <section className="relative py-16 px-4 md:px-8 overflow-hidden bg-white">
-        {/* Background Pattern (Faint Graphics) */}
+        {/* Background Pattern */}
         <div
           className="absolute inset-0 z-0 pointer-events-none"
           style={{
-            background: `repeating-linear-gradient(
-        45deg,
-        #f0f0f0,
-        #f0f0f0 10px,
-        #ffffff 10px,
-        #ffffff 20px
-      )`,
+            background: `repeating-linear-gradient(45deg, #f0f0f0, #f0f0f0 10px, #ffffff 10px, #ffffff 20px)`,
             opacity: 0.5,
           }}
         />
-        {/* Content Container */}
-        <div className="relative z-10 max-w-6xl mx-auto flex flex-col lg:flex-row items-center lg:items-start">
-          {/* Left Column: Text Content and Pastor's Name Block */}
-          <div className="lg:w-7/12 p-4 lg:pr-12 bg-white/80 rounded-lg">
-            <h2 className="text-4xl font-serif text-gray-800 mb-6">Welcome To Church</h2>
-            <p className="text-gray-700 mb-4 text-sm leading-relaxed">
-              Welcome to Lavington SDA Church online. We are a loving, compassionate church family and your gateway to numerous community events and faithful services. I hope you'll find spiritual nourishment while you're here and are convinced to join us in person for our weekly Sabbath worship.
-            </p>
-            <p className="text-gray-700 mb-6 text-sm leading-relaxed">
-              We believe the Holy Scriptures are sacred and should be studied reverently. Our services follow a traditional style with hymns, prayers, and sermons. We welcome you to fellowship with us as you seek your rightful place of service to God and humanity.
-            </p>
-            {/* Pastor's Name Block */}
-            <div className="mt-8 max-w-sm mx-auto lg:mx-0">
-              <div className="h-1 bg-[#d67918]" />
-              <div className="bg-[#7d0707] text-white p-3 text-center text-xl font-bold">Pr. Daniel Ombim</div>
-              <div className="h-1 bg-[#d67918]" />
-            </div>
-          </div>
 
-          {/* Right Column: Pastor's Photo with Animated Frame */}
-          <div className="lg:w-5/12 w-full mt-8 lg:mt-0 lg:ml-[-50px] flex justify-center relative shadow-2xl">
-            <div className="animated-frame-final w-full max-w-xs md:max-w-sm h-[450px] lg:h-[600px]">
-              <div className="relative w-full h-full rounded-lg">
-                <Image
-                  src={PASTOR_PHOTO_PATH}
-                  alt="Pr. Daniel Ombim"
-                  layout="fill"
-                  objectFit="cover"
-                  priority
-                />
-              </div>
+        {/* Content Container */}
+        <div className="relative z-10 max-w-6xl mx-auto">
+
+          {/* 1. Centered Title Section */}
+          <ScrollReveal>
+            <div className="mb-12 flex flex-col items-center text-center">
+              <h2 className="text-4xl md:text-5xl font-black text-black tracking-tighter mb-4">
+                Welcome To Church
+              </h2>
+              {/* Main Section Gradient Bar */}
+              <div className="w-24 h-1.5 rounded-full bg-gradient-to-r from-[#7d0707] to-[#d67918]" />
             </div>
+          </ScrollReveal>
+
+          <div className="flex flex-col lg:flex-row items-center lg:items-start gap-12">
+
+            {/* Left Column: Message Block */}
+            <ScrollReveal delay={0.2} className="w-full lg:w-7/12 order-2 lg:order-1">
+              {/* Message Subtitle - No bar here */}
+              <div className="flex flex-col items-center lg:items-start mb-4">
+                <h4 className="text-[#d67918] font-bold tracking-widest uppercase text-xs">
+                  — Message —
+                </h4>
+              </div>
+
+              {/* Message Box: Maroon background */}
+              <div className="relative bg-[#7d0707] text-white p-8 shadow-2xl border-l-8 border-[#7d0707] border-r-8 border-[#d67918]">
+                <p className="mb-4 text-sm md:text-base leading-relaxed font-medium opacity-95">
+                  Welcome to Lavington SDA Church online. We are a loving, compassionate church family and your gateway to numerous community events and faithful services. I hope you'll find spiritual nourishment while you're here and are convinced to join us in person for our weekly Sabbath worship.
+                </p>
+                <p className="text-sm md:text-base leading-relaxed font-medium opacity-95">
+                  We believe the Holy Scriptures are sacred and should be studied reverently. Our services follow a traditional style with hymns, prayers, and sermons. We welcome you to fellowship with us as you seek your rightful place of service to God and humanity.
+                </p>
+              </div>
+            </ScrollReveal>
+
+            {/* Right Column: Pastor Image with Name Block on Top */}
+            <ScrollReveal delay={0.4} className="w-full lg:w-5/12 order-1 lg:order-2 flex flex-col items-center">
+
+              {/* Pastor's Name Block - "Hard" Formatting */}
+              <div className="mb-6 w-full max-w-sm">
+                <div className="h-1 bg-[#d67918]" />
+                <div className="bg-[#7d0707] text-white p-3 text-center text-xl font-bold uppercase tracking-tight shadow-lg">
+                  Pr. Daniel Ombim
+                </div>
+                <div className="h-1 bg-[#d67918]" />
+              </div>
+
+              {/* The Original Image Frame Style */}
+              <div className="animated-frame-final w-full max-w-sm h-[450px] lg:h-[550px] shadow-2xl relative">
+                <div className="relative w-full h-full rounded-lg overflow-hidden border-4 border-white">
+                  <Image
+                    src={PASTOR_PHOTO_PATH}
+                    alt="Pr. Daniel Ombim"
+                    fill
+                    className="object-cover"
+                    priority
+                  />
+                </div>
+              </div>
+
+              {/* Church Pastor Title - Gradient Bar Below it */}
+              <div className="mt-4 flex flex-col items-center">
+                <span className="text-sm font-bold uppercase tracking-[0.3em] text-[#7d0707]">
+                  Church Pastor
+                </span>
+                {/* Gradient Bar applied here */}
+                <div className="w-16 h-1 rounded-full bg-gradient-to-r from-[#7d0707] to-[#d67918] mt-2" />
+              </div>
+            </ScrollReveal>
+
           </div>
         </div>
       </section>
-
       {/* LATEST BLOG - use the component instead of embedding the JSX here */}
       <LatestBlogSection />
     </main>
