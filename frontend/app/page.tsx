@@ -148,84 +148,58 @@ export default function Home() {
       </ScrollReveal>
 
       {/* Our Identity Section */}
-      <section className="py-16 text-center bg-white">
-        <ScrollReveal>
-          <div className="mb-12 flex flex-col items-center">
-            <h2 className="text-4xl md:text-5xl font-black text-black tracking-tighter mb-4">
-              Our Identity
-            </h2>
-            <div className="w-24 h-1.5 rounded-full bg-gradient-to-r from-[#7d0707] to-[#d67918]" />
-          </div>
-        </ScrollReveal>
+      <section className="py-20 bg-white overflow-hidden w-full">
+        <div className="max-w-7xl mx-auto px-4 flex flex-col items-center">
 
-        <div className="flex flex-col md:flex-row justify-center gap-8 px-4 max-w-7xl mx-auto">
-          {[
-            {
-              title: 'COMMUNITY',
-              tag: 'Loving family, rooted in God.',
-              text: 'We are a community who firmly believes in God’s Word. Join our loving, compassionate church family.',
-              img: '/images/slider1.jpg'
-            },
-            {
-              title: 'MISSION',
-              tag: 'Serve and share.',
-              text: 'Our mission is to serve God and humanity with love, integrity, and faithful service.',
-              img: '/images/slider2.jpg'
-            },
-            {
-              title: 'VISION',
-              tag: 'Rooted in faith.',
-              text: 'Our vision is to grow a strong, vibrant spiritual family that is deeply rooted in the promises of faith.',
-              img: '/images/slider3.jpg'
-            }
-          ].map((item, idx) => (
-            /* The ScrollReveal is now the layout container. 
-               It handles the width (md:w-1/3) and the animation.
-            */
-            <ScrollReveal
-              key={idx}
-              delay={idx * 0.2}
-              className="w-full md:w-1/3 max-w-sm"
-            >
-              {/* The actual Card: Set to w-full so it fills the ScrollReveal div */}
-              <div className="w-full bg-white rounded-xl shadow-xl relative group hover:shadow-2xl transition-all duration-300 flex flex-col h-full">
-                <div className="h-4 bg-[#d67918] rounded-t-xl shrink-0" />
+          <ScrollReveal>
+            <div className="mb-16 flex flex-col items-center text-center">
+              <h2 className="text-4xl md:text-5xl font-black text-black tracking-tighter mb-4">
+                Our Identity
+              </h2>
+              <div className="w-24 h-1.5 rounded-full bg-gradient-to-r from-[#7d0707] to-[#d67918]" />
+            </div>
+          </ScrollReveal>
 
-                <div className="bg-[#7d0707] text-white p-5 relative z-10 text-left shrink-0">
-                  <h1 className="text-3xl font-black m-0 tracking-tighter uppercase">{item.title}</h1>
-                </div>
+          {/* Flex wrap with justify-center is safer than Grid for centering complex cards */}
+          <div className="flex flex-wrap justify-center gap-y-16 gap-x-8 w-full">
+            {[
+              { title: 'COMMUNITY', tag: 'Loving family, rooted in God.', text: 'We are a community who firmly believes in God’s Word. Join our loving, compassionate church family.', img: '/images/slider1.jpg' },
+              { title: 'MISSION', tag: 'Serve and share.', text: 'Our mission is to serve God and humanity with love, integrity, and faithful service.', img: '/images/slider2.jpg' },
+              { title: 'VISION', tag: 'Rooted in faith.', text: 'Our vision is to grow a strong, vibrant spiritual family that is deeply rooted in the promises of faith.', img: '/images/slider3.jpg' }
+            ].map((item, idx) => (
+              <ScrollReveal key={idx} delay={idx * 0.2} className="flex justify-center w-full md:w-auto">
+                <div className="w-full max-w-[360px] bg-white rounded-xl shadow-xl relative flex flex-col h-full overflow-hidden border border-gray-100 mx-auto">
 
-                <div className="h-3 bg-white shrink-0" />
-
-                <div className="relative bg-black min-h-[220px] w-full grow">
-                  <Image
-                    src={item.img}
-                    alt={item.title}
-                    fill
-                    className="object-cover block opacity-90 transition-transform duration-500 group-hover:scale-105"
-                  />
-
-                  <div
-                    className="absolute inset-0 pointer-events-none"
-                    style={{
-                      background: 'linear-gradient(to bottom, rgba(214,121,24,0.9) 0%, rgba(214,121,24,0.6) 40%, rgba(214,121,24,0.1) 70%, rgba(214,121,24,0.0) 100%)',
-                    }}
-                  />
-
-                  <div className="absolute top-[-12px] bottom-4 left-4 w-[85%] bg-[#7d0707] text-white p-4 shadow-2xl flex flex-col z-20 border-r-4 border-[#d67918]">
-                    <div className="px-2 py-1 mb-3 rounded-full font-bold text-[10px] text-white border-2 border-[#d67918] text-center uppercase tracking-wider">
-                      {item.tag}
-                    </div>
-                    <p className="m-0 text-xs leading-relaxed text-left flex-1 font-medium opacity-90">
-                      {item.text}
-                    </p>
+                  <div className="h-4 bg-[#d67918] shrink-0" />
+                  <div className="bg-[#7d0707] text-white p-5 text-center">
+                    <h1 className="text-3xl font-black m-0 tracking-tighter uppercase">{item.title}</h1>
                   </div>
-                </div>
+                  <div className="h-3 bg-white shrink-0" />
 
-                <div className="h-5 bg-[#d67918] rounded-b-xl shrink-0" />
-              </div>
-            </ScrollReveal>
-          ))}
+                  <div className="relative bg-black min-h-[300px] w-full grow">
+                    <Image src={item.img} alt={item.title} fill className="object-cover opacity-90" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-[#d67918]/90 via-[#d67918]/40 to-transparent" />
+
+                    {/* THE BOX FIX:
+                       - Removed 'left-4' and 'w-[85%]'
+                       - Used 'inset-x-5' (equal left/right gap)
+                       - Used 'mx-auto'
+                    */}
+                    <div className="absolute top-[-12px] bottom-4 inset-x-5 bg-[#7d0707] text-white p-5 shadow-2xl flex flex-col z-20 border-r-4 border-[#d67918]">
+                      <div className="px-2 py-1.5 mb-3 rounded-full font-bold text-[10px] text-white border-2 border-[#d67918] text-center uppercase tracking-wider">
+                        {item.tag}
+                      </div>
+                      <p className="m-0 text-sm leading-relaxed text-left flex-1 font-medium opacity-90">
+                        {item.text}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="h-5 bg-[#d67918] shrink-0" />
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -402,7 +376,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      
+
       {/* LATEST BLOG - use the component instead of embedding the JSX here */}
       <LatestBlogSection />
     </main>
