@@ -229,131 +229,90 @@ export default function Home() {
         </div>
       </section>
 
-      {/* LATEST SERMON */}
-      <section className="py-8 bg-gray-100">
-        <h2 className="text-3xl font-serif text-blue-800 mb-8 text-center">
-          Latest Sermons
-        </h2>
+      {/* LATEST SERMONS */}
+      <section className="py-20 bg-white overflow-hidden">
+        {/* Uniform Header Structure */}
+        <ScrollReveal>
+          <div className="mb-12 flex flex-col items-center">
+            {/* Black Inter Title */}
+            <h2 className="text-4xl md:text-5xl font-black text-black tracking-tighter mb-4">
+              Latest Sermons
+            </h2>
 
-        {/* Grid Container for three visual cards */}
+            {/* Custom Gradient Bar */}
+            <div className="w-24 h-1.5 rounded-full bg-gradient-to-r from-[#7d0707] to-[#d67918]" />
+          </div>
+        </ScrollReveal>
+
         <div className="flex justify-center px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl w-full">
-            {/* CARD 1 */}
-            <div className="w-full bg-white rounded-lg shadow-2xl overflow-hidden">
-              <div className="p-3 text-center text-white bg-[#7d0707]">
-                <h3 className="text-xl font-bold">Youth Sabbath</h3>
-              </div>
-              <div className="h-1 bg-[#d67918]" />
-              <div className="relative w-full" style={{ height: '300px' }}>
-                <Image
-                  src="/images/flowers.jpg"
-                  alt="How to overcome Heartbreak"
-                  layout="fill"
-                  objectFit="cover"
-                  priority
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
-                  <h1 className="text-2xl font-serif font-bold mb-3 leading-tight">
-                    How to overcome Heartbreak in the modern Era?
-                  </h1>
-                  <p className="text-sm font-semibold">
-                    <span className="font-normal text-gray-300">Speaker:</span> Pr. Prof. Rei Kesis
-                  </p>
-                  <p className="text-sm font-semibold">
-                    <span className="font-normal text-gray-300">Duration:</span> 45 Mins
-                  </p>
-                </div>
-                <a
-                  href="/sermons/heartbreak"
-                  className="absolute bottom-4 right-4 z-10 p-3 rounded-full shadow-lg transition hover:scale-105 bg-[#d67918]"
-                  aria-label="Watch Video"
-                >
-                  <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M6 4l15 8-15 8z" />
-                  </svg>
-                </a>
-              </div>
-              <div className="h-2 bg-[#d67918]" />
-            </div>
+          <div className="flex flex-col md:flex-row gap-8 max-w-6xl w-full">
+            {/* SERMON CARDS */}
+            {[
+              {
+                tag: 'Youth Sabbath',
+                title: 'How to overcome Heartbreak in the modern Era?',
+                speaker: 'Pr. Prof. Rei Kesis',
+                meta: '45 Mins',
+                img: '/images/flowers.jpg'
+              },
+              {
+                tag: 'Prayer Series',
+                title: 'Men Ought to Pray',
+                speaker: 'Pr. Gilbert Ojwang',
+                meta: 'July 12, 2025',
+                img: '/images/flowers1.jpg'
+              },
+              {
+                tag: 'Parable Study',
+                title: 'The Prodigal Sons',
+                speaker: 'Eld. Emmanuel Nyambare',
+                meta: 'February 21, 2025',
+                img: '/images/flowers2.jpg'
+              }
+            ].map((sermon, i) => (
+              /* Using the fixed ScrollReveal with width classes */
+              <ScrollReveal
+                key={i}
+                delay={i * 0.2}
+                className="w-full md:w-1/3"
+              >
+                <div className="w-full h-full bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all overflow-hidden border border-gray-100 flex flex-col">
+                  {/* Tag Header (Maroon) */}
+                  <div className="p-4 text-center text-white bg-[#7d0707] shrink-0">
+                    <h3 className="text-sm font-bold uppercase tracking-widest">{sermon.tag}</h3>
+                  </div>
 
-            {/* CARD 2 */}
-            <div className="w-full bg-white rounded-lg shadow-2xl overflow-hidden">
-              <div className="p-3 text-center text-white bg-[#7d0707]">
-                <h3 className="text-xl font-bold">Prayer Series</h3>
-              </div>
-              <div className="h-1 bg-[#d67918]" />
-              <div className="relative w-full" style={{ height: '300px' }}>
-                <Image
-                  src="/images/flowers1.jpg"
-                  alt="Men Ought to Pray"
-                  layout="fill"
-                  objectFit="cover"
-                  priority
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
-                  <h1 className="text-2xl font-serif font-bold mb-3 leading-tight">
-                    Men Ought to Pray
-                  </h1>
-                  <p className="text-sm font-semibold">
-                    <span className="font-normal text-gray-300">Speaker:</span> Pr. Gilbert Ojwang
-                  </p>
-                  <p className="text-sm font-semibold">
-                    <span className="font-normal text-gray-300">Date:</span> July 12, 2025
-                  </p>
-                </div>
-                <a
-                  href="/sermons/men-ought-to-pray"
-                  className="absolute bottom-4 right-4 z-10 p-3 rounded-full shadow-lg transition hover:scale-105 bg-[#d67918]"
-                  aria-label="Watch Video"
-                >
-                  <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M6 4l15 8-15 8z" />
-                  </svg>
-                </a>
-              </div>
-              <div className="h-2 bg-[#d67918]" />
-            </div>
+                  {/* Accent Line (Orange) */}
+                  <div className="h-1 bg-[#d67918] shrink-0" />
 
-            {/* CARD 3 */}
-            <div className="w-full bg-white rounded-lg shadow-2xl overflow-hidden">
-              <div className="p-3 text-center text-white bg-[#7d0707]">
-                <h3 className="text-xl font-bold">Parable Study</h3>
-              </div>
-              <div className="h-1 bg-[#d67918]" />
-              <div className="relative w-full" style={{ height: '300px' }}>
-                <Image
-                  src="/images/flowers2.jpg"
-                  alt="The Prodigal Sons"
-                  layout="fill"
-                  objectFit="cover"
-                  priority
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
-                  <h1 className="text-2xl font-serif font-bold mb-3 leading-tight">
-                    The Prodigal Sons
-                  </h1>
-                  <p className="text-sm font-semibold">
-                    <span className="font-normal text-gray-300">Speaker:</span> Eld. Emmanuel Nyambare
-                  </p>
-                  <p className="text-sm font-semibold">
-                    <span className="font-normal text-gray-300">Date:</span> February 21, 2025
-                  </p>
+                  {/* Image and Content Container */}
+                  <div className="relative w-full h-[320px] grow">
+                    <Image src={sermon.img} alt={sermon.title} fill className="object-cover" />
+
+                    {/* Gradient Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
+
+                    {/* Text Content */}
+                    <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                      <h1 className="text-xl font-bold mb-3 leading-tight tracking-tight">
+                        {sermon.title}
+                      </h1>
+                      <div className="space-y-1 opacity-80">
+                        <p className="text-xs font-medium">Speaker: {sermon.speaker}</p>
+                        <p className="text-xs font-medium">Info: {sermon.meta}</p>
+                      </div>
+                    </div>
+
+                    {/* Play Button (Orange) */}
+                    <button className="absolute bottom-6 right-6 p-4 rounded-full shadow-lg bg-[#d67918] hover:bg-orange-600 transition-colors text-white">
+                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M6 4l15 8-15 8z" />
+                      </svg>
+                    </button>
+                  </div>
                 </div>
-                <a
-                  href="/sermons/the-prodigal-sons"
-                  className="absolute bottom-4 right-4 z-10 p-3 rounded-full shadow-lg transition hover:scale-105 bg-[#d67918]"
-                  aria-label="Watch Video"
-                >
-                  <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M6 4l15 8-15 8z" />
-                  </svg>
-                </a>
-              </div>
-              <div className="h-2 bg-[#d67918]" />
-            </div>
+              </ScrollReveal>
+            ))}
           </div>
         </div>
       </section>
