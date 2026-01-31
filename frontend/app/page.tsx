@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Countdown from 'react-countdown';
 import Image from 'next/image';
-import LatestBlogSection from './events/LatestBlogSection'; 
+import LatestBlogSection from './events/LatestBlogSection';
 import ScrollReveal from '@/components/ScrollReveal';
 
 // Slider images
@@ -39,9 +39,8 @@ export default function Home() {
           {sliderImages.map((image, index) => (
             <div
               key={index}
-              className={`absolute inset-0 transition-opacity duration-1000 ${
-                index === currentSlide ? 'opacity-100' : 'opacity-0'
-              }`}
+              className={`absolute inset-0 transition-opacity duration-1000 ${index === currentSlide ? 'opacity-100' : 'opacity-0'
+                }`}
               style={{
                 backgroundImage: `url(${image})`,
                 backgroundSize: 'cover',
@@ -75,9 +74,8 @@ export default function Home() {
             <button
               key={index}
               onClick={() => setCurrentSlide(index)}
-              className={`w-3 h-3 rounded-full ${
-                index === currentSlide ? 'bg-white' : 'bg-gray-400'
-              }`}
+              className={`w-3 h-3 rounded-full ${index === currentSlide ? 'bg-white' : 'bg-gray-400'
+                }`}
             />
           ))}
         </div>
@@ -85,32 +83,57 @@ export default function Home() {
 
       {/* Upcoming Events */}
       <ScrollReveal>
-      <section className="py-8 text-center">
-        <h2 className="text-3xl font-serif text-blue-800 mb-4">
-          Upcoming Events
-        </h2>
-        <h3 className="text-2xl font-semibold">Education Sabbath</h3>
-        <p className="text-gray-600">August 30, 2025, 8:00 AM</p>
-        <Countdown
-          date={eventDate}
-          renderer={({ days, hours, minutes, seconds }) => (
-            <div className="grid grid-cols-4 gap-4 max-w-md mx-auto mt-4">
-              <div className="bg-blue-100 p-4 rounded-lg shadow">
-                <span className="text-2xl font-bold">{days}</span> Days
+        <section className="py-16 text-center bg-white">
+          {/* Header Section */}
+          <div className="mb-8">
+            <h2 className="text-sm font-black tracking-[0.2em] text-[#d67918] uppercase mb-2">
+              Mark Your Calendar
+            </h2>
+            <h3 className="text-4xl font-extrabold text-gray-900 tracking-tighter mb-2">
+              Education Sabbath
+            </h3>
+            <p className="text-gray-500 font-medium italic">
+              August 30, 2025 — 8:00 AM
+            </p>
+          </div>
+
+          {/* Countdown Timer */}
+          <Countdown
+            date={eventDate}
+            renderer={({ days, hours, minutes, seconds }) => (
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto px-4">
+                {[
+                  { label: 'Days', value: days },
+                  { label: 'Hours', value: hours },
+                  { label: 'Minutes', value: minutes },
+                  { label: 'Seconds', value: seconds },
+                ].map((item, i) => (
+                  <div key={i} className="relative group">
+                    {/* Decorative Background Accent */}
+                    <div className="absolute inset-0 bg-[#d67918] rounded-2xl translate-y-1 translate-x-1 group-hover:translate-y-0 group-hover:translate-x-0 transition-transform" />
+
+                    {/* Main Card */}
+                    <div className="relative bg-[#7d0707] p-6 rounded-2xl border-2 border-[#7d0707] flex flex-col items-center justify-center shadow-lg">
+                      <span className="text-4xl font-black text-white tracking-tighter">
+                        {item.value}
+                      </span>
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-[#d67918] mt-1">
+                        {item.label}
+                      </span>
+                    </div>
+                  </div>
+                ))}
               </div>
-              <div className="bg-blue-100 p-4 rounded-lg shadow">
-                <span className="text-2xl font-bold">{hours}</span> Hours
-              </div>
-              <div className="bg-blue-100 p-4 rounded-lg shadow">
-                <span className="text-2xl font-bold">{minutes}</span> Minutes
-              </div>
-              <div className="bg-blue-100 p-4 rounded-lg shadow">
-                <span className="text-2xl font-bold">{seconds}</span> Seconds
-              </div>
-            </div>
-          )}
-        />
-      </section>
+            )}
+          />
+
+          {/* Call to Action */}
+          <div className="mt-10">
+            <button className="px-8 py-3 bg-[#7d0707] text-white font-bold rounded-full hover:bg-[#d67918] transition-colors duration-300 shadow-md">
+              Add to Calendar
+            </button>
+          </div>
+        </section>
       </ScrollReveal>
 
       {/* Community, Mission, Vision - Resized to be smaller (max-w-sm) */}
