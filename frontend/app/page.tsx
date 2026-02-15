@@ -186,9 +186,9 @@ export default function Home() {
                     <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/30" />
 
                     {/* INTERNAL MAROON BOX */}
-                    <div className="absolute top-[-10px] inset-x-5 bg-[#7d0707] text-white shadow-2xl flex flex-col z-20 h-auto rounded-t-2xl rounded-b-xl overflow-hidden">
+                    <div className="absolute top-[-10px] inset-x-5 bg-[#7d0707] text-white shadow-2xl flex flex-col z-20 h-auto rounded-t-none rounded-b-xl overflow-hidden">
                       {/* Content Padding */}
-                      <div className="p-6 pb-5">
+                      <div className="p-6 pb-6">
                         <div className="px-3 py-1.5 mb-4 rounded-full font-bold text-[10px] text-white border-2 border-[#d67918] text-center uppercase tracking-widest bg-black/20">
                           {item.tag}
                         </div>
@@ -198,15 +198,16 @@ export default function Home() {
                       </div>
 
                       {/* THE "FOOTER" BAR: 
-                    - Solid White like the screenshot's orange bar
-                    - Slim (h-4) 
-                    - Matching the bottom curve of the red box
-                */}
-                      <div className="h-4 w-full bg-white shrink-0 mt-auto" />
+                          - Solid White, full-width to mimic the screenshot style
+                          - Height: h-1.5 (Slim)
+                          - mt-auto ensures it sits at the bottom
+                          - Inherits rounded-b-xl from parent due to overflow-hidden
+                      */}
+                      <div className="h-1.5 w-full bg-white shrink-0 mt-auto" />
                     </div>
                   </div>
 
-                  {/* Bottom Orange Accent (The one from your screenshot) */}
+                  {/* Bottom Orange Accent */}
                   <div className="h-5 bg-[#d67918] shrink-0" />
                 </div>
               </ScrollReveal>
