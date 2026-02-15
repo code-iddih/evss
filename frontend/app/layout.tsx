@@ -1,11 +1,12 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { Inter } from 'next/font/google';
+import Preloader from '@/components/Preloader'; // Ensure this file exists
 
 // 1. Initialize Inter and assign it to the CSS variable name
 const inter = Inter({ 
   subsets: ['latin'],
-  variable: '--font-inter', // This MUST match the variable in your globals.css
+  variable: '--font-inter', 
   display: 'swap',
 });
 
@@ -20,6 +21,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={inter.variable}>
       {/* 3. Add font-sans to the body to activate it globally */}
       <body className="font-sans antialiased bg-gray-50">
+        
+        {/* SDA Logo Preloader - Runs before content is interactive */}
+        <Preloader />
+
         <header className="bg-blue-600 text-white text-center py-8">
           <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight">
             Elgonview SDA Church
