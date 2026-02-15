@@ -160,41 +160,47 @@ export default function Home() {
             </div>
           </ScrollReveal>
 
-          {/* Flex wrap with justify-center is safer than Grid for centering complex cards */}
-          <div className="flex flex-wrap justify-center gap-y-16 gap-x-8 w-full">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-16 gap-x-8 w-full justify-items-center">
             {[
               { title: 'COMMUNITY', tag: 'Loving family, rooted in God.', text: 'We are a community who firmly believes in God’s Word. Join our loving, compassionate church family.', img: '/images/slider1.jpg' },
               { title: 'MISSION', tag: 'Serve and share.', text: 'Our mission is to serve God and humanity with love, integrity, and faithful service.', img: '/images/slider2.jpg' },
               { title: 'VISION', tag: 'Rooted in faith.', text: 'Our vision is to grow a strong, vibrant spiritual family that is deeply rooted in the promises of faith.', img: '/images/slider3.jpg' }
             ].map((item, idx) => (
-              <ScrollReveal key={idx} delay={idx * 0.2} className="flex justify-center w-full md:w-auto">
-                <div className="w-full max-w-[360px] bg-white rounded-xl shadow-xl relative flex flex-col h-full overflow-hidden border border-gray-100 mx-auto">
+              <ScrollReveal key={idx} delay={idx * 0.2} className="w-full max-w-[360px]">
+                <div className="w-full bg-white rounded-xl shadow-xl relative flex flex-col h-full overflow-hidden border border-gray-100 transition-transform duration-300 hover:-translate-y-2">
 
+                  {/* Top Orange Accent */}
                   <div className="h-4 bg-[#d67918] shrink-0" />
-                  <div className="bg-[#7d0707] text-white p-5 text-center">
-                    <h1 className="text-3xl font-black m-0 tracking-tighter uppercase">{item.title}</h1>
+
+                  {/* Title Section */}
+                  <div className="bg-[#7d0707] text-white p-5 text-center shrink-0">
+                    <h1 className="text-2xl md:text-3xl font-black m-0 tracking-tighter uppercase">{item.title}</h1>
                   </div>
-                  <div className="h-3 bg-white shrink-0" />
 
-                  <div className="relative bg-black min-h-[300px] w-full grow">
+                  <div className="h-2 bg-white shrink-0" />
+
+                  {/* Image Container */}
+                  <div className="relative bg-black h-[400px] w-full grow">
                     <Image src={item.img} alt={item.title} fill className="object-cover opacity-90" />
-                    <div className="absolute inset-0 bg-gradient-to-b from-[#d67918]/90 via-[#d67918]/40 to-transparent" />
 
-                    {/* THE BOX FIX:
-                       - Removed 'left-4' and 'w-[85%]'
-                       - Used 'inset-x-5' (equal left/right gap)
-                       - Used 'mx-auto'
-                    */}
-                    <div className="absolute top-[-12px] bottom-4 inset-x-5 bg-[#7d0707] text-white p-5 shadow-2xl flex flex-col z-20 border-r-4 border-[#d67918]">
-                      <div className="px-2 py-1.5 mb-3 rounded-full font-bold text-[10px] text-white border-2 border-[#d67918] text-center uppercase tracking-wider">
+                    <div className="absolute inset-0 bg-gradient-to-b from-[#d67918]/60 via-transparent to-black/20" />
+
+                    {/* HIGHT FIX: 
+                  - Removed 'bottom-5' so it doesn't stretch.
+                  - Box now ends exactly where the text ends.
+              */}
+                    <div className="absolute top-[-10px] inset-x-5 bg-[#7d0707] text-white p-6 shadow-2xl flex flex-col z-20 border-r-8 border-[#d67918] h-auto">
+                      <div className="px-3 py-1.5 mb-3 rounded-full font-bold text-[10px] text-white border-2 border-[#d67918] text-center uppercase tracking-widest bg-black/20">
                         {item.tag}
                       </div>
-                      <p className="m-0 text-sm leading-relaxed text-left flex-1 font-medium opacity-90">
+                      {/* Removed flex-1 to prevent vertical stretching */}
+                      <p className="m-0 text-sm leading-relaxed text-left font-medium opacity-95">
                         {item.text}
                       </p>
                     </div>
                   </div>
 
+                  {/* Bottom Orange Accent */}
                   <div className="h-5 bg-[#d67918] shrink-0" />
                 </div>
               </ScrollReveal>
