@@ -183,24 +183,30 @@ export default function Home() {
                   <div className="relative bg-black h-[400px] w-full grow">
                     <Image src={item.img} alt={item.title} fill className="object-cover opacity-90" />
 
-                    <div className="absolute inset-0 bg-gradient-to-b from-[#d67918]/60 via-transparent to-black/20" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/30" />
 
-                    {/* HIGHT FIX: 
-                  - Removed 'bottom-5' so it doesn't stretch.
-                  - Box now ends exactly where the text ends.
-              */}
-                    <div className="absolute top-[-10px] inset-x-5 bg-[#7d0707] text-white p-6 shadow-2xl flex flex-col z-20 border-r-8 border-[#d67918] h-auto">
-                      <div className="px-3 py-1.5 mb-3 rounded-full font-bold text-[10px] text-white border-2 border-[#d67918] text-center uppercase tracking-widest bg-black/20">
-                        {item.tag}
+                    {/* INTERNAL MAROON BOX */}
+                    <div className="absolute top-[-10px] inset-x-5 bg-[#7d0707] text-white shadow-2xl flex flex-col z-20 h-auto rounded-t-2xl rounded-b-xl overflow-hidden">
+                      {/* Content Padding */}
+                      <div className="p-6 pb-5">
+                        <div className="px-3 py-1.5 mb-4 rounded-full font-bold text-[10px] text-white border-2 border-[#d67918] text-center uppercase tracking-widest bg-black/20">
+                          {item.tag}
+                        </div>
+                        <p className="m-0 text-sm leading-relaxed text-left font-medium opacity-95">
+                          {item.text}
+                        </p>
                       </div>
-                      {/* Removed flex-1 to prevent vertical stretching */}
-                      <p className="m-0 text-sm leading-relaxed text-left font-medium opacity-95">
-                        {item.text}
-                      </p>
+
+                      {/* THE "FOOTER" BAR: 
+                    - Solid White like the screenshot's orange bar
+                    - Slim (h-4) 
+                    - Matching the bottom curve of the red box
+                */}
+                      <div className="h-4 w-full bg-white shrink-0 mt-auto" />
                     </div>
                   </div>
 
-                  {/* Bottom Orange Accent */}
+                  {/* Bottom Orange Accent (The one from your screenshot) */}
                   <div className="h-5 bg-[#d67918] shrink-0" />
                 </div>
               </ScrollReveal>
