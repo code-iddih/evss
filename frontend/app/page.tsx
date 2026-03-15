@@ -5,6 +5,7 @@ import Countdown from 'react-countdown';
 import Image from 'next/image';
 import LatestBlogSection from './events/LatestBlogSection';
 import ScrollReveal from '@/components/ScrollReveal';
+import { getSabbathDetails } from '@/utils/sabbathLogic';
 
 // Slider images
 const sliderImages = [
@@ -18,10 +19,19 @@ const sliderImages = [
 const PASTOR_PHOTO_PATH = '/images/pastor.jpg';
 
 export default function Home() {
-  const eventDate = new Date('2025-08-30T08:00:00');
+  const [now, setNow] = useState(new Date());
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // Auto-slide every 5 seconds
+  // 1. Update the time every second
+  useEffect(() => {
+    const timer = setInterval(() => setNow(new Date()), 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  // 2. Define the sabbath object (Fixes the ReferenceError)
+  const sabbath = getSabbathDetails(now);
+
+  // 3. Auto-slide effect
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) =>
@@ -82,63 +92,74 @@ export default function Home() {
       </section>
 
 
-      {/* Upcoming Events */}
+      {/* Upcoming Sabbath */}
       <ScrollReveal>
         <section className="py-16 text-center bg-white">
           {/* Header Section */}
           <div className="mb-10 flex flex-col items-center">
-            {/* Title set to Black */}
             <h2 className="text-4xl md:text-5xl font-black text-black tracking-tighter mb-4">
-              Next Sabbath
+              {sabbath.isLive ? "This Sabbath" : "Next Sabbath"}
             </h2>
 
             {/* Custom Gradient Bar */}
             <div className="w-24 h-1.5 rounded-full bg-gradient-to-r from-[#7d0707] to-[#d67918]" />
 
-            <div className="mt-6">
-              <h3 className="text-2xl font-extrabold text-[#7d0707] tracking-tight">
-                Education Sabbath
+            <div className="mt-6 px-4">
+              <h3 className="text-2xl font-extrabold text-[#7d0707] tracking-tight uppercase">
+                {sabbath.title}
               </h3>
               <p className="text-gray-500 font-medium mt-1">
-                August 30, 2025 • 8:00 AM
+                {sabbath.date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })} • 08:30 AM
               </p>
+              {sabbath.isLive && (
+                <span className="inline-block mt-2 px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full animate-pulse">
+                  HAPPENING NOW
+                </span>
+              )}
             </div>
           </div>
 
           {/* Countdown Timer */}
           <Countdown
-            date={eventDate}
-            renderer={({ days, hours, minutes, seconds }) => (
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-2xl mx-auto px-4">
-                {[
-                  { label: 'Days', value: days },
-                  { label: 'Hours', value: hours },
-                  { label: 'Minutes', value: minutes },
-                  { label: 'Seconds', value: seconds },
-                ].map((item, i) => (
-                  <div key={i} className="relative group">
-                    {/* Shadow Accent */}
-                    <div className="absolute inset-0 bg-[#d67918] rounded-2xl translate-y-1 translate-x-1 opacity-20 group-hover:opacity-100 transition-opacity" />
-
-                    {/* Main Card */}
-                    <div className="relative bg-white p-6 rounded-2xl border-2 border-[#7d0707] flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-shadow">
-                      <span className="text-4xl font-black text-[#7d0707] tracking-tighter leading-none">
-                        {item.value}
-                      </span>
-                      <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#d67918] mt-2">
-                        {item.label}
-                      </span>
-                    </div>
+            key={sabbath.date.getTime()} // Key forces re-render when date changes
+            date={sabbath.date}
+            renderer={({ days, hours, minutes, seconds, completed }) => {
+              if (sabbath.isLive) {
+                return (
+                  <div className="text-[#7d0707] font-black text-2xl animate-bounce">
+                    Join us in Worship!
                   </div>
-                ))}
-              </div>
-            )}
+                );
+              }
+              return (
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-2xl mx-auto px-4">
+                  {[
+                    { label: 'Days', value: days },
+                    { label: 'Hours', value: hours },
+                    { label: 'Minutes', value: minutes },
+                    { label: 'Seconds', value: seconds },
+                  ].map((item, i) => (
+                    <div key={i} className="relative group">
+                      <div className="absolute inset-0 bg-[#d67918] rounded-2xl translate-y-1 translate-x-1 opacity-20 group-hover:opacity-100 transition-opacity" />
+                      <div className="relative bg-white p-6 rounded-2xl border-2 border-[#7d0707] flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-shadow">
+                        <span className="text-4xl font-black text-[#7d0707] tracking-tighter leading-none">
+                          {item.value}
+                        </span>
+                        <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#d67918] mt-2">
+                          {item.label}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              );
+            }}
           />
 
-          {/* Call to Action - Updated Button Text */}
+          {/* Call to Action */}
           <div className="mt-12">
             <button
-              onClick={() => {/* Add calendar logic here */ }}
+              onClick={() => { /* Calendar Logic */ }}
               className="px-10 py-3.5 bg-[#7d0707] text-white font-bold rounded-xl hover:bg-[#d67918] transition-all transform hover:-translate-y-1 shadow-lg inline-block cursor-pointer"
             >
               Add to Calendar
@@ -162,9 +183,24 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-16 gap-x-8 w-full justify-items-center">
             {[
-              { title: 'COMMUNITY', tag: 'Loving family, rooted in God.', text: 'We are a community who firmly believes in God’s Word. Join our loving, compassionate church family.', img: '/images/slider1.jpg' },
-              { title: 'MISSION', tag: 'Serve and share.', text: 'Our mission is to serve God and humanity with love, integrity, and faithful service.', img: '/images/slider2.jpg' },
-              { title: 'VISION', tag: 'Rooted in faith.', text: 'Our vision is to grow a strong, vibrant spiritual family that is deeply rooted in the promises of faith.', img: '/images/slider3.jpg' }
+              {
+                title: 'COMMUNITY',
+                tag: 'Loving family, rooted in God.',
+                text: 'We are a community who firmly believes in God’s Word. Join our loving, compassionate church family.',
+                img: '/images/community.jpg'
+              },
+              {
+                title: 'MISSION',
+                tag: 'Serve and share.',
+                text: 'Our mission is to serve God and humanity with love, integrity, and faithful service.',
+                img: '/images/mission.jpg'
+              },
+              {
+                title: 'VISION',
+                tag: 'Rooted in faith.',
+                text: 'Our vision is to grow a strong, vibrant spiritual family that is deeply rooted in the promises of faith.',
+                img: '/images/vision.jpg'
+              }
             ].map((item, idx) => (
               <ScrollReveal key={idx} delay={idx * 0.2} className="w-full max-w-[360px]">
                 <div className="w-full bg-white rounded-xl shadow-xl relative flex flex-col h-full overflow-hidden border border-gray-100 transition-transform duration-300 hover:-translate-y-2">
@@ -181,13 +217,19 @@ export default function Home() {
 
                   {/* Image Container */}
                   <div className="relative bg-black h-[400px] w-full grow">
-                    <Image src={item.img} alt={item.title} fill className="object-cover opacity-90" />
+                    {/* Note: Next.js <Image /> component automatically looks into the 'public' folder */}
+                    <Image
+                      src={item.img}
+                      alt={item.title}
+                      fill
+                      className="object-cover opacity-90"
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
 
                     <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/30" />
 
                     {/* INTERNAL MAROON BOX */}
                     <div className="absolute top-[-10px] inset-x-5 bg-[#7d0707] text-white shadow-2xl flex flex-col z-20 h-auto rounded-t-none rounded-b-xl overflow-hidden">
-                      {/* Content Padding */}
                       <div className="p-6 pb-6">
                         <div className="px-3 py-1.5 mb-4 rounded-full font-bold text-[10px] text-white border-2 border-[#d67918] text-center uppercase tracking-widest bg-black/20">
                           {item.tag}
@@ -197,12 +239,6 @@ export default function Home() {
                         </p>
                       </div>
 
-                      {/* THE "FOOTER" BAR: 
-                          - Solid White, full-width to mimic the screenshot style
-                          - Height: h-1.5 (Slim)
-                          - mt-auto ensures it sits at the bottom
-                          - Inherits rounded-b-xl from parent due to overflow-hidden
-                      */}
                       <div className="h-1.5 w-full bg-white shrink-0 mt-auto" />
                     </div>
                   </div>
@@ -233,9 +269,9 @@ export default function Home() {
         */}
         <div className="flex flex-col md:flex-row flex-wrap justify-center gap-y-16 gap-x-8 px-4 max-w-7xl mx-auto w-full">
           {[
-            { tag: 'Youth Sabbath', title: 'How to overcome Heartbreak...', speaker: 'Pr. Prof. Rei Kesis', meta: '45 Mins', img: '/images/flowers.jpg' },
-            { tag: 'Prayer Series', title: 'Men Ought to Pray', speaker: 'Pr. Gilbert Ojwang', meta: 'July 12, 2025', img: '/images/flowers1.jpg' },
-            { tag: 'Parable Study', title: 'The Prodigal Sons', speaker: 'Eld. Emmanuel Nyambare', meta: 'February 21, 2025', img: '/images/flowers2.jpg' }
+            { tag: 'Youth Sabbath', title: 'How to overcome Heartbreak...', speaker: 'Pr. Prof. Rei Kesis', meta: '45 Mins', img: '/images/heartbreak.jpg' },
+            { tag: 'Prayer Series', title: 'Men Ought to Pray', speaker: 'Pr. Gilbert Ojwang', meta: '30 Mins', img: '/images/pray.jpg' },
+            { tag: 'Parable Study', title: 'The Prodigal Sons', speaker: 'Eld. Emmanuel Nyambare', meta: '53 Mins', img: '/images/prodigal.jpg' }
           ].map((sermon, i) => (
             <ScrollReveal
               key={i}
@@ -267,7 +303,7 @@ export default function Home() {
                     </h1>
                     <div className="space-y-1 opacity-90">
                       <p className="text-[10px] font-bold uppercase text-[#d67918]">Speaker: {sermon.speaker}</p>
-                      <p className="text-[10px] opacity-70">Info: {sermon.meta}</p>
+                      <p className="text-[10px] opacity-70">Time: {sermon.meta}</p>
                     </div>
                   </div>
 

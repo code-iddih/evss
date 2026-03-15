@@ -8,19 +8,19 @@ const cards = [
     title: "HOW TO HANDLE GRIEF",
     text: "To deal with grief, allow yourself to feel your emotions, take care of your physical health through regular meals, sleep, and exercise, and seek support from friends, family, or a professional. Be patient with yourself, maintain a routine when ...",
     href: "/blog/how-to-handle-grief",
-    image: "/images/flowers.jpg", 
+    image: "/images/griefs.jpg", 
   },
   {
     title: "SABBATH DAY",
     text: "Discover the meaning and significance of the Sabbath day in Seventh-day Adventist belief. Learn about its biblical foundation, practical observance, and the spiritual rest it offers in our busy modern lives.",
     href: "/blog/sabbath-day",
-    image: "/images/flowers1.jpg",
+    image: "/images/bible.jpg",
   },
   {
     title: "STEPS TO CHRIST",
     text: "Steps to Christ is a timeless Christian devotional that gently guides the heart toward a personal relationship with Jesus. Rather than focusing on complex theology, it speaks to everyday struggles.",
     href: "/blog/steps-to-christ",
-    image: "/images/flowers2.jpg",
+    image: "/images/christ.jpg",
   },
 ];
 
