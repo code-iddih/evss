@@ -9,11 +9,11 @@ import { getSabbathDetails } from '@/utils/sabbathLogic';
 
 // Slider images
 const sliderImages = [
-  '/images/slider1.jpg',
-  '/images/slider2.jpg',
+  '/images/bible1.jpg',
   '/images/slider3.jpg',
-  '/images/slider4.jpg',
-  '/images/slider5.jpg',
+  '/images/dove.jpg',
+  '/images/jesus.jpg',
+  '/images/family.jpg',
 ];
 
 const PASTOR_PHOTO_PATH = '/images/pastor.jpg';
@@ -373,7 +373,7 @@ export default function Home() {
               {/* Message Box: Maroon background */}
               <div className="relative bg-[#7d0707] text-white p-8 shadow-2xl border-l-8 border-[#7d0707] border-r-8 border-[#d67918] w-full text-center lg:text-left">
                 <p className="mb-4 text-sm md:text-base leading-relaxed font-medium opacity-95">
-                  Welcome to Lavington SDA Church online. We are a loving, compassionate church family and your gateway to numerous community events and faithful services. I hope you'll find spiritual nourishment while you're here and are convinced to join us in person for our weekly Sabbath worship.
+                  Welcome to Elgonview SDA Church online. We are a loving, compassionate church family and your gateway to numerous community events and faithful services. I hope you'll find spiritual nourishment while you're here and are convinced to join us in person for our weekly Sabbath worship.
                 </p>
                 <p className="text-sm md:text-base leading-relaxed font-medium opacity-95">
                   We believe the Holy Scriptures are sacred and should be studied reverently. Our services follow a traditional style with hymns, prayers, and sermons. We welcome you to fellowship with us as you seek your rightful place of service to God and humanity.
