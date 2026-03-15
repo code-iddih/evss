@@ -92,45 +92,60 @@ export default function Home() {
       </section>
 
 
-      {/* Upcoming Sabbath */}
+      {/* Upcoming Events / Sabbath Countdown */}
       <ScrollReveal>
         <section className="py-16 text-center bg-white">
-          {/* Header Section */}
           <div className="mb-10 flex flex-col items-center">
+            {/* Main Header: Next/This Sabbath */}
             <h2 className="text-4xl md:text-5xl font-black text-black tracking-tighter mb-4">
               {sabbath.isLive ? "This Sabbath" : "Next Sabbath"}
             </h2>
 
-            {/* Custom Gradient Bar */}
+            {/* Gradient Separator Bar */}
             <div className="w-24 h-1.5 rounded-full bg-gradient-to-r from-[#7d0707] to-[#d67918]" />
 
             <div className="mt-6 px-4">
-              <h3 className="text-2xl font-extrabold text-[#7d0707] tracking-tight uppercase">
-                {sabbath.title}
+              {/* Split Color Title: [Event Name in Maroon] [Sabbath in Orange] */}
+              <h3 className="text-2xl md:text-4xl font-black uppercase tracking-tighter flex flex-wrap justify-center items-center gap-x-3">
+                <span className="text-[#7d0707]">
+                  {sabbath.title.toLowerCase().replace('sabbath', '').trim()}
+                </span>
+                <span className="text-[#d67918]">
+                  Sabbath
+                </span>
               </h3>
-              <p className="text-gray-500 font-medium mt-1">
+
+              {/* Date and Time Info */}
+              <p className="text-gray-500 font-bold mt-2 text-sm md:text-base">
                 {sabbath.date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })} • 08:30 AM
               </p>
+
+              {/* Live Badge (Friday 6pm - Sat 6pm) */}
               {sabbath.isLive && (
-                <span className="inline-block mt-2 px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full animate-pulse">
-                  HAPPENING NOW
-                </span>
+                <div className="mt-4 flex justify-center">
+                  <span className="px-4 py-1.5 bg-green-100 text-green-700 text-xs font-black rounded-full animate-pulse border border-green-200">
+                    HAPPENING NOW
+                  </span>
+                </div>
               )}
             </div>
           </div>
 
-          {/* Countdown Timer */}
+          {/* Countdown Display */}
           <Countdown
-            key={sabbath.date.getTime()} // Key forces re-render when date changes
+            key={sabbath.date.getTime()}
             date={sabbath.date}
-            renderer={({ days, hours, minutes, seconds, completed }) => {
+            renderer={({ days, hours, minutes, seconds }) => {
+              // If we are within the Sabbath window, hide timer and show welcome message
               if (sabbath.isLive) {
                 return (
-                  <div className="text-[#7d0707] font-black text-2xl animate-bounce">
+                  <div className="text-[#7d0707] font-black text-3xl animate-bounce tracking-tighter uppercase">
                     Join us in Worship!
                   </div>
                 );
               }
+
+              // Standard Countdown Grid
               return (
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-2xl mx-auto px-4">
                   {[
@@ -140,7 +155,10 @@ export default function Home() {
                     { label: 'Seconds', value: seconds },
                   ].map((item, i) => (
                     <div key={i} className="relative group">
+                      {/* Decorative Shadow Box */}
                       <div className="absolute inset-0 bg-[#d67918] rounded-2xl translate-y-1 translate-x-1 opacity-20 group-hover:opacity-100 transition-opacity" />
+
+                      {/* Timer Card */}
                       <div className="relative bg-white p-6 rounded-2xl border-2 border-[#7d0707] flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-shadow">
                         <span className="text-4xl font-black text-[#7d0707] tracking-tighter leading-none">
                           {item.value}
@@ -156,12 +174,9 @@ export default function Home() {
             }}
           />
 
-          {/* Call to Action */}
+          {/* Call to Action Button */}
           <div className="mt-12">
-            <button
-              onClick={() => { /* Calendar Logic */ }}
-              className="px-10 py-3.5 bg-[#7d0707] text-white font-bold rounded-xl hover:bg-[#d67918] transition-all transform hover:-translate-y-1 shadow-lg inline-block cursor-pointer"
-            >
+            <button className="px-10 py-3.5 bg-[#7d0707] text-white font-bold rounded-xl hover:bg-[#d67918] transition-all transform hover:-translate-y-1 shadow-lg cursor-pointer">
               Add to Calendar
             </button>
           </div>
