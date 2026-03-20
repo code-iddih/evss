@@ -69,15 +69,16 @@ export default function VacanciesPage() {
       >
         <div className="container mx-auto px-4">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Job Vacancies</h1>
+          {/* FIX: Wrapped the quoted Bible verse in curly braces to escape double quotes */}
           <p className="text-lg opacity-90 max-w-2xl mx-auto italic">
-            "Whatever you do, work at it with all your heart, as working for the Lord." — Colossians 3:23
+            {"'Whatever you do, work at it with all your heart, as working for the Lord.' — Colossians 3:23"}
           </p>
         </div>
       </div>
 
       <div className="container mx-auto px-4 max-w-6xl">
         
-        {/* 2. Summary Info - Pop-up effect applied here */}
+        {/* 2. Summary Info */}
         <ScrollReveal>
           <div className="flex flex-col md:flex-row justify-between items-center mb-8 bg-white p-6 rounded-2xl shadow-sm border-t-4" style={{ borderTopColor: COLOR_ORANGE }}>
               <div className="text-center md:text-left mb-4 md:mb-0">
@@ -95,7 +96,7 @@ export default function VacanciesPage() {
           </div>
         </ScrollReveal>
 
-        {/* 3. The Vacancies List Grid - Staggered delay applied to each card */}
+        {/* 3. The Vacancies List Grid */}
         <div className="grid gap-8">
           {sampleVacancies.map((vacancy, index) => (
             <ScrollReveal key={vacancy.id} delay={index * 0.15}>
@@ -104,9 +105,9 @@ export default function VacanciesPage() {
           ))}
         </div>
 
-        {/* 4. Submission Footer - Pop-up effect with a slight delay */}
+        {/* 4. Submission Footer */}
         <ScrollReveal delay={0.4}>
-          <div className="mt-16 p-8 bg-white rounded-2xl border-2 border-dashed border-gray-200 text-center">
+          <div className="mt-16 p-8 bg-white rounded-2xl border-2 border-dashed border-gray-200 text-center text-black">
               <h3 className="text-2xl font-bold text-gray-800 mb-3">How to Apply</h3>
               <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed">
                   Interested candidates should submit their CV, cover letter, and a recommendation letter from their local church pastor. 
@@ -133,7 +134,7 @@ function VacancyCard({ vacancy }: { vacancy: Vacancy }) {
   const isOpen = vacancy.status === 'Open';
 
   return (
-    <div className="group bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden">
+    <div className="group bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden text-black">
       <div className="p-6 md:p-8">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
           <div className="mb-4 md:mb-0">

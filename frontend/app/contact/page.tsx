@@ -2,20 +2,20 @@
 import type { Metadata } from 'next';
 import MapDirections from './MapDirections';
 
-// New Church details for Elgon View SDA Church, Eldoret (using Conference details as central contact)
+// New Church details for Elgon View SDA Church, Eldoret
 const ADDRESS_LINES = [
-  "Elgon View Drive, Eldoret", // Physical location from Maps
-  "P.O BOX 3059-30100", // P.O. Box for the local administration (GRVC)
+  "Elgon View Drive, Eldoret", 
+  "P.O BOX 3059-30100", 
   "Eldoret, Kenya",
 ];
-const PHONE_NUMBER = "+254 733 679578"; // Mobile number for Greater Rift Valley Conference (GRVC)
-const EMAIL = "info@grvc.adventist.or.ke"; // Email for GRVC
+const PHONE_NUMBER = "+254 733 679578"; 
+const EMAIL = "info@grvc.adventist.or.ke"; 
 const HOURS = [
   "MON-FRI (Office): 08:00 - 17:00",
-  "SAT (Worship): 09:00 - 17:00", // Standard SDA worship schedule
+  "SAT (Worship): 09:00 - 17:00", 
   "SUN: Closed (Prayer team available)",
 ];
-const WEBSITE_URL = "https://grvc.adventist.or.ke/contact-address/"; // GRVC website for CTA
+const WEBSITE_URL = "https://grvc.adventist.or.ke/contact-address/";
 
 // Metadata for SEO
 export const metadata: Metadata = {
@@ -31,7 +31,8 @@ const ContactPage = () => {
       <header className="bg-[#7d0707] text-white py-16 shadow-lg">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-5xl font-serif font-extrabold tracking-tight">Get In Touch</h1>
-          <p className="mt-3 text-xl opacity-90">We're here to connect and serve you.</p>
+          {/* FIX: Wrapped in curly braces to handle the apostrophe in "We're" */}
+          <p className="mt-3 text-xl opacity-90">{"We're here to connect and serve you."}</p>
         </div>
       </header>
 
@@ -46,11 +47,11 @@ const ContactPage = () => {
               <svg className="w-6 h-6 mr-2 text-[#d67918]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.828 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
               Physical Location
             </h2>
-            <p className="text-gray-700 space-y-1">
+            <div className="text-gray-700 space-y-1">
               {ADDRESS_LINES.map((line, index) => (
                 <span key={index} className="block">{line}</span>
               ))}
-            </p>
+            </div>
           </div>
 
           {/* Card 2: Contact Info */}
@@ -89,12 +90,10 @@ const ContactPage = () => {
         {/* Section 2: Interactive Map & Directions */}
         <section className="pt-8 text-center">
           <h2 className="text-3xl font-bold text-[#7d0707] mb-8">Locate Us</h2>
-          
           <MapDirections />
-
         </section>
         
-        {/* Section 3: Call to Action (Optional) */}
+        {/* Section 3: Call to Action */}
         <section className="pt-8 text-center border-t border-gray-200">
           <h2 className="text-3xl font-bold text-[#7d0707] mb-4">Visit Us This Sabbath</h2>
           <p className="text-lg text-gray-700 max-w-2xl mx-auto mb-6">

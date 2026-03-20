@@ -1,3 +1,4 @@
+// app/layout.tsx
 import type { Metadata } from 'next';
 import './globals.css';
 import { Inter } from 'next/font/google';
@@ -13,8 +14,6 @@ export const metadata: Metadata = {
   title: 'Elgonview SDA Church',
   description: 'Welcome to Elgonview SDA Church - A loving, compassionate church family.',
   icons: {
-    // Pointing directly to your circular JPG
-    // ?v=200 forces the browser to drop the old red circle from its memory
     icon: [
       {
         url: '/images/church-brand.jpg?v=200',
@@ -46,7 +45,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </h1>
             <div className="h-1 w-20 bg-[#d67918] rounded-full" />
             <p className="mt-2 text-orange-200 font-medium italic opacity-90">
-              "Your gateway to a loving church family"
+              {/* FIX: Wrapped in curly braces to handle quotes for Vercel build */}
+              {"'Your gateway to a loving church family'"}
             </p>
           </div>
         </header>
