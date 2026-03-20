@@ -102,7 +102,7 @@ export default function Home() {
             </h2>
 
             {/* Gradient Separator Bar */}
-            <div className="w-24 h-1.5 rounded-full bg-gradient-to-r from-[#7d0707] to-[#d67918]" />
+            <div className="w-24 h-1.5 rounded-full bg-gradient-to-r from-[#7d0707] to-[#7d0707]" />
 
             <div className="mt-6 px-4">
               {/* Split Color Title: [Event Name in Maroon] [Sabbath in Orange] */}

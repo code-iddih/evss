@@ -37,34 +37,36 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* SDA Logo Preloader */}
         <Preloader />
 
-        {/* HEADER: Maroon Background with Orange Accent */}
-        <header className="bg-[#7d0707] border-b-4 border-[#d67918] text-white text-center py-10 shadow-lg">
+        {/* HEADER: Deep Maroon Background */}
+        <header className="bg-[#7d0707] text-white text-center py-12 shadow-sm">
           <div className="flex flex-col items-center gap-2">
             <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight uppercase">
               Elgonview SDA Church
             </h1>
-            <div className="h-1 w-20 bg-[#d67918] rounded-full" />
-            <p className="mt-2 text-orange-200 font-medium italic opacity-90">
-              {/* FIX: Wrapped in curly braces to handle quotes for Vercel build */}
+            {/* SDA Gold Accent Bar */}
+            <div className="h-1.5 w-24 bg-[#d67918] rounded-full mt-1" />
+            <p className="mt-3 text-orange-200 font-medium italic opacity-90 text-sm md:text-base tracking-wide">
               {"'Your gateway to a loving church family'"}
             </p>
           </div>
         </header>
 
-        {/* NAVIGATION: Deep Maroon */}
-        <nav className="bg-[#610505] text-white py-4 shadow-md sticky top-0 z-50 border-b border-[#d67918]/20">
-          <ul className="flex flex-wrap justify-center gap-8 px-4">
-            {['Home', 'Events', 'Sermons', 'Giving', 'Blog', 'Vacancies', 'Prayers', 'Contact'].map((item) => (
-              <li key={item}>
-                <a 
-                  href={item === 'Home' ? '/' : `/${item.toLowerCase()}`} 
-                  className="font-bold text-xs uppercase tracking-widest hover:text-[#d67918] transition-all duration-300"
-                >
-                  {item}
-                </a>
-              </li>
-            ))}
-          </ul>
+        {/* NAVIGATION: Unified with Header using same #7d0707 */}
+        <nav className="bg-[#7d0707] text-white py-6 shadow-xl sticky top-0 z-50 border-t border-white/10">
+          <div className="max-w-7xl mx-auto px-4">
+            <ul className="flex flex-wrap justify-center gap-x-8 gap-y-5">
+              {['Home', 'Events', 'Sermons', 'Giving', 'Blog', 'Vacancies', 'Prayers', 'Contact'].map((item) => (
+                <li key={item}>
+                  <a 
+                    href={item === 'Home' ? '/' : `/${item.toLowerCase()}`} 
+                    className="font-bold text-[10px] md:text-xs uppercase tracking-[0.2em] hover:text-[#d67918] transition-all duration-300 whitespace-nowrap"
+                  >
+                    {item}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
         </nav>
 
         {/* MAIN CONTENT AREA */}
@@ -73,14 +75,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </main>
 
         {/* FOOTER */}
-        <footer className="bg-gray-950 text-gray-400 text-center py-12 mt-12 border-t-4 border-[#7d0707]">
-          <div className="mb-4">
-             <span className="text-white font-bold tracking-[0.3em] text-sm uppercase">
+        <footer className="bg-gray-950 text-gray-400 text-center py-16 mt-12 border-t-4 border-[#7d0707]">
+          <div className="mb-6">
+             <span className="text-white font-bold tracking-[0.4em] text-sm uppercase">
                Elgonview SDA Church
              </span>
-             <div className="h-0.5 w-12 bg-[#d67918] mx-auto mt-2" />
+             <div className="h-0.5 w-16 bg-[#d67918] mx-auto mt-3" />
           </div>
-          <p className="text-xs">
+          <p className="text-xs opacity-60">
             &copy; {new Date().getFullYear()} Elgonview SDA Church. All rights reserved.
           </p>
         </footer>
