@@ -1,8 +1,8 @@
-'use client'; // Added to allow the active link detection
+'use client'; 
 
 import './globals.css';
 import { Inter } from 'next/font/google';
-import { usePathname } from 'next/navigation'; // Hook to check which page we are on
+import { usePathname } from 'next/navigation'; 
 import Preloader from '@/components/Preloader';
 
 const inter = Inter({ 
@@ -16,14 +16,24 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   return (
     <html lang="en" className={inter.variable}>
+      {/* 1. ADD THE HEAD SECTION MANUALLY FOR CLIENT COMPONENTS */}
+      <head>
+        <title>Elgonview SDA Church</title>
+        <meta name="description" content="Welcome to Elgonview SDA Church - A loving, compassionate church family." />
+        
+        {/* The Icon Links - Force refreshing with ?v=2 */}
+        <link rel="icon" href="/images/church-brand.jpg?v=2" />
+        <link rel="apple-touch-icon" href="/images/church-brand.jpg?v=2" />
+        <link rel="shortcut icon" href="/images/church-brand.jpg?v=2" />
+      </head>
+
       <body className="font-sans antialiased bg-gray-50 text-gray-900">
         
         <Preloader />
 
-        {/* HEADER & NAV GROUP: Deep Maroon (#610505) */}
+        {/* HEADER & NAV GROUP */}
         <div className="bg-[#610505] text-white shadow-xl">
           
-          {/* Main Title Section */}
           <header className="text-center py-12">
             <div className="flex flex-col items-center gap-2">
               <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight uppercase">
@@ -36,7 +46,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </div>
           </header>
 
-          {/* 1. THE VISIBLE SEPARATOR: A bold orange line between Header and Nav */}
+          {/* Visible Separator */}
           <div className="h-1.5 w-full bg-[#d67918] shadow-inner" />
 
           {/* Navigation Section */}
@@ -44,7 +54,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <div className="max-w-7xl mx-auto px-4">
               <ul className="flex flex-wrap justify-center gap-x-8 gap-y-5">
                 {['Home', 'Events', 'Sermons', 'Giving', 'Blog', 'Vacancies', 'Prayers', 'Contact'].map((item) => {
-                  // Determine if this specific link is the current page
                   const href = item === 'Home' ? '/' : `/${item.toLowerCase()}`;
                   const isActive = pathname === href;
 
@@ -59,7 +68,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                         {item}
                       </a>
                       
-                      {/* 2. THE ORANGE BAR: Stays full width if Active, or slides on Hover */}
+                      {/* Orange Active/Hover Bar */}
                       <div 
                         className={`absolute -bottom-2 left-0 h-0.5 bg-[#d67918] transition-all duration-300 ${
                           isActive ? 'w-full' : 'w-0 group-hover:w-full'
@@ -73,12 +82,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </nav>
         </div>
 
-        {/* MAIN CONTENT AREA */}
         <main className="min-h-screen">
           {children}
         </main>
 
-        {/* FOOTER */}
         <footer className="bg-gray-950 text-gray-400 text-center py-16 mt-12 border-t-4 border-[#610505]">
           <div className="mb-6">
              <span className="text-white font-bold tracking-[0.4em] text-sm uppercase">
