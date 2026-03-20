@@ -69,7 +69,7 @@ export default function Home() {
                   </p>
                   <a
                     href="/about"
-                    className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition"
+                    className="inline-block bg-[#610505] text-white px-8 py-3 rounded-lg hover:bg-[#d67918] transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 active:scale-95 font-bold uppercase tracking-wider text-sm"
                   >
                     Learn More
                   </a>
