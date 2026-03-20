@@ -26,40 +26,40 @@ const cards = [
 
 export default function LatestBlogSection() {
   return (
-    <section className="relative py-24 bg-gray-50 overflow-hidden">
-      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-8">
+    <section className="relative py-20 bg-gray-50 overflow-hidden">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header Section */}
         <ScrollReveal>
-          <div className="mb-24 flex flex-col items-center text-center">
+          <div className="mb-16 md:mb-24 flex flex-col items-center text-center">
             <h2 className="text-4xl md:text-5xl font-black text-black tracking-tighter mb-4">
               Latest Blog
             </h2>
-            {/* EXACT MATCH BAR: width 24, height 1.5, rounded-full, gradient from Maroon to Orange */}
             <div className="w-24 h-1.5 rounded-full bg-gradient-to-r from-[#7d0707] to-[#d67918]" />
           </div>
         </ScrollReveal>
 
-        {/* Blog Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-24 justify-items-center pb-16">
+        {/* Blog Grid: Added justify-center and adjusted gap for mobile */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-20 md:gap-x-10 md:gap-y-24 justify-center items-center">
           {cards.map((c, idx) => (
             <ScrollReveal 
               key={c.title} 
               delay={idx * 0.1} 
-              className="w-full flex justify-center"
+              // Removed flex justify-center here to allow the card's mx-auto to handle it natively
+              className="w-full" 
             >
-              {/* Card Container */}
-              <div className="group relative w-full max-w-[380px] rounded-2xl shadow-2xl bg-white flex flex-col transition-all duration-300 hover:-translate-y-2">
+              {/* Card Container: Added mx-auto for perfect mobile centering */}
+              <div className="group relative w-full max-w-[360px] md:max-w-[380px] mx-auto rounded-2xl shadow-2xl bg-white flex flex-col transition-all duration-300 hover:-translate-y-2">
                 
                 {/* 1. Maroon Header Title Bar */}
                 <div className="bg-[#7d0707] py-4 px-6 text-center rounded-t-2xl">
-                  <h3 className="text-white font-bold text-xl tracking-tight uppercase">
+                  <h3 className="text-white font-bold text-lg md:text-xl tracking-tight uppercase">
                     {c.title}
                   </h3>
                 </div>
 
                 {/* 2. Image Area */}
-                <div className="h-48 w-full overflow-hidden">
+                <div className="h-44 md:h-48 w-full overflow-hidden">
                   <img 
                     src={c.image} 
                     alt={c.title} 
@@ -68,7 +68,7 @@ export default function LatestBlogSection() {
                 </div>
 
                 {/* 3. Gradient Content Area */}
-                <div className="p-8 pb-16 bg-gradient-to-b from-[#7d0707] via-[#9e1c1c] to-[#d67918] flex-grow rounded-b-2xl">
+                <div className="p-6 md:p-8 pb-14 md:pb-16 bg-gradient-to-b from-[#7d0707] via-[#9e1c1c] to-[#d67918] flex-grow rounded-b-2xl">
                   <p className="text-white text-sm md:text-base leading-relaxed font-medium text-center opacity-95">
                     {c.text}
                   </p>
@@ -78,7 +78,7 @@ export default function LatestBlogSection() {
                 <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-full flex justify-center z-20">
                   <a 
                     href={c.href} 
-                    className="bg-[#7d0707] text-white px-10 py-3 rounded-full font-bold text-xs tracking-[0.2em] uppercase shadow-[0_10px_25px_rgba(0,0,0,0.4)] hover:bg-black transition-all duration-300 whitespace-nowrap border-2 border-white/10"
+                    className="bg-[#7d0707] text-white px-8 md:px-10 py-3 rounded-full font-bold text-[10px] md:text-xs tracking-[0.2em] uppercase shadow-[0_10px_25px_rgba(0,0,0,0.4)] hover:bg-black transition-all duration-300 whitespace-nowrap border-2 border-white/10"
                   >
                     READ MORE
                   </a>
