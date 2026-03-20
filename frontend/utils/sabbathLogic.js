@@ -6,12 +6,11 @@ export const getSabbathDetails = (currentTime) => {
     "Education Sabbath"
   ];
 
-  // Starting Point: March 21, 2026
+  // Starting Point: March 21, 2026 (The first Saturday in the cycle)
   const startDate = new Date("2026-03-21T08:30:00");
   const msInWeek = 7 * 24 * 60 * 60 * 1000;
 
-  // 1. Calculate how many weeks have passed since the start date
-  // We add a 2-day buffer to the calculation to ensure we are looking at the "current" week cycle correctly
+  // 1. Calculate weeks passed since start date
   const weeksPassed = Math.max(0, Math.floor((currentTime.getTime() - startDate.getTime() + (2 * 24 * 60 * 60 * 1000)) / msInWeek));
   
   // 2. Identify the Saturday for this week cycle
@@ -25,20 +24,26 @@ export const getSabbathDetails = (currentTime) => {
   const saturdayEnd = new Date(targetSaturday);
   saturdayEnd.setHours(18, 0, 0, 0);
 
-  // 4. Logic: If we are past Saturday 6:00 PM, move to the NEXT Sabbath immediately
+  // 4. If we are past Saturday 6:00 PM, move to the NEXT Sabbath immediately
   let finalWeeksPassed = weeksPassed;
   if (currentTime > saturdayEnd) {
     targetSaturday = new Date(targetSaturday.getTime() + msInWeek);
+    fridayStart.setTime(fridayStart.getTime() + msInWeek);
+    saturdayEnd.setTime(saturdayEnd.getTime() + msInWeek);
     finalWeeksPassed += 1;
   }
 
-  // 5. Check if the "current" time falls within the Friday 6pm - Sat 6pm window
-  // Note: We re-check the window based on the original targetSaturday 
-  // before we potentially incremented it for the "Next" display.
+  // 5. Check if we are currently in the Friday 6pm - Sat 6pm window
   const isLive = currentTime >= fridayStart && currentTime <= saturdayEnd;
 
+  // 6. TARGET LOGIC: 
+  // If Sabbath hasn't started yet (before Friday 6pm), count down to Friday 6pm.
+  // This makes the timer read "1 hour to go" on Friday afternoon.
+  const countdownTarget = (currentTime < fridayStart) ? fridayStart : targetSaturday;
+
   return {
-    date: targetSaturday,
+    date: countdownTarget, // Targets Fri 6pm or Sat morning service
+    displayDate: targetSaturday, // Always labels the Saturday date
     title: eventNames[finalWeeksPassed % eventNames.length],
     isLive: isLive
   };

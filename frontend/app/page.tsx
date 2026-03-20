@@ -92,7 +92,7 @@ export default function Home() {
       </section>
 
 
-      {/* Upcoming Events / Sabbath Countdown */}
+{/* Upcoming Events / Sabbath Countdown */}
       <ScrollReveal>
         <section className="py-16 text-center bg-white">
           <div className="mb-10 flex flex-col items-center">
@@ -101,68 +101,71 @@ export default function Home() {
               {sabbath.isLive ? "This Sabbath" : "Next Sabbath"}
             </h2>
 
-            {/* GRADIENT SEPARATOR BAR: From Maroon to Orange */}
+            {/* GRADIENT SEPARATOR BAR: Maroon to Orange */}
             <div className="w-24 h-1.5 rounded-full bg-gradient-to-r from-[#7d0707] to-[#d67918]" />
 
             <div className="mt-6 px-4">
-              {/* Split Color Title: [Event Name in Maroon] [Sabbath in Orange] */}
+              {/* Split Color Title */}
               <h3 className="text-2xl md:text-4xl font-black uppercase tracking-tighter flex flex-wrap justify-center items-center gap-x-3">
                 <span className="text-[#7d0707]">
-                  {sabbath.title.toLowerCase().replace('sabbath', '').trim()}
+                  {sabbath.title.toLowerCase().replace('sabbath', '').trim() || "Main"}
                 </span>
                 <span className="text-[#d67918]">
                   Sabbath
                 </span>
               </h3>
 
-              {/* Date and Time Info */}
+              {/* Date and Time Info - Uses displayDate for the label */}
               <p className="text-gray-500 font-bold mt-2 text-sm md:text-base">
-                {sabbath.date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })} • 08:30 AM
+                {sabbath.displayDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })} • 08:30 AM
               </p>
 
               {/* Live Badge */}
               {sabbath.isLive && (
                 <div className="mt-4 flex justify-center">
                   <span className="px-4 py-1.5 bg-green-100 text-green-700 text-xs font-black rounded-full animate-pulse border border-green-200">
-                    HAPPENING NOW
+                    SABBATH IS HERE
                   </span>
                 </div>
               )}
             </div>
           </div>
 
-          {/* Countdown Display */}
+          {/* Countdown Display: Targets Friday 6pm to show "< 2 hours" right now */}
           <Countdown
             key={sabbath.date.getTime()}
             date={sabbath.date}
-            renderer={({ days, hours, minutes, seconds }) => {
-              if (sabbath.isLive) {
+            renderer={({ days, hours, minutes, seconds, completed }) => {
+              // Show "Happy Sabbath" if isLive is true OR if the timer to Friday 6pm finishes
+              if (sabbath.isLive || completed) {
                 return (
-                  <div className="text-[#7d0707] font-black text-3xl animate-bounce tracking-tighter uppercase">
-                    Join us in Worship!
+                  <div className="py-8">
+                    <div className="text-[#7d0707] font-black text-4xl md:text-6xl animate-bounce tracking-tighter uppercase">
+                      Happy Sabbath!
+                    </div>
+                    <p className="text-gray-500 font-bold mt-2 uppercase tracking-widest text-xs">
+                      Welcome to the house of the Lord
+                    </p>
                   </div>
                 );
               }
 
-              // MODIFIED GRID: Uses grid-cols-4 on all screens to stay in one line
               return (
                 <div className="grid grid-cols-4 gap-2 sm:gap-4 md:gap-6 max-w-3xl mx-auto px-2 sm:px-4">
                   {[
                     { label: 'Days', value: days },
-                    { label: 'Hrs', value: hours }, // Shortened for mobile fit
-                    { label: 'Min', value: minutes }, // Shortened for mobile fit
-                    { label: 'Sec', value: seconds }, // Shortened for mobile fit
+                    { label: 'Hrs', value: hours }, 
+                    { label: 'Min', value: minutes }, 
+                    { label: 'Sec', value: seconds }, 
                   ].map((item, i) => (
                     <div key={i} className="relative group">
-                      {/* Decorative Shadow Box */}
                       <div className="absolute inset-0 bg-[#d67918] rounded-xl md:rounded-2xl translate-y-1 translate-x-1 opacity-10 group-hover:opacity-100 transition-opacity" />
 
-                      {/* Timer Card: Reduced padding on mobile (p-3) to ensure fit */}
                       <div className="relative bg-white p-3 md:p-6 rounded-xl md:rounded-2xl border-2 border-[#7d0707] flex flex-col items-center justify-center shadow-sm hover:shadow-md transition-shadow">
                         <span className="text-xl sm:text-2xl md:text-4xl font-black text-[#7d0707] tracking-tighter leading-none">
                           {item.value}
                         </span>
-                        <span className="text-[8px] md:text-[10px] font-bold uppercase tracking-[0.1em] md:tracking-[0.2em] text-[#d67918] mt-1 md:mt-2">
+                        <span className="text-[8px] md:text-[10px] font-bold uppercase tracking-tighter text-[#d67918] mt-1">
                           {item.label}
                         </span>
                       </div>
@@ -173,7 +176,6 @@ export default function Home() {
             }}
           />
 
-          {/* Call to Action Button */}
           <div className="mt-12">
             <button className="px-10 py-3.5 bg-[#7d0707] text-white font-bold rounded-xl hover:bg-[#d67918] transition-all transform hover:-translate-y-1 shadow-lg cursor-pointer">
               Add to Calendar
