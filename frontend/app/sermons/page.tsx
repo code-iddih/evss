@@ -1,17 +1,13 @@
 // app/sermons/page.tsx
-// Server Component - NO 'use client'
-import { fetchChannelSermons, SermonData } from '@/lib/youtube'; 
-import { SermonCard } from '@/components/SermonCard'; // 👈 NEW IMPORT
-
-// Helper to pass the SermonData type (if needed, but mainly for clarity)
-type SermonData = Awaited<ReturnType<typeof fetchChannelSermons>>[number];
+import { fetchChannelSermons } from '@/lib/youtube'; 
+import { SermonCard } from '@/components/SermonCard';
 
 export default async function SermonsPage() {
-  // Fetch the latest 6 videos from the ELGONVIEW SDA channel automatically
+  // Fetch the latest 6 videos from the ELGONVIEW SDA channel
   const sermons = await fetchChannelSermons(6); 
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 py-12">
       {/* Centered Title */}
       <h1 className="text-4xl font-bold mb-10 text-center text-gray-900">
         🎥 Latest Sermons
@@ -19,17 +15,17 @@ export default async function SermonsPage() {
       
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {sermons.map((sermon) => (
-          // Use the imported Client Component
           <SermonCard key={sermon.videoId} sermon={sermon} />
         ))}
         
         {sermons.length === 0 && (
-            <p className="text-gray-500 col-span-full text-center p-8 border border-dashed rounded-lg">
-                No sermons found. Please ensure the API key is correct and the server is restarted.
+          <div className="col-span-full text-center p-12 border-2 border-dashed border-gray-200 rounded-2xl">
+            <p className="text-gray-500 font-medium">
+              No sermons found. Please check the YouTube API connection.
             </p>
+          </div>
         )}
       </div>
     </div>
   );
 }
-// Note: The SermonCard component has been MOVED to ./components/SermonCard.tsx

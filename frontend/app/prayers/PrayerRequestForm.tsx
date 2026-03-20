@@ -1,18 +1,14 @@
-// app/prayers/PrayerRequestForm.tsx
 'use client';
 
 import React, { useState } from 'react';
-import { useRouter } from 'next/navigation'; // Import for better handling
 
 export default function PrayerRequestForm() {
   const [name, setName] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState(''); // Changed from email
+  const [phoneNumber, setPhoneNumber] = useState(''); 
   const [request, setRequest] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  
-  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,7 +22,6 @@ export default function PrayerRequestForm() {
     setIsSubmitting(true);
 
     try {
-      // 1. Send data to our new Next.js API route
       const response = await fetch('/api/submit-prayer', {
         method: 'POST',
         headers: {
@@ -40,17 +35,17 @@ export default function PrayerRequestForm() {
       });
 
       if (!response.ok) {
-        // Handle API route errors
         const errorData = await response.json();
         throw new Error(errorData.message || 'Failed to send prayer request.');
       }
 
-      // 2. Success state
       setIsSubmitted(true);
       
-    } catch (err: any) {
+    } catch (err) {
+      // FIX: Removed ': any' and handled the error type safely
       console.error('Submission Error:', err);
-      setError(err.message || 'An unexpected error occurred. Please try again.');
+      const errorMessage = err instanceof Error ? err.message : 'An unexpected error occurred.';
+      setError(errorMessage);
     } finally {
       setIsSubmitting(false);
     }
@@ -74,14 +69,12 @@ export default function PrayerRequestForm() {
 
   return (
     <div className="container mx-auto px-4 py-12 min-h-[70vh] flex flex-col items-center">
-      {/* ... (Existing Headings) ... */}
       <h1 className="text-4xl font-serif text-[#7d0707] font-bold text-center mb-6">Submit a Prayer Request</h1>
       
       <p className="text-lg text-gray-700 text-center max-w-3xl mb-10">
         We believe in the power of prayer. Please share your burdens, thanksgivings, and needs with us. Our dedicated prayer team will lift your request to God in confidence.
       </p>
 
-      {/* Form Container */}
       <div className="bg-white p-8 md:p-10 rounded-xl shadow-2xl max-w-2xl w-full border-t-4 border-[#d67918]">
         {error && (
           <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4" role="alert">
@@ -91,7 +84,6 @@ export default function PrayerRequestForm() {
         )}
         <form onSubmit={handleSubmit} className="space-y-6">
           
-          {/* Name Field (Optional) */}
           <div>
             <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
               Your Name (Optional)
@@ -101,29 +93,27 @@ export default function PrayerRequestForm() {
               id="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-[#7d0707] focus:border-[#7d0707] transition"
+              className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-[#7d0707] focus:border-[#7d0707] transition text-black"
               placeholder="John Doe"
               disabled={isSubmitting}
             />
           </div>
 
-          {/* Phone Number Field (Replaced Email, Optional) */}
           <div>
             <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
-              Your Phone Number (Optional, for follow-up)
+              Your Phone Number (Optional)
             </label>
             <input
-              type="tel" // Use type="tel" for phone numbers
+              type="tel" 
               id="phone"
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
-              className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-[#7d0707] focus:border-[#7d0707] transition"
+              className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-[#7d0707] focus:border-[#7d0707] transition text-black"
               placeholder="+254 7XX XXX XXX"
               disabled={isSubmitting}
             />
           </div>
 
-          {/* Prayer Request Textarea (Required) */}
           <div>
             <label htmlFor="request" className="block text-sm font-medium text-gray-700 mb-1">
               Your Prayer Request <span className="text-red-500">*</span>
@@ -134,21 +124,20 @@ export default function PrayerRequestForm() {
               value={request}
               onChange={(e) => setRequest(e.target.value)}
               required
-              className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-[#7d0707] focus:border-[#7d0707] transition"
+              className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-[#7d0707] focus:border-[#7d0707] transition text-black"
               placeholder="Dear Lord, I pray for..."
               disabled={isSubmitting}
             />
           </div>
 
-          {/* Submit Button (Orange Accent) */}
           <button
             type="submit"
             disabled={isSubmitting}
             className="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-[#d67918] hover:bg-[#c26c16] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#7d0707] transition disabled:opacity-50"
           >
-            {isSubmitting ? (
+            {isSubmitting && (
               <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-3"></div>
-            ) : null}
+            )}
             {isSubmitting ? 'Sending Request...' : 'Submit Prayer Request'}
           </button>
           
